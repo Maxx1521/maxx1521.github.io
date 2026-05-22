@@ -161,25 +161,7 @@ def ask_for_name(user_id, appt_type, date, time, product=None, line_bot_api=None
         "time": time,
         "product": product,
     })
-
-    quick_items = []
-    if line_bot_api:
-        try:
-            profile = line_bot_api.get_profile(user_id)
-            if profile.display_name:
-                quick_items.append(
-                    QuickReplyItem(action=MessageAction(
-                        label=f"👤 {profile.display_name}",
-                        text=profile.display_name,
-                    ))
-                )
-        except Exception as e:
-            print(f"[get profile error] {e}")
-
-    return TextMessage(
-        text="好的！請問您的姓名？\n（可直接點選下方帶入 LINE 名稱）",
-        quick_reply=QuickReply(items=quick_items) if quick_items else None,
-    )
+    return TextMessage(text="好的！請問您的姓名？")
 
 
 def handle_name_input(user_id, name, session):
