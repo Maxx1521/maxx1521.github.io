@@ -53,11 +53,14 @@ def _delete_session(user_id):
 
 # ── 預約流程 ─────────────────────────────────────
 
+_WEEKDAYS = ["(一)", "(二)", "(三)", "(四)", "(五)", "(六)", "(日)"]
+
+
 def start_booking(product=None, appt_type="丈量預約"):
     quick_items = []
     for i in range(1, 8):
         date = datetime.now() + timedelta(days=i)
-        label = date.strftime("%m/%d (%a)")
+        label = date.strftime("%m/%d") + _WEEKDAYS[date.weekday()]
         data = f"action=select_date&date={date.strftime('%Y-%m-%d')}&appt_type={appt_type}"
         if product:
             data += f"&product={product}"
