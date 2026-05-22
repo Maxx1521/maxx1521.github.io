@@ -24,7 +24,7 @@ menu = {
         },
         {
             "bounds": {"x": COL, "y": 0, "width": COL, "height": TOP_H},
-            "action": {"type": "postback", "data": "action=location_inquiry", "label": "預約參觀"}
+            "action": {"type": "postback", "data": "action=store_visit", "label": "預約參觀"}
         },
         {
             "bounds": {"x": COL * 2, "y": 0, "width": COL + 1, "height": TOP_H},
