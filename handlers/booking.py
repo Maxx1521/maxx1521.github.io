@@ -1,18 +1,24 @@
 import os
-import json
 from datetime import datetime, timedelta
 from linebot.v3.messaging import (
     FlexMessage, FlexContainer, TextMessage,
     QuickReply, QuickReplyItem, PostbackAction
 )
+from supabase import create_client
 
-# 預約流程狀態暫存（正式版改用 Supabase）
-booking_sessions = {}
+_supabase = None
+
+def get_supabase():
+    global _supabase
+    if _supabase is None:
+        url = os.environ.get("SUPABASE_URL")
+        key = os.environ.get("SUPABASE_KEY")
+        _supabase = create_client(url, key)
+    return _supabase
 
 
 def start_booking(product=None):
     quick_items = []
-    # 產生未來 7 天的日期選項
     for i in range(1, 8):
         date = datetime.now() + timedelta(days=i)
         label = date.strftime("%m/%d (%a)")
@@ -47,15 +53,17 @@ def select_time(date, product=None):
 
 
 def confirm_booking(user_id, date, time, product=None):
-    # 儲存預約資料（之後串接 Supabase）
-    booking_sessions[user_id] = {
+    record = {
+        "user_id": user_id,
         "date": date,
         "time": time,
         "product": product,
-        "status": "pending"
+        "status": "pending",
     }
-
-    product_text = f"\n📦 有意向商品：{product}" if product else ""
+    try:
+        get_supabase().table("bookings").insert(record).execute()
+    except Exception as e:
+        print(f"[Supabase error] {e}")
 
     bubble = {
         "type": "bubble",
