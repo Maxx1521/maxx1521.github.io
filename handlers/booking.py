@@ -2,7 +2,8 @@ import os
 from datetime import datetime, timedelta
 from linebot.v3.messaging import (
     FlexMessage, FlexContainer, TextMessage,
-    QuickReply, QuickReplyItem, PostbackAction
+    QuickReply, QuickReplyItem, PostbackAction,
+    ApiClient, Configuration, MessagingApi, PushMessageRequest
 )
 from supabase import create_client
 
@@ -15,6 +16,23 @@ def get_supabase():
         key = os.environ.get("SUPABASE_KEY")
         _supabase = create_client(url, key)
     return _supabase
+
+
+def push_owner_notification(date, time, product):
+    owner_id = os.environ.get("OWNER_LINE_USER_ID")
+    token = os.environ.get("LINE_CHANNEL_ACCESS_TOKEN")
+    if not owner_id or not token:
+        return
+    try:
+        product_text = f"\n📦 商品：{product}" if product else ""
+        msg = f"📬 新預約通知\n\n📅 日期：{date}\n🕐 時間：{time}{product_text}\n\n請至後台確認客戶資訊。"
+        config = Configuration(access_token=token)
+        with ApiClient(config) as client:
+            MessagingApi(client).push_message(
+                PushMessageRequest(to=owner_id, messages=[TextMessage(text=msg)])
+            )
+    except Exception as e:
+        print(f"[push notify error] {e}")
 
 
 def start_booking(product=None):
@@ -64,6 +82,8 @@ def confirm_booking(user_id, date, time, product=None):
         get_supabase().table("bookings").insert(record).execute()
     except Exception as e:
         print(f"[Supabase error] {e}")
+
+    push_owner_notification(date, time, product)
 
     bubble = {
         "type": "bubble",

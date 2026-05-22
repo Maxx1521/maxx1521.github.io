@@ -14,7 +14,9 @@ BOOKING_KEYWORDS = ["預約", "丈量", "到府", "預約丈量"]
 def handle_text_message(event, line_bot_api):
     text = event.message.text.strip()
 
-    if any(k in text for k in MENU_KEYWORDS):
+    if text == "我的id":
+        reply = TextMessage(text=f"你的 LINE user ID：\n{event.source.user_id}")
+    elif any(k in text for k in MENU_KEYWORDS):
         reply = _main_menu()
     elif any(k in text for k in CATALOG_KEYWORDS):
         reply = get_category_flex()
