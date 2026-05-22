@@ -1,5 +1,7 @@
 import os
 import re
+import json
+import base64
 from datetime import datetime, timedelta, timezone, date as date_type
 from linebot.v3.messaging import (
     FlexMessage, FlexContainer, TextMessage,
@@ -7,6 +9,8 @@ from linebot.v3.messaging import (
     ApiClient, Configuration, MessagingApi, PushMessageRequest
 )
 from supabase import create_client
+from googleapiclient.discovery import build
+from google.oauth2 import service_account
 
 _supabase = None
 
@@ -213,6 +217,7 @@ def handle_confirm(user_id, session):
         print(f"[Supabase error] {e}")
 
     _delete_session(user_id)
+    create_calendar_event(session)
     push_owner_notification(
         session["appt_type"], session["date"], session["time"],
         session.get("name",""), session.get("phone",""),
@@ -340,6 +345,44 @@ def _success_card(session):
         alt_text="預約申請已收到",
         contents=FlexContainer.from_dict(bubble)
     )
+
+
+# ── Google Calendar ───────────────────────────────
+
+def create_calendar_event(session):
+    creds_b64 = os.environ.get("GOOGLE_CREDENTIALS_B64")
+    calendar_id = os.environ.get("GOOGLE_CALENDAR_ID")
+    if not creds_b64 or not calendar_id:
+        return
+    try:
+        creds_json = base64.b64decode(creds_b64).decode("utf-8")
+        creds_info = json.loads(creds_json)
+        creds = service_account.Credentials.from_service_account_info(
+            creds_info,
+            scopes=["https://www.googleapis.com/auth/calendar"],
+        )
+        service = build("calendar", "v3", credentials=creds, cache_discovery=False)
+
+        date_str = session["date"]
+        time_str = session["time"]
+        start_dt = datetime.strptime(f"{date_str} {time_str}", "%Y-%m-%d %H:%M")
+        end_dt = start_dt + timedelta(hours=1)
+        tz = "Asia/Taipei"
+
+        appt_type = session.get("appt_type", "預約")
+        name = session.get("name", "")
+        phone = session.get("phone", "")
+        address = session.get("address", "")
+
+        event = {
+            "summary": f"{appt_type} - {name}",
+            "description": f"姓名：{name}\n電話：{phone}\n地址：{address}",
+            "start": {"dateTime": start_dt.isoformat(), "timeZone": tz},
+            "end":   {"dateTime": end_dt.isoformat(),   "timeZone": tz},
+        }
+        service.events().insert(calendarId=calendar_id, body=event).execute()
+    except Exception as e:
+        print(f"[calendar error] {e}")
 
 
 # ── 推播通知 ─────────────────────────────────────

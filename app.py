@@ -12,7 +12,7 @@ from linebot.v3.webhooks import MessageEvent, PostbackEvent, TextMessageContent
 
 from handlers.booking import (
     WAITING_CONFIRM, _delete_session, get_supabase,
-    push_owner_notification, push_success_to_customer,
+    push_owner_notification, push_success_to_customer, create_calendar_event,
 )
 from handlers.message_handler import handle_text_message
 from handlers.postback_handler import handle_postback
@@ -53,6 +53,7 @@ def auto_confirm_pending():
                     "status":    "pending",
                 }).execute()
                 _delete_session(user_id)
+                create_calendar_event(session)
                 push_owner_notification(
                     session["appt_type"], session["date"], session["time"],
                     session.get("name", ""), session.get("phone", ""),
