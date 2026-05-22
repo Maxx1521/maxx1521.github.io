@@ -8,7 +8,7 @@ from flask import Flask, abort, request
 from linebot.v3 import WebhookHandler
 from linebot.v3.exceptions import InvalidSignatureError
 from linebot.v3.messaging import ApiClient, Configuration, MessagingApi
-from linebot.v3.webhooks import MessageEvent, PostbackEvent, TextMessageContent
+from linebot.v3.webhooks import MessageEvent, PostbackEvent, TextMessageContent, FollowEvent
 
 from handlers.booking import (
     WAITING_CONFIRM, _delete_session, get_supabase,
@@ -102,6 +102,32 @@ def on_postback(event):
             handle_postback(event, line_bot_api)
     except Exception as e:
         print(f"[on_postback error] {e}")
+
+
+@handler.add(FollowEvent)
+def on_follow(event):
+    try:
+        with ApiClient(configuration) as api_client:
+            line_bot_api = MessagingApi(api_client)
+            from linebot.v3.messaging import ReplyMessageRequest
+            msg = TextMessage(
+                text=(
+                    "歡迎來到南島家居 🏠\n\n"
+                    "我們專注木地板與建材，\n"
+                    "提供選材建議、免費丈量、快速報價服務。\n\n"
+                    "你可以直接輸入以下關鍵字快速查詢：\n\n"
+                    "📐 輸入「估價」→ 免費報價服務\n"
+                    "📷 輸入「案例」→ 看近期施工實例\n"
+                    "🪵 輸入「材質」→ 了解各種地板差異\n"
+                    "🧹 輸入「保養」→ 地板清潔保養技巧\n\n"
+                    "或直接傳訊息給我們，我們會盡快親自回覆 😊"
+                )
+            )
+            line_bot_api.reply_message(
+                ReplyMessageRequest(reply_token=event.reply_token, messages=[msg])
+            )
+    except Exception as e:
+        print(f"[on_follow error] {e}")
 
 
 if __name__ == "__main__":
