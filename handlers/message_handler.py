@@ -18,7 +18,7 @@ MENU_KEYWORDS        = ["選單", "menu", "Menu", "MENU", "你好", "hi", "Hi", 
 CATALOG_KEYWORDS     = ["產品", "目錄", "地板", "看地板", "產品目錄"]
 BOOKING_KEYWORDS     = ["預約", "丈量", "到府", "預約丈量", "丈量預約"]
 STORE_VISIT_KEYWORDS = ["門市參觀", "參觀", "來店"]
-LOCATION_KEYWORDS    = ["門市在哪", "門市地址", "你們在哪", "在哪裡", "門市位置", "門市", "地址在哪"]
+LOCATION_KEYWORDS    = ["門市在哪", "門市地址", "你們在哪", "在哪裡", "門市位置", "門市", "地址在哪", "地址"]
 COLOR_KEYWORDS       = ["選色", "線上選色", "色卡", "顏色"]
 
 
