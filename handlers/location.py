@@ -48,7 +48,7 @@ def handle_area_input(user_id, area):
             quick_reply=QuickReply(items=[
                 QuickReplyItem(action=PostbackAction(
                     label="📅 預約門市參觀",
-                    data="action=store_visit"
+                    data=f"action=store_visit&store={matched['name']}"
                 )),
             ])
         )

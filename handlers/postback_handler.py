@@ -14,6 +14,8 @@ def handle_postback(event, line_bot_api):
     user_id = event.source.user_id
     appt_type = data.get("appt_type", ["丈量預約"])[0]
 
+    store = data.get("store", [None])[0]
+
     if action == "catalog":
         reply = get_category_flex()
 
@@ -26,7 +28,7 @@ def handle_postback(event, line_bot_api):
         reply = start_booking(product, appt_type)
 
     elif action == "store_visit":
-        reply = start_booking(appt_type="門市參觀")
+        reply = start_booking(appt_type="門市參觀", store=store)
 
     elif action == "color_selection":
         from handlers.message_handler import _color_selection_message
@@ -35,7 +37,7 @@ def handle_postback(event, line_bot_api):
     elif action == "select_date":
         date = data.get("date", [""])[0]
         product = data.get("product", [None])[0]
-        reply = select_time(date, product, appt_type)
+        reply = select_time(date, product, appt_type, store)
 
     elif action == "select_time":
         date = data.get("date", [""])[0]

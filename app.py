@@ -73,19 +73,6 @@ scheduler.start()
 atexit.register(lambda: scheduler.shutdown())
 
 
-@app.route("/test-calendar")
-def test_calendar():
-    session = {
-        "appt_type": "丈量預約", "date": "2026-06-01", "time": "10:00",
-        "name": "測試", "phone": "0912345678", "address": "高雄市測試路1號",
-    }
-    try:
-        create_calendar_event(session)
-        return "OK - check FLOORING calendar"
-    except Exception as e:
-        return f"ERROR: {e}"
-
-
 @app.route("/webhook", methods=["POST"])
 def webhook():
     signature = request.headers["X-Line-Signature"]

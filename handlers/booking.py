@@ -95,8 +95,8 @@ def _parse_date_text(text):
         target = _resolve_year(year, month, day, now)
         return target.strftime('%Y-%m-%d') if target else None
 
-    # M/D 或 MM/DD
-    m = re.search(r'(\d{1,2})/(\d{1,2})', text)
+    # M/D 或 MM/DD（含全形斜線）
+    m = re.search(r'(\d{1,2})[/／](\d{1,2})', text)
     if m:
         month, day = int(m.group(1)), int(m.group(2))
         target = _resolve_year(year, month, day, now)
@@ -118,7 +118,7 @@ def _resolve_year(year, month, day, now):
 _WEEKDAYS = ["(一)", "(二)", "(三)", "(四)", "(五)", "(六)", "(日)"]
 
 
-def start_booking(product=None, appt_type="丈量預約"):
+def start_booking(product=None, appt_type="丈量預約", store=None):
     quick_items = []
     for i in range(1, 8):
         date = datetime.now() + timedelta(days=i)
@@ -126,6 +126,8 @@ def start_booking(product=None, appt_type="丈量預約"):
         data = f"action=select_date&date={date.strftime('%Y-%m-%d')}&appt_type={appt_type}"
         if product:
             data += f"&product={product}"
+        if store:
+            data += f"&store={store}"
         quick_items.append(
             QuickReplyItem(action=PostbackAction(label=label, data=data))
         )
@@ -136,13 +138,21 @@ def start_booking(product=None, appt_type="丈量預約"):
     )
 
 
-def select_time(date, product=None, appt_type="丈量預約"):
-    times = ["10:00", "14:00", "16:00"]
+def select_time(date, product=None, appt_type="丈量預約", store=None):
+    if appt_type == "門市參觀":
+        if store and "苓雅" in store:
+            times = ["12:00", "14:00", "16:00", "18:00"]
+        else:
+            times = ["09:00", "11:00", "13:00", "15:00", "17:00"]
+    else:
+        times = ["10:00", "14:00", "16:00"]
     quick_items = []
     for t in times:
         data = f"action=select_time&date={date}&time={t}&appt_type={appt_type}"
         if product:
             data += f"&product={product}"
+        if store:
+            data += f"&store={store}"
         quick_items.append(
             QuickReplyItem(action=PostbackAction(label=t, data=data))
         )
@@ -170,6 +180,10 @@ def handle_name_input(user_id, name, session):
 
 
 def handle_phone_input(user_id, phone, session):
+    if session.get("appt_type") == "門市參觀":
+        updated = {**session, "state": WAITING_CONFIRM, "phone": phone}
+        _upsert_session(updated)
+        return _review_card(updated)
     _upsert_session({**session, "state": WAITING_ADDRESS, "phone": phone})
     return TextMessage(text="📍 請問您的地址？")
 
@@ -233,8 +247,9 @@ def _review_card(session):
         ("時間", session["time"]),
         ("姓名", session.get("name", "")),
         ("電話", session.get("phone", "")),
-        ("地址", session.get("address", "")),
     ]
+    if appt_type != "門市參觀":
+        rows.append(("地址", session.get("address", "")))
     if session.get("product"):
         rows.append(("商品", session["product"]))
 
@@ -274,11 +289,15 @@ def _review_card(session):
         },
     }
 
-    quick_reply = QuickReply(items=[
+    edit_items = [
         QuickReplyItem(action=PostbackAction(label="✏️ 改姓名", data="action=edit_field&field=name")),
         QuickReplyItem(action=PostbackAction(label="✏️ 改電話", data="action=edit_field&field=phone")),
-        QuickReplyItem(action=PostbackAction(label="✏️ 改地址", data="action=edit_field&field=address")),
-    ])
+    ]
+    if appt_type != "門市參觀":
+        edit_items.append(
+            QuickReplyItem(action=PostbackAction(label="✏️ 改地址", data="action=edit_field&field=address"))
+        )
+    quick_reply = QuickReply(items=edit_items)
 
     return FlexMessage(
         alt_text="請確認您的預約資料",
