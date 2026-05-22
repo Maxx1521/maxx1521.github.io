@@ -167,7 +167,7 @@ def _portfolio_message():
             "✅ 客廳｜臥室｜商業空間 都有施工經驗\n"
             "✅ 超耐磨、海島型、實木 各類材質均可施作\n\n"
             "想看更多案例，歡迎追蹤我們的 IG 👇\n"
-            "@south.home.flooring\n\n"
+            "@south_woodenn\n\n"
             "有看到喜歡的風格，輸入「估價」預約免費丈量 😊"
         )
     )
