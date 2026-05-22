@@ -12,6 +12,7 @@ _supabase = None
 WAITING_NAME    = "waiting_name"
 WAITING_PHONE   = "waiting_phone"
 WAITING_ADDRESS = "waiting_address"
+WAITING_CONFIRM = "waiting_confirm"
 
 
 def get_supabase():
@@ -86,7 +87,6 @@ def select_time(date, product=None, appt_type="丈量預約"):
 
 
 def ask_for_name(user_id, appt_type, date, time, product=None):
-    """選完時段後，建立 session 開始收集資料"""
     _upsert_session({
         "user_id": user_id,
         "state": WAITING_NAME,
@@ -99,39 +99,33 @@ def ask_for_name(user_id, appt_type, date, time, product=None):
 
 
 def handle_name_input(user_id, name, session):
-    _upsert_session({"user_id": user_id, "state": WAITING_PHONE, "name": name,
-                     "appt_type": session["appt_type"], "date": session["date"],
-                     "time": session["time"], "product": session.get("product")})
+    _upsert_session({**session, "state": WAITING_PHONE, "name": name})
     return TextMessage(text=f"謝謝 {name}！\n\n📱 請問您的聯絡電話？")
 
 
 def handle_phone_input(user_id, phone, session):
-    _upsert_session({"user_id": user_id, "state": WAITING_ADDRESS, "phone": phone,
-                     "name": session.get("name"), "appt_type": session["appt_type"],
-                     "date": session["date"], "time": session["time"],
-                     "product": session.get("product")})
-    label = "到府丈量" if session["appt_type"] == "丈量預約" else "門市所在"
-    return TextMessage(text=f"📍 請問您的地址？")
+    _upsert_session({**session, "state": WAITING_ADDRESS, "phone": phone})
+    return TextMessage(text="📍 請問您的地址？")
 
 
 def handle_address_input(user_id, address, session):
-    appt_type = session["appt_type"]
-    date      = session["date"]
-    time      = session["time"]
-    product   = session.get("product")
-    name      = session.get("name", "")
-    phone     = session.get("phone", "")
+    updated = {**session, "state": WAITING_CONFIRM, "address": address}
+    _upsert_session(updated)
+    return _review_card(updated)
 
+
+def handle_confirm(user_id, session):
+    """客戶確認，正式寫入資料庫"""
     record = {
-        "user_id": user_id,
-        "appt_type": appt_type,
-        "date": date,
-        "time": time,
-        "product": product,
-        "name": name,
-        "phone": phone,
-        "address": address,
-        "status": "pending",
+        "user_id":   user_id,
+        "appt_type": session["appt_type"],
+        "date":      session["date"],
+        "time":      session["time"],
+        "product":   session.get("product"),
+        "name":      session.get("name", ""),
+        "phone":     session.get("phone", ""),
+        "address":   session.get("address", ""),
+        "status":    "pending",
     }
     try:
         get_supabase().table("bookings").insert(record).execute()
@@ -139,8 +133,133 @@ def handle_address_input(user_id, address, session):
         print(f"[Supabase error] {e}")
 
     _delete_session(user_id)
-    push_owner_notification(appt_type, date, time, name, phone, address, product)
-    return _confirmation_card(appt_type, date, time, name, product)
+    push_owner_notification(
+        session["appt_type"], session["date"], session["time"],
+        session.get("name",""), session.get("phone",""),
+        session.get("address",""), session.get("product")
+    )
+    return _success_card(session)
+
+
+def handle_edit_field(user_id, field, session):
+    """客戶要修改某一欄位"""
+    prompts = {
+        "name":    (WAITING_NAME,    "請重新輸入您的姓名："),
+        "phone":   (WAITING_PHONE,   "請重新輸入您的電話："),
+        "address": (WAITING_ADDRESS, "請重新輸入您的地址："),
+    }
+    state, prompt = prompts.get(field, (WAITING_NAME, "請重新輸入您的姓名："))
+    _upsert_session({**session, "state": state})
+    return TextMessage(text=prompt)
+
+
+# ── 卡片 ─────────────────────────────────────────
+
+def _review_card(session):
+    """讓客戶確認填寫內容的摘要卡片"""
+    appt_type = session["appt_type"]
+    icon = "📅" if appt_type == "丈量預約" else "🏠"
+
+    rows = [
+        ("類型", f"{icon} {appt_type}"),
+        ("日期", session["date"]),
+        ("時間", session["time"]),
+        ("姓名", session.get("name", "")),
+        ("電話", session.get("phone", "")),
+        ("地址", session.get("address", "")),
+    ]
+    if session.get("product"):
+        rows.append(("商品", session["product"]))
+
+    contents = []
+    for label, value in rows:
+        contents.append({
+            "type": "box", "layout": "horizontal",
+            "contents": [
+                {"type": "text", "text": label, "size": "sm", "color": "#888888", "flex": 2},
+                {"type": "text", "text": value or "—", "size": "sm", "flex": 5, "wrap": True},
+            ]
+        })
+
+    bubble = {
+        "type": "bubble",
+        "body": {
+            "type": "box", "layout": "vertical",
+            "contents": [
+                {"type": "text", "text": "📋 請確認您的預約資料",
+                 "weight": "bold", "size": "lg", "color": "#5C8D5E"},
+                {"type": "separator", "margin": "md"},
+                {"type": "box", "layout": "vertical", "margin": "md",
+                 "spacing": "sm", "contents": contents},
+                {"type": "separator", "margin": "md"},
+                {"type": "text", "text": "資料有誤？請點下方快捷鍵修改。",
+                 "size": "xs", "color": "#aaaaaa", "wrap": True, "margin": "md"},
+            ],
+        },
+        "footer": {
+            "type": "box", "layout": "vertical",
+            "contents": [{
+                "type": "button",
+                "action": {"type": "postback", "label": "✅ 確認送出",
+                           "data": "action=confirm_booking"},
+                "style": "primary", "color": "#5C8D5E",
+            }],
+        },
+    }
+
+    quick_reply = QuickReply(items=[
+        QuickReplyItem(action=PostbackAction(label="✏️ 改姓名", data="action=edit_field&field=name")),
+        QuickReplyItem(action=PostbackAction(label="✏️ 改電話", data="action=edit_field&field=phone")),
+        QuickReplyItem(action=PostbackAction(label="✏️ 改地址", data="action=edit_field&field=address")),
+    ])
+
+    return FlexMessage(
+        alt_text="請確認您的預約資料",
+        contents=FlexContainer.from_dict(bubble),
+        quick_reply=quick_reply
+    )
+
+
+def _success_card(session):
+    appt_type = session["appt_type"]
+    icon = "📅" if appt_type == "丈量預約" else "🏠"
+    rows = [
+        ("類型", f"{icon} {appt_type}"),
+        ("姓名", session.get("name", "")),
+        ("日期", session["date"]),
+        ("時間", session["time"]),
+    ]
+    contents = []
+    for label, value in rows:
+        contents.append({
+            "type": "box", "layout": "horizontal",
+            "contents": [
+                {"type": "text", "text": label, "size": "sm", "color": "#888888", "flex": 2},
+                {"type": "text", "text": value or "—", "size": "sm", "flex": 5},
+            ]
+        })
+
+    bubble = {
+        "type": "bubble",
+        "body": {
+            "type": "box", "layout": "vertical",
+            "contents": [
+                {"type": "text", "text": "✅ 預約申請已收到",
+                 "weight": "bold", "size": "xl", "color": "#5C8D5E"},
+                {"type": "separator", "margin": "md"},
+                {"type": "box", "layout": "vertical", "margin": "md",
+                 "spacing": "sm", "contents": contents},
+                {"type": "separator", "margin": "md"},
+                {"type": "text",
+                 "text": "我們將請專人與您確認時間，謝謝！",
+                 "size": "xs", "color": "#888888", "wrap": True, "margin": "md"},
+            ],
+        },
+    }
+    return FlexMessage(
+        alt_text="預約申請已收到",
+        contents=FlexContainer.from_dict(bubble)
+    )
 
 
 # ── 推播通知 ─────────────────────────────────────
@@ -168,49 +287,3 @@ def push_owner_notification(appt_type, date, time, name, phone, address, product
             )
     except Exception as e:
         print(f"[push notify error] {e}")
-
-
-# ── 確認卡片 ─────────────────────────────────────
-
-def _confirmation_card(appt_type, date, time, name, product):
-    icon = "📅" if appt_type == "丈量預約" else "🏠"
-    rows = [
-        {"label": "類型", "value": f"{icon} {appt_type}"},
-        {"label": "姓名", "value": name},
-        {"label": "日期", "value": date},
-        {"label": "時間", "value": time},
-    ]
-    if product:
-        rows.append({"label": "商品", "value": product})
-
-    contents = []
-    for row in rows:
-        contents.append({
-            "type": "box", "layout": "horizontal",
-            "contents": [
-                {"type": "text", "text": row["label"], "size": "sm", "color": "#888888", "flex": 2},
-                {"type": "text", "text": row["value"], "size": "sm", "flex": 5, "wrap": True},
-            ]
-        })
-
-    bubble = {
-        "type": "bubble",
-        "body": {
-            "type": "box", "layout": "vertical",
-            "contents": [
-                {"type": "text", "text": "✅ 預約申請已收到",
-                 "weight": "bold", "size": "xl", "color": "#5C8D5E"},
-                {"type": "separator", "margin": "md"},
-                {"type": "box", "layout": "vertical", "margin": "md",
-                 "spacing": "sm", "contents": contents},
-                {"type": "separator", "margin": "md"},
-                {"type": "text",
-                 "text": "我們將請專人與您確認時間，謝謝！",
-                 "size": "xs", "color": "#888888", "wrap": True, "margin": "md"},
-            ],
-        },
-    }
-    return FlexMessage(
-        alt_text=f"預約申請已收到 {date} {time}",
-        contents=FlexContainer.from_dict(bubble)
-    )

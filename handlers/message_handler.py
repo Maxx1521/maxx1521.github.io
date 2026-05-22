@@ -7,7 +7,7 @@ from handlers.catalog import get_category_flex
 from handlers.booking import (
     start_booking, get_session,
     handle_name_input, handle_phone_input, handle_address_input,
-    WAITING_NAME, WAITING_PHONE, WAITING_ADDRESS
+    WAITING_NAME, WAITING_PHONE, WAITING_ADDRESS, WAITING_CONFIRM
 )
 
 
@@ -32,6 +32,8 @@ def handle_text_message(event, line_bot_api):
             reply = handle_phone_input(user_id, text, session)
         elif state == WAITING_ADDRESS:
             reply = handle_address_input(user_id, text, session)
+        elif state == WAITING_CONFIRM:
+            reply = TextMessage(text="請點選「✅ 確認送出」送出預約，或點快捷鍵修改資料。")
         else:
             reply = TextMessage(text="請輸入「選單」查看服務項目。")
         line_bot_api.reply_message(
