@@ -118,6 +118,13 @@ def _resolve_year(year, month, day, now):
 _WEEKDAYS = ["(一)", "(二)", "(三)", "(四)", "(五)", "(六)", "(日)"]
 
 
+_STORE_ADDRESSES = {
+    "左營店": "高雄市左營區南屏路206號",
+    "三民店": "高雄市三民區大昌一路362號",
+    "苓雅店": "高雄市苓雅區青年一路109-2號",
+}
+
+
 def start_booking(product=None, appt_type="丈量預約", store=None):
     quick_items = []
     for i in range(1, 8):
@@ -131,11 +138,13 @@ def start_booking(product=None, appt_type="丈量預約", store=None):
         quick_items.append(
             QuickReplyItem(action=PostbackAction(label=label, data=data))
         )
-    icon = "📅" if appt_type == "丈量預約" else "🏠"
-    return TextMessage(
-        text=f"{icon} {appt_type}\n\n請選擇希望的日期（開放未來 15 天）：\n若所需日期不在選項中，請直接輸入，例如：6/20",
-        quick_reply=QuickReply(items=quick_items)
-    )
+    if appt_type == "門市參觀" and store:
+        addr = _STORE_ADDRESSES.get(store, "")
+        text = f"🏠 {store}\n📍 {addr}\n\n請選擇預約日期\n若預約時間不在選單上，請直接輸入日期"
+    else:
+        icon = "📅" if appt_type == "丈量預約" else "🏠"
+        text = f"{icon} {appt_type}\n\n請選擇預約日期\n若預約時間不在選單上，請直接輸入日期"
+    return TextMessage(text=text, quick_reply=QuickReply(items=quick_items))
 
 
 def select_time(date, product=None, appt_type="丈量預約", store=None):
