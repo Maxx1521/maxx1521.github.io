@@ -74,8 +74,9 @@ def handle_date_input(user_id, text, session):
         return TextMessage(text="⚠️ 無法預約該日期，請選擇明天以後的時段。")
     appt_type = session.get("appt_type", "丈量預約")
     product   = session.get("product")
+    store     = product if appt_type == "門市參觀" else None
     _delete_session(user_id)
-    return select_time(date_str, product, appt_type)
+    return select_time(date_str, None if store else product, appt_type, store)
 
 
 def _parse_date_text(text):
@@ -130,7 +131,14 @@ _STORE_ADDRESSES = {
 }
 
 
-def start_booking(product=None, appt_type="丈量預約", store=None):
+def start_booking(product=None, appt_type="丈量預約", store=None, user_id=None):
+    if user_id and appt_type == "門市參觀" and store:
+        _upsert_session({
+            "user_id": user_id,
+            "state": WAITING_DATE,
+            "appt_type": appt_type,
+            "product": store,  # 暫借 product 欄位存門市名稱
+        })
     quick_items = []
     for i in range(1, 8):
         date = datetime.now() + timedelta(days=i)

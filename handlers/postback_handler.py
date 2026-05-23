@@ -31,7 +31,7 @@ def handle_postback(event, line_bot_api):
 
     elif action == "store_visit":
         if store:
-            reply = start_booking(appt_type="門市參觀", store=store)
+            reply = start_booking(appt_type="門市參觀", store=store, user_id=user_id)
         else:
             reply = TextMessage(
                 text="🏠 門市參觀\n\n請問您想預約哪間門市？",
