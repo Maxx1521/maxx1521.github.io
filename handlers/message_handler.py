@@ -5,7 +5,7 @@ from linebot.v3.messaging import (
 )
 from handlers.catalog import get_category_flex
 from handlers.booking import (
-    start_booking, get_session, select_time, _parse_date_text,
+    start_booking, get_session, select_time, _parse_date_text, _is_bookable_date,
     handle_name_input, handle_phone_input, handle_address_input,
     ask_for_date, handle_date_input,
     WAITING_DATE, WAITING_NAME, WAITING_PHONE, WAITING_ADDRESS, WAITING_CONFIRM
@@ -58,7 +58,10 @@ def handle_text_message(event, line_bot_api):
     # 直接輸入日期 → 跳時段選擇
     date_str = _parse_date_text(text)
     if date_str:
-        reply = select_time(date_str)
+        if not _is_bookable_date(date_str):
+            reply = TextMessage(text="⚠️ 無法預約該日期，請選擇明天以後的時段。")
+        else:
+            reply = select_time(date_str)
         line_bot_api.reply_message(
             ReplyMessageRequest(reply_token=event.reply_token, messages=[reply])
         )

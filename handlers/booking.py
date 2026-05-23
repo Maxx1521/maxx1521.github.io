@@ -69,9 +69,9 @@ def ask_for_date(user_id, appt_type="丈量預約"):
 def handle_date_input(user_id, text, session):
     date_str = _parse_date_text(text)
     if not date_str:
-        return TextMessage(
-            text="無法識別日期，請輸入格式如「6月20日」或「6/20」"
-        )
+        return TextMessage(text="無法識別日期，請輸入格式如「6月20日」或「6/20」")
+    if not _is_bookable_date(date_str):
+        return TextMessage(text="⚠️ 無法預約該日期，請選擇明天以後的時段。")
     appt_type = session.get("appt_type", "丈量預約")
     product   = session.get("product")
     _delete_session(user_id)
@@ -109,10 +109,18 @@ def _resolve_year(year, month, day, now):
     try:
         target = date_type(year, month, day)
         if target <= now.date():
-            target = date_type(year + 1, month, day)
+            return None  # 過去或今天，不自動跳年
         return target
     except ValueError:
         return None
+
+
+def _is_bookable_date(date_str):
+    """date_str 必須是明天或之後"""
+    try:
+        return date_type.fromisoformat(date_str) > date_type.today()
+    except Exception:
+        return False
 
 
 _WEEKDAYS = ["(一)", "(二)", "(三)", "(四)", "(五)", "(六)", "(日)"]
