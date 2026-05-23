@@ -32,8 +32,18 @@ LAMINATE_BRANDS = {
     "山井富士山": {
         "image": "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800",
         "products": [
-            {"name": "典藏款", "desc": "9.5mm｜抗水超耐磨｜8款日系花色\n宮崎白梣・富山白橡・千葉秋香・佐賀榆木\n京都淺橡・奈良灰橡・長野檜木・熊本橡木", "price": "NT$ 3,700/坪"},
-            {"name": "尊爵款", "desc": "13.5mm｜頂級厚實踏感｜4款精選花色\n高知橡木・姬路白橡・銀山淺橡・慕尼黑", "price": "NT$ 4,250/坪"},
+            {
+                "name": "典藏款",
+                "desc": "9.5mm｜抗水超耐磨｜日系花色設計",
+                "price": "NT$ 3,700/坪",
+                "colors": ["宮崎白梣", "富山白橡", "千葉秋香", "佐賀榆木", "京都淺橡", "奈良灰橡", "長野檜木", "熊本橡木"],
+            },
+            {
+                "name": "尊爵款",
+                "desc": "13.5mm｜頂級厚實踏感｜精選花色",
+                "price": "NT$ 4,250/坪",
+                "colors": ["高知橡木", "姬路白橡", "銀山淺橡", "慕尼黑"],
+            },
         ],
     },
     "派斯吐司倒角": {
@@ -266,6 +276,30 @@ def get_brand_products_flex(brand):
 
     bubbles = []
     for p in info["products"]:
+        has_colors = bool(p.get("colors"))
+        footer_buttons = []
+        if has_colors:
+            footer_buttons.append({
+                "type": "button",
+                "style": "secondary",
+                "action": {
+                    "type": "postback",
+                    "label": "🎨 查看花色",
+                    "data": f"action=view_colors&brand={brand}&product={p['name']}",
+                    "displayText": f"查看 {p['name']} 花色",
+                },
+            })
+        footer_buttons.append({
+            "type": "button",
+            "style": "primary",
+            "color": "#5C8D5E",
+            "action": {
+                "type": "postback",
+                "label": "預約到府丈量",
+                "data": f"action=booking&product={brand} {p['name']}",
+            },
+        })
+
         bubble = {
             "type": "bubble",
             "hero": {
@@ -288,21 +322,23 @@ def get_brand_products_flex(brand):
             "footer": {
                 "type": "box",
                 "layout": "vertical",
-                "contents": [
-                    {
-                        "type": "button",
-                        "style": "primary",
-                        "color": "#5C8D5E",
-                        "action": {
-                            "type": "postback",
-                            "label": "預約到府丈量",
-                            "data": f"action=booking&product={brand} {p['name']}",
-                        },
-                    }
-                ],
+                "spacing": "sm",
+                "contents": footer_buttons,
             },
         }
         bubbles.append(bubble)
 
     carousel = {"type": "carousel", "contents": bubbles}
     return FlexMessage(alt_text=f"{brand} 款式", contents=FlexContainer.from_dict(carousel))
+
+
+def get_product_colors(brand, product_name):
+    info = LAMINATE_BRANDS.get(brand)
+    if not info:
+        return TextMessage(text="找不到此品牌。")
+    product = next((p for p in info["products"] if p["name"] == product_name), None)
+    if not product or not product.get("colors"):
+        return TextMessage(text="此款式花色資料尚未建立，歡迎來門市看實品！")
+    colors = product["colors"]
+    colors_text = "・".join(colors)
+    return TextMessage(text=f"🎨 {brand}｜{product_name}\n共 {len(colors)} 款花色：\n\n{colors_text}\n\n想看實品？歡迎預約到府丈量或來門市！")
