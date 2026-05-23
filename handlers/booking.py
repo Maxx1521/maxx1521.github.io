@@ -107,10 +107,7 @@ def _parse_date_text(text):
 
 def _resolve_year(year, month, day, now):
     try:
-        target = date_type(year, month, day)
-        if target <= now.date():
-            return None  # 過去或今天，不自動跳年
-        return target
+        return date_type(year, month, day)  # 直接回傳，由呼叫端驗證是否可預約
     except ValueError:
         return None
 
