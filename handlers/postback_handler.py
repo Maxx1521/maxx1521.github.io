@@ -5,7 +5,8 @@ from linebot.v3.messaging import (
 from handlers.catalog import get_category_flex, get_products_flex
 from handlers.booking import (
     start_booking, select_time, ask_for_name,
-    handle_confirm, handle_edit_field, get_session, _delete_session
+    handle_confirm, handle_edit_field, get_session, _delete_session,
+    push_appointment_confirmation
 )
 from handlers.location import start_location_inquiry
 
@@ -75,6 +76,14 @@ def handle_postback(event, line_bot_api):
 
     elif action == "location_inquiry":
         reply = start_location_inquiry(user_id)
+
+    elif action == "confirm_appointment":
+        customer_id = data.get("customer_id", [""])[0]
+        appt_date   = data.get("date", [""])[0]
+        appt_time   = data.get("time", [""])[0]
+        appt_store  = data.get("store", [None])[0]
+        push_appointment_confirmation(customer_id, appt_date, appt_time, appt_store)
+        reply = TextMessage(text="✅ 已通知客人時間確認！")
 
     else:
         reply = TextMessage(text="請輸入「選單」查看服務項目。")

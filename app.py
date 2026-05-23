@@ -58,6 +58,7 @@ def auto_confirm_pending():
                     session["appt_type"], session["date"], session["time"],
                     session.get("name", ""), session.get("phone", ""),
                     session.get("address", ""), session.get("product"),
+                    customer_id=user_id,
                 )
                 push_success_to_customer(user_id, session)
                 print(f"[auto_confirm] {user_id} auto-confirmed")

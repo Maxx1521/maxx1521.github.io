@@ -130,6 +130,12 @@ _STORE_ADDRESSES = {
     "苓雅店": "高雄市苓雅區青年一路109-2號",
 }
 
+_STORE_FULL_NAMES = {
+    "左營店": "左營南屏店",
+    "三民店": "三民大昌店",
+    "苓雅店": "苓雅青年店",
+}
+
 
 def start_booking(product=None, appt_type="丈量預約", store=None, user_id=None):
     if user_id and appt_type == "門市參觀" and store:
@@ -239,7 +245,7 @@ def handle_confirm(user_id, session):
     push_owner_notification(
         session["appt_type"], session["date"], session["time"],
         session.get("name",""), session.get("phone",""),
-        session.get("address",""), session.get("product")
+        session.get("address",""), session.get("product"), customer_id=user_id
     )
     return _success_card(session)
 
@@ -273,7 +279,10 @@ def _review_card(session):
     if appt_type != "門市參觀":
         rows.append(("地址", session.get("address", "")))
     if session.get("product"):
-        rows.append(("商品", session["product"]))
+        if appt_type == "門市參觀":
+            rows.append(("門市", _STORE_FULL_NAMES.get(session["product"], session["product"])))
+        else:
+            rows.append(("商品", session["product"]))
 
     contents = []
     for label, value in rows:
@@ -305,7 +314,7 @@ def _review_card(session):
             "contents": [{
                 "type": "button",
                 "action": {"type": "postback", "label": "✅ 確認送出",
-                           "data": "action=confirm_booking", "displayText": "✅ 確認送出"},
+                           "data": "action=confirm_booking"},
                 "style": "primary", "color": "#5C8D5E",
             }],
         },
@@ -337,6 +346,8 @@ def _success_card(session):
         ("日期", session["date"]),
         ("時間", session["time"]),
     ]
+    if appt_type == "門市參觀" and session.get("product"):
+        rows.append(("門市", _STORE_FULL_NAMES.get(session["product"], session["product"])))
     contents = []
     for label, value in rows:
         contents.append({
@@ -424,26 +435,101 @@ def push_success_to_customer(user_id, session):
         print(f"[push customer error] {e}")
 
 
-def push_owner_notification(appt_type, date, time, name, phone, address, product):
+def push_owner_notification(appt_type, date, time, name, phone, address, product, customer_id=""):
     owner_id = os.environ.get("OWNER_LINE_USER_ID")
     token    = os.environ.get("LINE_CHANNEL_ACCESS_TOKEN")
     if not owner_id or not token:
         return
     try:
-        product_text = f"\n📦 商品：{product}" if product else ""
-        msg = (
-            f"📬 新預約申請\n\n"
-            f"🏷 類型：{appt_type}\n"
-            f"👤 姓名：{name}\n"
-            f"📱 電話：{phone}\n"
-            f"📍 地址：{address}\n"
-            f"📅 日期：{date}\n"
-            f"🕐 時間：{time}{product_text}"
-        )
+        rows = [
+            ("類型", appt_type),
+            ("姓名", name),
+            ("電話", phone),
+            ("日期", date),
+            ("時間", time),
+        ]
+        if appt_type == "門市參觀" and product:
+            rows.append(("門市", _STORE_FULL_NAMES.get(product, product)))
+        else:
+            if address:
+                rows.append(("地址", address))
+            if product:
+                rows.append(("商品", product))
+
+        contents = []
+        for label, value in rows:
+            contents.append({
+                "type": "box", "layout": "horizontal",
+                "contents": [
+                    {"type": "text", "text": label, "size": "sm", "color": "#888888", "flex": 2},
+                    {"type": "text", "text": value or "—", "size": "sm", "flex": 5, "wrap": True},
+                ]
+            })
+
+        confirm_data = f"action=confirm_appointment&customer_id={customer_id}&date={date}&time={time}"
+        if appt_type == "門市參觀" and product:
+            confirm_data += f"&store={product}"
+
+        bubble = {
+            "type": "bubble",
+            "body": {
+                "type": "box", "layout": "vertical",
+                "contents": [
+                    {"type": "text", "text": "📬 新預約申請",
+                     "weight": "bold", "size": "lg", "color": "#5C8D5E"},
+                    {"type": "separator", "margin": "md"},
+                    {"type": "box", "layout": "vertical", "margin": "md",
+                     "spacing": "sm", "contents": contents},
+                ],
+            },
+            "footer": {
+                "type": "box", "layout": "vertical",
+                "contents": [{
+                    "type": "button",
+                    "action": {"type": "postback", "label": "✅ 確認時間", "data": confirm_data},
+                    "style": "primary", "color": "#5C8D5E",
+                }],
+            },
+        }
+        msg = FlexMessage(alt_text="📬 新預約申請", contents=FlexContainer.from_dict(bubble))
         config = Configuration(access_token=token)
         with ApiClient(config) as client:
             MessagingApi(client).push_message(
-                PushMessageRequest(to=owner_id, messages=[TextMessage(text=msg)])
+                PushMessageRequest(to=owner_id, messages=[msg])
             )
     except Exception as e:
         print(f"[push notify error] {e}")
+
+
+def push_appointment_confirmation(customer_id, date, time, store=None):
+    token = os.environ.get("LINE_CHANNEL_ACCESS_TOKEN")
+    if not token or not customer_id:
+        return
+    try:
+        if store:
+            full_name = _STORE_FULL_NAMES.get(store, store)
+            addr = _STORE_ADDRESSES.get(store, "")
+            msg_text = (
+                f"您好！感謝您的預約 🙏\n\n"
+                f"已確認您的預約時間如下：\n\n"
+                f"📅 日期：{date}\n"
+                f"🕐 時間：{time}\n"
+                f"🏬 門市：{full_name}\n"
+                f"📍 地址：{addr}\n\n"
+                f"期待您的到來！如需更改請提前告知 😊"
+            )
+        else:
+            msg_text = (
+                f"您好！感謝您的預約 🙏\n\n"
+                f"已確認您的丈量時間如下：\n\n"
+                f"📅 日期：{date}\n"
+                f"🕐 時間：{time}\n\n"
+                f"我們將準時到府丈量，請確保有人在家。\n如需更改請提前告知 😊"
+            )
+        config = Configuration(access_token=token)
+        with ApiClient(config) as client:
+            MessagingApi(client).push_message(
+                PushMessageRequest(to=customer_id, messages=[TextMessage(text=msg_text)])
+            )
+    except Exception as e:
+        print(f"[push confirm error] {e}")
