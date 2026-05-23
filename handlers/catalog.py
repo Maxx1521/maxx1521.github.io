@@ -245,7 +245,6 @@ def _laminate_brands_flex():
                 "layout": "vertical",
                 "contents": [
                     {"type": "text", "text": brand, "weight": "bold", "size": "md"},
-                    {"type": "text", "text": f"{len(info['products'])} 款", "size": "sm", "color": "#888888", "margin": "sm"},
                     {"type": "text", "text": price_text, "size": "sm", "color": "#4CAF50", "margin": "sm"},
                     *([{"type": "text", "text": info["desc"], "size": "sm", "color": "#666666", "margin": "sm", "wrap": True}] if info.get("desc") else []),
                 ],
