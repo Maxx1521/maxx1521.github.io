@@ -298,23 +298,25 @@ def get_brand_products_flex(brand):
         if has_colors:
             footer_buttons.append({
                 "type": "button",
-                "style": "secondary",
+                "style": "primary",
+                "color": "#5C8D5E",
                 "action": {
                     "type": "postback",
                     "label": "查看花色",
                     "data": f"action=view_colors&brand={brand}&product={p['name']}",
                 },
             })
-        footer_buttons.append({
-            "type": "button",
-            "style": "primary",
-            "color": "#5C8D5E",
-            "action": {
-                "type": "postback",
-                "label": "預約到府丈量",
-                "data": f"action=booking&product={brand} {p['name']}",
-            },
-        })
+        else:
+            footer_buttons.append({
+                "type": "button",
+                "style": "primary",
+                "color": "#5C8D5E",
+                "action": {
+                    "type": "postback",
+                    "label": "預約到府丈量",
+                    "data": f"action=booking&product={brand} {p['name']}",
+                },
+            })
 
         bubble = {
             "type": "bubble",
