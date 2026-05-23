@@ -30,7 +30,7 @@ CATEGORY_ORDER = ["海島型實木地板", "超耐磨木地板", "石塑地板",
 # 超耐磨木地板：品牌 → 款式
 LAMINATE_BRANDS = {
     "山井富士山": {
-        "image": "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800",
+        "image": "https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sanwell_card.jpg",
         "desc": "抗水白基材 24小時防水滲、日系獨家花色",
         "products": [
             {
