@@ -175,6 +175,15 @@ def _product_bubble(p, product_key):
     }
 
 
+NOTION_CATEGORY_URLS = {
+    "超耐磨木地板": "https://www.notion.so/2fd5ab351ee580a4b185c9ceb75d32c2",
+    "石塑地板": "https://www.notion.so/2fd5ab351ee58009a074c0cd6e66f066",
+    "海島型實木地板": "https://www.notion.so/2ff5ab351ee580469d6dcfa074fbfa4c",
+    "塑膠地磚": "https://www.notion.so/2fc5ab351ee5801a8800c8f3c9e4b905",
+    "戶外塑木地板": "https://www.notion.so/2fc5ab351ee5801a8800c8f3c9e4b905",
+}
+
+
 def get_category_flex():
     bubbles = []
     for category in CATEGORY_ORDER:
@@ -185,6 +194,8 @@ def get_category_flex():
             count_text = "敬請期待"
         else:
             count_text = f"{len(PRODUCTS[category])} 款商品"
+
+        notion_url = NOTION_CATEGORY_URLS.get(category, "https://www.notion.so/2fc5ab351ee5801a8800c8f3c9e4b905")
 
         bubble = {
             "type": "bubble",
@@ -213,9 +224,9 @@ def get_category_flex():
                         "style": "primary",
                         "color": "#5C8D5E",
                         "action": {
-                            "type": "postback",
-                            "label": "查看商品",
-                            "data": f"action=view_category&category={category}",
+                            "type": "uri",
+                            "label": "查看完整系列",
+                            "uri": notion_url,
                         },
                     }
                 ],
