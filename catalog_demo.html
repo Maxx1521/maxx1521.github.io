@@ -193,12 +193,18 @@ main { padding-top: 56px; }
 .color-card-img {
   width: 100%; aspect-ratio: 4/3;
   overflow: hidden; background: var(--warm); margin-bottom: 10px;
+  position: relative;
 }
 .color-card-img img {
   width: 100%; height: 100%; object-fit: cover; display: block;
-  transition: transform .45s ease;
+  transition: opacity .42s ease, transform .42s ease;
 }
-.color-card:hover .color-card-img img { transform: scale(1.06); }
+.color-card-img .room {
+  position: absolute; top: 0; left: 0;
+  opacity: 0;
+}
+.color-card:hover .color-card-img .room { opacity: 1; }
+.color-card:hover .color-card-img img:not(.room) { transform: scale(1.04); }
 .color-name { font-size: 13px; text-align: center; letter-spacing: 0.04em; }
 
 
@@ -465,35 +471,35 @@ footer {
     <div class="sec-heading">色系選擇 · 8 種花色</div>
     <div class="color-grid">
       <div class="color-card">
-        <div class="color-card-img"><img src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_miyazaki.jpg" alt="宮崎白梣" loading="lazy"></div>
+        <div class="color-card-img"><img src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_miyazaki.jpg" alt="宮崎白梣" loading="lazy"><img class="room" src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_miyazaki_room.jpg" alt="" loading="lazy"></div>
         <div class="color-name">宮崎白梣</div>
       </div>
       <div class="color-card">
-        <div class="color-card-img"><img src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_tomiyama.jpg" alt="富山白橡" loading="lazy"></div>
+        <div class="color-card-img"><img src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_tomiyama.jpg" alt="富山白橡" loading="lazy"><img class="room" src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_tomiyama_room.jpg" alt="" loading="lazy"></div>
         <div class="color-name">富山白橡</div>
       </div>
       <div class="color-card">
-        <div class="color-card-img"><img src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_chiba.jpg" alt="千葉秋香" loading="lazy"></div>
+        <div class="color-card-img"><img src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_chiba.jpg" alt="千葉秋香" loading="lazy"><img class="room" src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_chiba_room.jpg" alt="" loading="lazy"></div>
         <div class="color-name">千葉秋香</div>
       </div>
       <div class="color-card">
-        <div class="color-card-img"><img src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_saga.jpg" alt="佐賀榆木" loading="lazy"></div>
+        <div class="color-card-img"><img src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_saga.jpg" alt="佐賀榆木" loading="lazy"><img class="room" src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_saga_room.jpg" alt="" loading="lazy"></div>
         <div class="color-name">佐賀榆木</div>
       </div>
       <div class="color-card">
-        <div class="color-card-img"><img src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_kyoto.jpg" alt="京都淺橡" loading="lazy"></div>
+        <div class="color-card-img"><img src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_kyoto.jpg" alt="京都淺橡" loading="lazy"><img class="room" src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_kyoto_room.jpg" alt="" loading="lazy"></div>
         <div class="color-name">京都淺橡</div>
       </div>
       <div class="color-card">
-        <div class="color-card-img"><img src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_nara.jpg" alt="奈良灰橡" loading="lazy"></div>
+        <div class="color-card-img"><img src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_nara.jpg" alt="奈良灰橡" loading="lazy"><img class="room" src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_nara_room.jpg" alt="" loading="lazy"></div>
         <div class="color-name">奈良灰橡</div>
       </div>
       <div class="color-card">
-        <div class="color-card-img"><img src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_nagano.jpg" alt="長野檜木" loading="lazy"></div>
+        <div class="color-card-img"><img src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_nagano.jpg" alt="長野檜木" loading="lazy"><img class="room" src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_nagano_room.jpg" alt="" loading="lazy"></div>
         <div class="color-name">長野檜木</div>
       </div>
       <div class="color-card">
-        <div class="color-card-img"><img src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_kumamoto.jpg" alt="熊本橡木" loading="lazy"></div>
+        <div class="color-card-img"><img src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_kumamoto.jpg" alt="熊本橡木" loading="lazy"><img class="room" src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_kumamoto_room.jpg" alt="" loading="lazy"></div>
         <div class="color-name">熊本橡木</div>
       </div>
     </div>
@@ -507,15 +513,15 @@ footer {
         <div class="color-name">姬路白橡</div>
       </div>
       <div class="color-card">
-        <div class="color-card-img"><img src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_kochi.jpg" alt="高知橡木" loading="lazy"></div>
+        <div class="color-card-img"><img src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_kochi.jpg" alt="高知橡木" loading="lazy"><img class="room" src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_kochi_room.jpg" alt="" loading="lazy"></div>
         <div class="color-name">高知橡木</div>
       </div>
       <div class="color-card">
-        <div class="color-card-img"><img src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_ginzan.jpg" alt="銀山淺橡" loading="lazy"></div>
+        <div class="color-card-img"><img src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_ginzan.jpg" alt="銀山淺橡" loading="lazy"><img class="room" src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_ginzan_room.jpg" alt="" loading="lazy"></div>
         <div class="color-name">銀山淺橡</div>
       </div>
       <div class="color-card">
-        <div class="color-card-img"><img src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_munchen.jpg" alt="慕尼黑" loading="lazy"></div>
+        <div class="color-card-img"><img src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_munchen.jpg" alt="慕尼黑" loading="lazy"><img class="room" src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_munchen_room.jpg" alt="" loading="lazy"></div>
         <div class="color-name">慕尼黑</div>
       </div>
     </div>
