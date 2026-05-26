@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>地板產品系列 | 南島家居 South Home</title>
+<style>
+:root {
+  --green:  #5C8D5E;
+  --dark:   #1a1a1a;
+  --gray:   #777;
+  --warm:   #f8f6f3;
+  --border: #e5e0db;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+  color: var(--dark);
+  background: #fff;
+}
+
+/* ── Header ──────────────────────────────────────────── */
+.site-header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  background: rgba(255,255,255,0.97);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+  height: 56px;
+  display: flex; align-items: center;
+  padding: 0 48px; gap: 36px;
+}
+.site-logo {
+  font-size: 16px; font-weight: 700; letter-spacing: 0.04em;
+  text-decoration: none; color: var(--dark); white-space: nowrap;
+}
+.site-logo em { color: var(--green); font-style: normal; }
+.brand-nav {
+  flex: 1; display: flex; overflow-x: auto; scrollbar-width: none;
+}
+.brand-nav::-webkit-scrollbar { display: none; }
+.brand-nav a {
+  padding: 0 14px; height: 56px;
+  display: flex; align-items: center;
+  font-size: 13px; font-weight: 500;
+  color: var(--gray); text-decoration: none;
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+  transition: color .15s, border-color .15s;
+}
+.brand-nav a:hover, .brand-nav a.active { color: var(--dark); border-bottom-color: var(--dark); }
+.header-cta {
+  background: var(--green); color: white;
+  padding: 9px 22px; font-size: 13px; font-weight: 500;
+  letter-spacing: 0.05em; text-decoration: none; white-space: nowrap;
+  transition: opacity .15s;
+}
+.header-cta:hover { opacity: .85; }
+
+/* ── Buttons ─────────────────────────────────────────── */
+.btn-primary {
+  display: inline-block; padding: 13px 32px;
+  background: var(--dark); color: white;
+  font-size: 13px; font-weight: 600; letter-spacing: 0.1em;
+  text-decoration: none; transition: background .15s;
+}
+.btn-primary:hover { background: var(--green); }
+.btn-white {
+  display: inline-block; padding: 13px 32px;
+  background: white; color: var(--dark);
+  font-size: 13px; font-weight: 600; letter-spacing: 0.1em;
+  text-decoration: none; transition: background .15s, color .15s;
+}
+.btn-white:hover { background: var(--green); color: white; }
+.btn-outline {
+  display: inline-block; padding: 12px 28px;
+  border: 1px solid currentColor; color: inherit;
+  font-size: 13px; font-weight: 500; letter-spacing: 0.08em;
+  text-decoration: none; transition: background .15s, color .15s;
+}
+.btn-outline:hover { background: var(--dark); color: white; border-color: var(--dark); }
+
+main { padding-top: 56px; }
+
+/* ── Page Hero ───────────────────────────────────────── */
+.page-hero {
+  position: relative; height: 78vh; min-height: 520px;
+  overflow: hidden; background: #111;
+}
+.page-hero img {
+  width: 100%; height: 100%; object-fit: cover;
+  opacity: .55; display: block;
+}
+.page-hero-content {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  color: white; text-align: center; padding: 40px;
+}
+.eyebrow {
+  font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase;
+  opacity: .65; margin-bottom: 20px;
+}
+.page-hero-content h1 {
+  font-size: clamp(34px,5.5vw,70px); font-weight: 200;
+  letter-spacing: 0.14em; line-height: 1.2; margin-bottom: 18px;
+}
+.page-hero-content .sub {
+  font-size: 15px; opacity: .7; letter-spacing: 0.08em; margin-bottom: 40px;
+}
+.hero-btns { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
+
+/* ── Brand section wrapper ───────────────────────────── */
+.brand-section { scroll-margin-top: 56px; }
+
+/* ── Brand intro band ────────────────────────────────── */
+.brand-intro {
+  padding: 80px 80px 0;
+  max-width: 1400px; margin: 0 auto;
+}
+.brand-tag {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.24em;
+  text-transform: uppercase; color: var(--green); margin-bottom: 14px;
+}
+.brand-intro h2 {
+  font-size: clamp(26px,3.5vw,50px); font-weight: 200;
+  letter-spacing: 0.12em; line-height: 1.2; margin-bottom: 16px;
+}
+.brand-intro .desc {
+  font-size: 15px; color: var(--gray); line-height: 1.8;
+  max-width: 560px; margin-bottom: 0;
+}
+
+/* ── Split panel ─────────────────────────────────────── */
+.split {
+  display: grid; grid-template-columns: 1fr 1fr;
+  min-height: 500px; margin-top: 56px;
+}
+.split.rev { direction: rtl; }
+.split.rev > * { direction: ltr; }
+.split-img {
+  overflow: hidden; background: var(--warm); position: relative;
+}
+.split-img img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  transition: transform .6s cubic-bezier(.25,.46,.45,.94);
+}
+.split-img:hover img { transform: scale(1.04); }
+.split-txt {
+  background: var(--warm);
+  padding: 64px 72px;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.split-txt h3 {
+  font-size: 20px; font-weight: 400; letter-spacing: 0.06em;
+  margin-bottom: 14px; margin-top: 28px;
+}
+.split-txt h3:first-child { margin-top: 0; }
+.split-txt p {
+  font-size: 14px; color: var(--gray); line-height: 1.85;
+}
+
+/* ── Features row ────────────────────────────────────── */
+.features {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1px; background: var(--border);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  margin-top: 1px;
+}
+.feature {
+  background: white; padding: 44px 40px;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.feature .ico { font-size: 30px; line-height: 1; }
+.feature h4 { font-size: 15px; font-weight: 600; letter-spacing: 0.04em; }
+.feature p { font-size: 13px; color: var(--gray); line-height: 1.75; }
+
+/* ── Color section ───────────────────────────────────── */
+.color-section {
+  padding: 72px 80px;
+  max-width: 1400px; margin: 0 auto;
+}
+.sec-heading {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--gray);
+  display: flex; align-items: center; gap: 20px; margin-bottom: 36px;
+}
+.sec-heading::after { content:''; flex:1; height:1px; background:var(--border); }
+.color-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px 16px;
+}
+.color-card { cursor: pointer; }
+.color-card-img {
+  width: 100%; aspect-ratio: 4/3;
+  overflow: hidden; background: var(--warm); margin-bottom: 10px;
+}
+.color-card-img img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  transition: transform .45s ease;
+}
+.color-card:hover .color-card-img img { transform: scale(1.06); }
+.color-name { font-size: 13px; text-align: center; letter-spacing: 0.04em; }
+/* 山井圖片底部有 logo 浮水印，裁切顯示上半木紋 */
+.color-card-img img[alt="富山白橡"] { object-position: center top; }
+
+
+/* ── Brand footer (price + CTA) ──────────────────────── */
+.brand-foot {
+  background: var(--warm); border-top: 1px solid var(--border);
+  padding: 48px 80px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.price-block h3 {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--gray); margin-bottom: 8px;
+}
+.price-block .price {
+  font-size: 34px; font-weight: 200; letter-spacing: 0.04em;
+}
+.price-block .price sub { font-size: 13px; font-weight: 400; color: var(--gray); }
+.cta-group { display: flex; gap: 14px; align-items: center; }
+
+/* ── Divider ─────────────────────────────────────────── */
+.divider { height: 0; }
+
+/* ── Compact brand banner ────────────────────────────── */
+.compact-hero {
+  height: 300px; position: relative; overflow: hidden; background: #1a1a1a;
+}
+.compact-hero img {
+  width: 100%; height: 100%; object-fit: cover; display: block; opacity: .52;
+}
+.compact-hero-content {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 28px 80px 36px;
+  background: linear-gradient(to top, rgba(0,0,0,.65) 0%, transparent 100%);
+  color: white;
+}
+.compact-hero-content .brand-tag { color: rgba(255,255,255,.65); margin-bottom: 8px; }
+.compact-hero-content h2 {
+  font-size: clamp(22px,3vw,38px); font-weight: 200; letter-spacing: 0.12em; color: white;
+}
+.compact-hero-content .chips { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+.compact-hero-content .chip {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.1em;
+  padding: 4px 10px; border: 1px solid rgba(255,255,255,.4);
+  color: rgba(255,255,255,.85); background: transparent;
+}
+/* (keep .chip for brand-foot area too) */
+.chip {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.08em;
+  padding: 4px 10px; background: var(--warm); border: 1px solid var(--border);
+}
+
+/* ── CTA section ─────────────────────────────────────── */
+.cta-section {
+  background: var(--dark); color: white;
+  text-align: center; padding: 100px 40px;
+}
+.cta-section .eyebrow { opacity: .45; }
+.cta-section h2 {
+  font-size: clamp(26px,4vw,54px); font-weight: 200;
+  letter-spacing: 0.1em; margin-bottom: 18px;
+}
+.cta-section .sub {
+  font-size: 15px; opacity: .6; line-height: 1.8; margin-bottom: 44px;
+}
+.cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+/* ── Footer ──────────────────────────────────────────── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 28px 80px;
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 12px; color: var(--gray);
+}
+
+/* ── Fade-in animation ───────────────────────────────── */
+.fi { opacity: 0; transform: translateY(22px); transition: opacity .65s ease, transform .65s ease; }
+.fi.vis { opacity: 1; transform: none; }
+
+/* ── Dark section theme (EGGER, KRONO) ──────────────── */
+#egger, #krono { background: #141414; }
+#egger .compact-hero,
+#krono .compact-hero { height: 440px; }
+#egger .color-section,
+#krono .color-section {
+  background: #141414; color: white;
+}
+#egger .sec-heading,
+#krono .sec-heading { color: rgba(255,255,255,.35); }
+#egger .sec-heading::after,
+#krono .sec-heading::after { background: #2e2e2e; }
+#egger .color-name,
+#krono .color-name { color: rgba(255,255,255,.72); }
+#egger .color-card-img,
+#krono .color-card-img { background: #1e1e1e; }
+#egger .brand-foot,
+#krono .brand-foot { background: #0e0e0e; border-color: #222; }
+#egger .price-block .price,
+#krono .price-block .price { color: white; }
+#egger .price-block h3,
+#krono .price-block h3 { color: rgba(255,255,255,.38); }
+#egger .btn-outline,
+#krono .btn-outline { color: rgba(255,255,255,.8); border-color: rgba(255,255,255,.3); }
+#egger .btn-outline:hover,
+#krono .btn-outline:hover { background: white; color: #141414; border-color: white; }
+
+/* ── Warm section theme (ROBINA, Twin Oaks) ─────────── */
+#robina .brand-brief   { background: #F4EDE3; }
+#robina .color-section { background: #F4EDE3; }
+#robina .brand-foot    { background: #EAE1D5; border-color: #D9CFC3; }
+#twin-oaks .brand-brief   { background: #EEF0EC; }
+#twin-oaks .color-section { background: #EEF0EC; }
+#twin-oaks .brand-foot    { background: #E3E6E0; border-color: #D3D8CE; }
+
+/* ── Slate section theme (Dongwhal) ──────────────────── */
+#dongwhal .brand-brief   { background: #F0F2F5; }
+#dongwhal .color-section { background: #F0F2F5; }
+#dongwhal .brand-foot    { background: #E6E9EE; border-color: #D5DAE1; }
+
+/* ── Compact hero height ─────────────────────────────── */
+.compact-hero { height: 420px; }
+
+/* ── Brand brief strip ───────────────────────────────── */
+.brand-brief {
+  padding: 40px 80px 0;
+  max-width: 1400px; margin: 0 auto;
+  display: flex; align-items: baseline;
+  justify-content: space-between; gap: 40px;
+  flex-wrap: wrap;
+}
+.brand-brief p {
+  font-size: 14px; color: var(--gray); line-height: 1.85; max-width: 520px;
+}
+.brand-specs { display: flex; gap: 8px; flex-wrap: wrap; flex-shrink: 0; }
+.brand-specs .spec {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
+  padding: 5px 12px; border: 1px solid var(--border);
+  color: var(--dark);
+}
+#egger .brand-specs .spec,
+#krono .brand-specs .spec { border-color: #2e2e2e; color: rgba(255,255,255,.7); }
+#egger .brand-brief p,
+#krono .brand-brief p { color: rgba(255,255,255,.5); }
+#egger .brand-brief,
+#krono .brand-brief { background: #141414; padding-bottom: 0; }
+#robina .brand-specs .spec { border-color: #CEC4B8; }
+#twin-oaks .brand-specs .spec { border-color: #C8CECA; }
+#dongwhal .brand-specs .spec { border-color: #C8CDD4; }
+
+/* ── Dark features row ───────────────────────────────── */
+.features.dark { background: #141414; }
+.features.dark .feature { background: #141414; color: white; }
+.features.dark .feature h4 { color: white; }
+.features.dark .feature p { color: rgba(255,255,255,.5); }
+
+/* ── 3-col color grid ────────────────────────────────── */
+.color-grid { grid-template-columns: repeat(3, 1fr); gap: 28px 20px; }
+.color-card-img { aspect-ratio: 3/2; }
+
+/* ── Responsive ──────────────────────────────────────── */
+@media (max-width: 960px) {
+  .split { grid-template-columns: 1fr; }
+  .split.rev { direction: ltr; }
+  .features { grid-template-columns: 1fr; }
+  .color-grid { grid-template-columns: repeat(2, 1fr); }
+  .brand-intro { padding: 48px 24px 0; }
+  .color-section { padding: 48px 24px; }
+  .brand-foot { padding: 32px 24px; flex-direction: column; gap: 24px; align-items: flex-start; }
+  .split-txt { padding: 40px 28px; }
+  .other-brands { padding: 48px 24px; }
+  .other-grid { grid-template-columns: 1fr 1fr; }
+  .cta-section { padding: 64px 24px; }
+  footer { padding: 24px; flex-direction: column; gap: 8px; text-align: center; }
+  .site-header { padding: 0 16px; gap: 16px; }
+  .brand-brief { padding: 28px 24px 0; flex-direction: column; gap: 16px; }
+  .compact-hero { height: 300px; }
+}
+@media (max-width: 600px) {
+  .other-grid { grid-template-columns: 1fr; }
+  .color-grid { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+</head>
+<body>
+
+<!-- ─── Header ──────────────────────────────────────────────────── -->
+<header class="site-header">
+  <a class="site-logo" href="#"><em>南島</em>家居 South Home</a>
+  <nav class="brand-nav">
+    <a href="#sanwell">山井</a>
+    <a href="#sanxia">三夏</a>
+    <a href="#egger">EGGER</a>
+    <a href="#robina">ROBINA</a>
+    <a href="#dongwhal">Dongwhal</a>
+    <a href="#krono">KRONO</a>
+    <a href="#twin-oaks">Twin Oaks</a>
+  </nav>
+  <a class="header-cta" href="#contact">預約丈量</a>
+</header>
+
+<main>
+
+<!-- ─── Page Hero ───────────────────────────────────────────────── -->
+<section class="page-hero">
+  <img src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_kumamoto.jpg" alt="南島家居地板">
+  <div class="page-hero-content">
+    <p class="eyebrow">South Home · 南島家居 · 高雄木地板專家</p>
+    <h1>木地板<br>選材美學</h1>
+    <p class="sub">超耐磨・SPC 防水・海島型實木<br>專業丈量・免費報價</p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-white">免費預約丈量 →</a>
+      <a href="#sanwell" class="btn-outline" style="border-color:rgba(255,255,255,.5);color:white">瀏覽產品系列</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     山井 富士山系列
+════════════════════════════════════════════════════════════════ -->
+<section class="brand-section" id="sanwell">
+
+  <div class="brand-intro fi">
+    <div class="brand-tag">山井 フローリング · 抗水白基材超耐磨</div>
+    <h2>富士山系列</h2>
+    <p class="desc">
+      來自日本的地板工藝美學，獨特抗水白基材有效阻絕水分滲透，
+      日系獨家花色設計讓每一塊地板都如日本風景般細緻雋永。
+      9.5mm 加厚板材，踩踏踏實、質感出眾。
+    </p>
+  </div>
+
+  <div class="split fi">
+    <div class="split-img">
+      <img src="https://shengyang1688.com/wp-content/uploads/2025/07/%E5%AF%8C%E5%B1%B1%E7%99%BD%E6%A9%A1.jpg" alt="富山白橡">
+    </div>
+    <div class="split-txt">
+      <h3>24 小時抗潑水保護</h3>
+      <p>採用獨家抗水白基材技術，有效阻絕日常潑水、拖地濕氣的侵害。白色基材不易黃變，讓地板長期維持如新質感，適合廚房周邊、寵物家庭等高需求場合。</p>
+      <h3>日系工藝・卡扣安裝</h3>
+      <p>獨特日系花色設計，視覺層次豐富。PerfectFold 卡扣系統施工快速省工，讓美型地板也能輕鬆入住，介面平整不留縫隙。</p>
+    </div>
+  </div>
+
+  <div class="features dark fi">
+    <div class="feature">
+      <div class="ico">💧</div>
+      <h4>24H 抗潑水</h4>
+      <p>抗水白基材有效阻絕水分，適合廚房、客廳等易潮濕區域</p>
+    </div>
+    <div class="feature">
+      <div class="ico">🛡️</div>
+      <h4>耐刮耐磨表層</h4>
+      <p>表面耐磨層抵抗日常走動磨損，維持光澤持久如新</p>
+    </div>
+    <div class="feature">
+      <div class="ico">⚡</div>
+      <h4>卡扣快速安裝</h4>
+      <p>施工快速省工，平整接縫不留縫隙，DIY 亦可操作</p>
+    </div>
+  </div>
+
+  <div class="color-section fi">
+    <div class="sec-heading">色系選擇 · 8 種花色</div>
+    <div class="color-grid">
+      <div class="color-card">
+        <div class="color-card-img"><img src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_miyazaki.jpg" alt="宮崎白梣" loading="lazy"></div>
+        <div class="color-name">宮崎白梣</div>
+      </div>
+      <div class="color-card">
+        <div class="color-card-img"><img src="https://shengyang1688.com/wp-content/uploads/2025/07/%E5%AF%8C%E5%B1%B1%E7%99%BD%E5%83%8F.jpg" alt="富山白橡" loading="lazy"></div>
+        <div class="color-name">富山白橡</div>
+      </div>
+      <div class="color-card">
+        <div class="color-card-img"><img src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_chiba.jpg" alt="千葉秋香" loading="lazy"></div>
+        <div class="color-name">千葉秋香</div>
+      </div>
+      <div class="color-card">
+        <div class="color-card-img"><img src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_saga.jpg" alt="佐賀榆木" loading="lazy"></div>
+        <div class="color-name">佐賀榆木</div>
+      </div>
+      <div class="color-card">
+        <div class="color-card-img"><img src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_kyoto.jpg" alt="京都淺橡" loading="lazy"></div>
+        <div class="color-name">京都淺橡</div>
+      </div>
+      <div class="color-card">
+        <div class="color-card-img"><img src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_nara.jpg" alt="奈良灰橡" loading="lazy"></div>
+        <div class="color-name">奈良灰橡</div>
+      </div>
+      <div class="color-card">
+        <div class="color-card-img"><img src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_nagano.jpg" alt="長野檜木" loading="lazy"></div>
+        <div class="color-name">長野檜木</div>
+      </div>
+      <div class="color-card">
+        <div class="color-card-img"><img src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_kumamoto.jpg" alt="熊本橡木" loading="lazy"></div>
+        <div class="color-name">熊本橡木</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="brand-foot fi">
+    <div class="price-block">
+      <h3>典藏款 9.5mm · 長1210 × 寬190</h3>
+      <div class="price">NT $3,700 <sub>/ 坪起</sub></div>
+    </div>
+    <div class="cta-group">
+      <a href="#contact" class="btn-outline">詢問報價</a>
+      <a href="#contact" class="btn-primary" style="background:var(--green)">預約丈量</a>
+    </div>
+  </div>
+
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     三夏 晶鋼防水 SPC
+════════════════════════════════════════════════════════════════ -->
+<section class="brand-section" id="sanxia">
+
+  <div class="brand-intro fi">
+    <div class="brand-tag">三夏地板 · SPC 晶鋼防水</div>
+    <h2>晶鋼防水系列</h2>
+    <p class="desc">
+      石塑防水核心（SPC），全身防水不怕潑濺。
+      5mm 輕薄設計無需墊高，抗壓耐重、尺寸穩定，
+      適合廚房、浴室外圍、陽台等潮濕空間。
+    </p>
+  </div>
+
+  <div class="split rev fi">
+    <div class="split-img">
+      <img src="https://www.ssefloor.com.tw/upload-files/spc/EA0607-1.jpg" alt="三夏晶鋼防水">
+    </div>
+    <div class="split-txt">
+      <h3>SPC 石塑核心・真正全防水</h3>
+      <p>不同於一般超耐磨的「抗潑水」，SPC 晶鋼地板採用石塑複合材料芯層，即便長期接觸水分也不膨脹、不變形，廚房、衛浴外圍都適用。</p>
+      <h3>5mm 輕薄・靜音底墊</h3>
+      <p>超薄設計減少地板高度差，內建 IXPE 靜音緩衝層，步行踩踏安靜舒適，完全相容各式地暖系統。</p>
+    </div>
+  </div>
+
+  <div class="features fi">
+    <div class="feature">
+      <div class="ico">🌊</div>
+      <h4>全身防水</h4>
+      <p>SPC 石塑核心不吸水不膨脹，廚房浴室周邊放心鋪設</p>
+    </div>
+    <div class="feature">
+      <div class="ico">🔇</div>
+      <h4>IXPE 靜音底墊</h4>
+      <p>內建靜音緩衝層，步行踩踏聲更安靜，樓上樓下都安心</p>
+    </div>
+    <div class="feature">
+      <div class="ico">🔥</div>
+      <h4>地暖相容</h4>
+      <p>耐熱穩定尺寸，完全相容各式地暖系統，冬暖舒適不變形</p>
+    </div>
+  </div>
+
+  <div class="color-section fi">
+    <div class="sec-heading">色系選擇 · 8 種花色</div>
+    <div class="color-grid">
+      <div class="color-card">
+        <div class="color-card-img"><img src="https://www.ssefloor.com.tw/upload-files/spc/EA0512-1.jpg" alt="EA0512" loading="lazy"></div>
+        <div class="color-name">EA0512</div>
+      </div>
+      <div class="color-card">
+        <div class="color-card-img"><img src="https://www.ssefloor.com.tw/upload-files/spc/EA0607-1.jpg" alt="EA0607" loading="lazy"></div>
+        <div class="color-name">EA0607</div>
+      </div>
+      <div class="color-card">
+        <div class="color-card-img"><img src="https://www.ssefloor.com.tw/upload-files/spc/EB0105-1.jpg" alt="EB0105" loading="lazy"></div>
+        <div class="color-name">EB0105</div>
+      </div>
+      <div class="color-card">
+        <div class="color-card-img"><img src="https://www.ssefloor.com.tw/upload-files/spc/EB0107-1.jpg" alt="EB0107" loading="lazy"></div>
+        <div class="color-name">EB0107</div>
+      </div>
+      <div class="color-card">
+        <div class="color-card-img"><img src="https://www.ssefloor.com.tw/upload-files/spc/EB0110-1.jpg" alt="EB0110" loading="lazy"></div>
+        <div class="color-name">EB0110</div>
+      </div>
+      <div class="color-card">
+        <div class="color-card-img"><img src="https://www.ssefloor.com.tw/upload-files/spc/EC0108-1.jpg" alt="EC0108" loading="lazy"></div>
+        <div class="color-name">EC0108</div>
+      </div>
+      <div class="color-card">
+        <div class="color-card-img"><img src="https://www.ssefloor.com.tw/upload-files/spc/A3340-1.jpg" alt="A3340" loading="lazy"></div>
+        <div class="color-name">A3340</div>
+      </div>
+      <div class="color-card">
+        <div class="color-card-img"><img src="https://www.ssefloor.com.tw/upload-files/spc/D0802-1.jpg" alt="D0802" loading="lazy"></div>
+        <div class="color-name">D0802</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="brand-foot fi">
+    <div class="price-block">
+      <h3>晶鋼防水 5mm · SPC 石塑</h3>
+      <div class="price">NT $2,800 <sub>/ 坪起</sub></div>
+    </div>
+    <div class="cta-group">
+      <a href="#contact" class="btn-outline">詢問報價</a>
+      <a href="#contact" class="btn-primary" style="background:var(--green)">預約丈量</a>
+    </div>
+  </div>
+
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     EGGER 愛格
+════════════════════════════════════════════════════════════════ -->
+<section class="brand-section" id="egger">
+  <div class="compact-hero fi">
+    <img src="https://www.fumaogroup.com.tw/wp-content/uploads/2025/04/EL2026-Large-D.png" alt="EGGER">
+    <div class="compact-hero-content">
+      <div class="brand-tag">EGGER 愛格 · 奧地利超耐磨木地板</div>
+      <h2>Aqua+ 防潮系列</h2>
+      <div class="chips">
+        <span class="chip">超耐磨</span><span class="chip">8–10mm</span><span class="chip">奧地利製</span>
+      </div>
+    </div>
+  </div>
+  <div class="brand-brief fi">
+    <p>來自奧地利的百年木業集團，EGGER Aqua+ 系列以 HydroSeal® 防潮封邊技術守護接縫，24 小時浸水不膨脹。豐富歐洲風格花色，為每個空間注入精準品味。</p>
+    <div class="brand-specs">
+      <span class="spec">8–10 mm</span>
+      <span class="spec">HydroSeal® 封邊</span>
+      <span class="spec">AC4 耐磨</span>
+      <span class="spec">奧地利製</span>
+    </div>
+  </div>
+  <div class="color-section fi">
+    <div class="sec-heading">色系選擇 · 8 種花色</div>
+    <div class="color-grid">
+      <div class="color-card"><div class="color-card-img"><img src="https://www.fumaogroup.com.tw/wp-content/uploads/2025/04/EL2154-CD.png" alt="洛哈奶油橡木" loading="lazy"></div><div class="color-name">洛哈奶油橡木</div></div>
+      <div class="color-card"><div class="color-card-img"><img src="https://www.fumaogroup.com.tw/wp-content/uploads/2025/04/EL2113-CD.png" alt="皮諾沙棕橡木" loading="lazy"></div><div class="color-name">皮諾沙棕橡木</div></div>
+      <div class="color-card"><div class="color-card-img"><img src="https://www.fumaogroup.com.tw/wp-content/uploads/2025/04/EL2525-CD.png" alt="榭菲爾德淺色刺槐" loading="lazy"></div><div class="color-name">榭菲爾德刺槐</div></div>
+      <div class="color-card"><div class="color-card-img"><img src="https://www.fumaogroup.com.tw/wp-content/uploads/2025/04/EL2026-Large-D.png" alt="維多利亞白橡木" loading="lazy"></div><div class="color-name">維多利亞白橡木</div></div>
+      <div class="color-card"><div class="color-card-img"><img src="https://www.fumaogroup.com.tw/wp-content/uploads/2025/04/EL2027-LargeD.png" alt="維多利亞自然橡木" loading="lazy"></div><div class="color-name">維多利亞自然橡木</div></div>
+      <div class="color-card"><div class="color-card-img"><img src="https://www.fumaogroup.com.tw/wp-content/uploads/2025/04/EL2064-CD.png" alt="索里亞原橡" loading="lazy"></div><div class="color-name">索里亞原橡</div></div>
+      <div class="color-card"><div class="color-card-img"><img src="https://www.fumaogroup.com.tw/wp-content/uploads/2025/04/EL2065-CD.png" alt="索里亞灰橡" loading="lazy"></div><div class="color-name">索里亞灰橡</div></div>
+      <div class="color-card"><div class="color-card-img"><img src="https://www.fumaogroup.com.tw/wp-content/uploads/2025/04/EL2070-CD.png" alt="蘭里淺胡桃木" loading="lazy"></div><div class="color-name">蘭里淺胡桃木</div></div>
+    </div>
+  </div>
+  <div class="brand-foot fi">
+    <div class="price-block"><h3>Aqua+ · 8mm</h3><div class="price">NT $3,500 <sub>/ 坪起</sub></div></div>
+    <div class="cta-group"><a href="#contact" class="btn-outline">詢問報價</a><a href="#contact" class="btn-primary" style="background:var(--green)">預約丈量</a></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     ROBINA 羅賓
+════════════════════════════════════════════════════════════════ -->
+<section class="brand-section" id="robina">
+  <div class="compact-hero fi">
+    <img src="https://www.wecanyes.com.tw/wp-content/uploads/AB324-%E5%8C%97%E6%AD%90%E6%A9%A1%E6%9C%A8-4V.png" alt="ROBINA">
+    <div class="compact-hero-content">
+      <div class="brand-tag">ROBINA 羅賓 · 韓國超耐磨木地板</div>
+      <h2>Classic · Premium 系列</h2>
+      <div class="chips">
+        <span class="chip">超耐磨</span><span class="chip">8–12mm</span><span class="chip">韓國製</span>
+      </div>
+    </div>
+  </div>
+  <div class="brand-brief fi">
+    <p>韓國 ROBINA 以嚴格品管與豐富色系聞名，從清淺北歐橡木到深沉古木紋理，皆能精準還原天然木感。4V 導角設計強化立體視覺，帶來更接近實木的細膩觸感。</p>
+    <div class="brand-specs">
+      <span class="spec">8–12 mm</span>
+      <span class="spec">4V 導角</span>
+      <span class="spec">AC4 耐磨</span>
+      <span class="spec">韓國製</span>
+    </div>
+  </div>
+  <div class="color-section fi">
+    <div class="sec-heading">色系選擇 · 8 種花色</div>
+    <div class="color-grid">
+      <div class="color-card"><div class="color-card-img"><img src="https://www.wecanyes.com.tw/wp-content/uploads/1904%E8%B2%9D%E6%A0%BC%E6%A9%A1%E6%9C%A8_%E5%B9%B3%E9%9D%A2%E5%9C%96.png" alt="貝格橡木" loading="lazy"></div><div class="color-name">貝格橡木</div></div>
+      <div class="color-card"><div class="color-card-img"><img src="https://www.wecanyes.com.tw/wp-content/uploads/%E7%BE%85%E8%B3%93%E5%9C%B0%E6%9D%BF_AI_3101_%E4%BA%9E%E5%A0%A4%E5%85%8B_%E5%B9%B3%E9%9D%A2%E5%9C%96.webp" alt="亞堤克" loading="lazy"></div><div class="color-name">亞堤克</div></div>
+      <div class="color-card"><div class="color-card-img"><img src="https://www.wecanyes.com.tw/wp-content/uploads/SG-2767RC-%E5%85%A8%E5%A4%9A%E5%88%A94V.jpg" alt="全多刻" loading="lazy"></div><div class="color-name">SG-2767RC 全多刻</div></div>
+      <div class="color-card"><div class="color-card-img"><img src="https://www.wecanyes.com.tw/wp-content/uploads/AB324-%E5%8C%97%E6%AD%90%E6%A9%A1%E6%9C%A8-4V.png" alt="北歐橡木" loading="lazy"></div><div class="color-name">AB324 北歐橡木</div></div>
+      <div class="color-card"><div class="color-card-img"><img src="https://www.wecanyes.com.tw/wp-content/uploads/AB314-%E5%93%88%E5%B0%BC-4V.png" alt="哈尼" loading="lazy"></div><div class="color-name">AB314 哈尼</div></div>
+      <div class="color-card"><div class="color-card-img"><img src="https://www.wecanyes.com.tw/wp-content/uploads/2019/06/DE-O112RC%E6%96%87%E5%8C%96%E5%8F%A4%E6%A9%A1%E6%8B%B7%E8%B2%9D.png" alt="文化古橡" loading="lazy"></div><div class="color-name">文化古橡</div></div>
+      <div class="color-card"><div class="color-card-img"><img src="https://www.wecanyes.com.tw/wp-content/uploads/SP011-%E6%9C%88%E4%B9%8B%E6%88%80.png" alt="月之戀" loading="lazy"></div><div class="color-name">SP011 月之戀</div></div>
+      <div class="color-card"><div class="color-card-img"><img src="https://www.wecanyes.com.tw/wp-content/uploads/2019/06/SG-O133RC-%E7%A7%91%E8%BF%AA%E6%A9%A1%E6%9C%A84V.jpg" alt="科迪橡木" loading="lazy"></div><div class="color-name">科迪橡木</div></div>
+    </div>
+  </div>
+  <div class="brand-foot fi">
+    <div class="price-block"><h3>Classic · 8mm</h3><div class="price">NT $3,200 <sub>/ 坪起</sub></div></div>
+    <div class="cta-group"><a href="#contact" class="btn-outline">詢問報價</a><a href="#contact" class="btn-primary" style="background:var(--green)">預約丈量</a></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     Dongwhal 都華
+════════════════════════════════════════════════════════════════ -->
+<section class="brand-section" id="dongwhal">
+  <div class="compact-hero fi">
+    <img src="https://www.wecanyes.com.tw/wp-content/uploads/SF003-4V-European-Oak-%E6%AD%90%E6%B4%B2%E6%A9%A1%E6%9C%A8.jpg" alt="Dongwhal">
+    <div class="compact-hero-content">
+      <div class="brand-tag">Dongwhal 都華 · 韓國超耐磨木地板</div>
+      <h2>Studio · Premier 系列</h2>
+      <div class="chips">
+        <span class="chip">超耐磨</span><span class="chip">8–12mm</span><span class="chip">韓國製</span>
+      </div>
+    </div>
+  </div>
+  <div class="brand-brief fi">
+    <p>都華地板以歐洲進口木皮為材料基礎，Studio 系列精選歐洲橡木、法國橡木等經典色號，透過韓國精密壓製工藝還原天然紋路，適合追求質感與耐用兼具的家居設計。</p>
+    <div class="brand-specs">
+      <span class="spec">8–12 mm</span>
+      <span class="spec">歐洲橡木</span>
+      <span class="spec">AC4 耐磨</span>
+      <span class="spec">韓國製</span>
+    </div>
+  </div>
+  <div class="color-section fi">
+    <div class="sec-heading">色系選擇 · 8 種花色</div>
+    <div class="color-grid">
+      <div class="color-card"><div class="color-card-img"><img src="https://www.wecanyes.com.tw/wp-content/uploads/SM004-4V-Luna-Oak-%E6%9C%88%E5%85%89%E6%A9%A1%E6%9C%A8.jpg" alt="月光橡木" loading="lazy"></div><div class="color-name">月光橡木</div></div>
+      <div class="color-card"><div class="color-card-img"><img src="https://www.wecanyes.com.tw/wp-content/uploads/SF003-4V-European-Oak-%E6%AD%90%E6%B4%B2%E6%A9%A1%E6%9C%A8.jpg" alt="歐洲橡木" loading="lazy"></div><div class="color-name">歐洲橡木</div></div>
+      <div class="color-card"><div class="color-card-img"><img src="https://www.wecanyes.com.tw/wp-content/uploads/SF002-4V-French-Oak-%E6%B3%95%E5%9C%8B%E6%A9%A1%E6%9C%A8.jpg" alt="法國橡木" loading="lazy"></div><div class="color-name">法國橡木</div></div>
+      <div class="color-card"><div class="color-card-img"><img src="https://www.wecanyes.com.tw/wp-content/uploads/NC006-NATURAL-WALNUT-DARK_pttn.jpg" alt="玄黑胡桃" loading="lazy"></div><div class="color-name">玄黑胡桃</div></div>
+      <div class="color-card"><div class="color-card-img"><img src="https://www.wecanyes.com.tw/wp-content/uploads/SF004-4V-Royal-Oak-%E7%9A%87%E5%AE%B6%E6%A9%A1%E6%9C%A8.jpg" alt="皇家橡木" loading="lazy"></div><div class="color-name">皇家橡木</div></div>
+      <div class="color-card"><div class="color-card-img"><img src="https://www.wecanyes.com.tw/wp-content/uploads/SM003-4V-Select-Oak-%E7%B2%BE%E8%90%83%E6%A9%A1%E6%9C%A8-scaled.jpg" alt="精萃橡木" loading="lazy"></div><div class="color-name">精萃橡木</div></div>
+      <div class="color-card"><div class="color-card-img"><img src="https://www.wecanyes.com.tw/wp-content/uploads/SF005-4V-Silky-Oak-%E7%B5%B2%E7%B6%A2%E6%A9%A1%E6%9C%A8.jpg" alt="絲綢橡木" loading="lazy"></div><div class="color-name">絲綢橡木</div></div>
+      <div class="color-card"><div class="color-card-img"><img src="https://www.wecanyes.com.tw/wp-content/uploads/SF006-4V-Noble-Oak-%E8%B2%B4%E6%97%8F%E6%A9%A1%E6%9C%A8.jpg" alt="貴族橡木" loading="lazy"></div><div class="color-name">貴族橡木</div></div>
+    </div>
+  </div>
+  <div class="brand-foot fi">
+    <div class="price-block"><h3>Studio · 8mm</h3><div class="price">NT $3,300 <sub>/ 坪起</sub></div></div>
+    <div class="cta-group"><a href="#contact" class="btn-outline">詢問報價</a><a href="#contact" class="btn-primary" style="background:var(--green)">預約丈量</a></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     KRONO 畢卡索
+════════════════════════════════════════════════════════════════ -->
+<section class="brand-section" id="krono">
+  <div class="compact-hero fi">
+    <img src="https://www.krflooring.com.tw/wp-content/uploads/2025/03/picasso-a.jpg" alt="KRONO">
+    <div class="compact-hero-content">
+      <div class="brand-tag">KRONO Original 畢卡索 · 瑞士超耐磨木地板</div>
+      <h2>Picasso · KO 系列</h2>
+      <div class="chips">
+        <span class="chip">超耐磨</span><span class="chip">8–10mm</span><span class="chip">瑞士製</span>
+      </div>
+    </div>
+  </div>
+  <div class="brand-brief fi">
+    <p>KRONO Original 源自瑞士的地板工藝標竿，Picasso 系列以藝術家之名命名，每款色系都如一幅精心構圖——從淺金橡木到炭灰深木，細緻壓紋觸感超越表象的美學。</p>
+    <div class="brand-specs">
+      <span class="spec">8–10 mm</span>
+      <span class="spec">V-Groove 四邊導角</span>
+      <span class="spec">AC4 耐磨</span>
+      <span class="spec">瑞士製</span>
+    </div>
+  </div>
+  <div class="color-section fi">
+    <div class="sec-heading">色系選擇 · 5 種花色</div>
+    <div class="color-grid">
+      <div class="color-card"><div class="color-card-img"><img src="https://www.krflooring.com.tw/wp-content/uploads/2025/03/picasso-a.jpg" alt="Picasso A" loading="lazy"></div><div class="color-name">Picasso 淺橡色</div></div>
+      <div class="color-card"><div class="color-card-img"><img src="https://www.krflooring.com.tw/wp-content/uploads/2025/03/picasso-c.jpg" alt="Picasso C" loading="lazy"></div><div class="color-name">Picasso 暖棕色</div></div>
+      <div class="color-card"><div class="color-card-img"><img src="https://www.krflooring.com.tw/wp-content/uploads/2025/03/picasso-d1.jpg" alt="Picasso D" loading="lazy"></div><div class="color-name">Picasso 深橡色</div></div>
+      <div class="color-card"><div class="color-card-img"><img src="https://www.krflooring.com.tw/wp-content/uploads/2024/04/ko-b.jpg" alt="KO B" loading="lazy"></div><div class="color-name">KO 灰褐橡木</div></div>
+      <div class="color-card"><div class="color-card-img"><img src="https://www.krflooring.com.tw/wp-content/uploads/2025/03/picasso-d1-2.jpg" alt="Picasso D2" loading="lazy"></div><div class="color-name">Picasso 炭灰色</div></div>
+    </div>
+  </div>
+  <div class="brand-foot fi">
+    <div class="price-block"><h3>Picasso · 8mm</h3><div class="price">NT $3,100 <sub>/ 坪起</sub></div></div>
+    <div class="cta-group"><a href="#contact" class="btn-outline">詢問報價</a><a href="#contact" class="btn-primary" style="background:var(--green)">預約丈量</a></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     Twin Oaks 雙橡園
+════════════════════════════════════════════════════════════════ -->
+<section class="brand-section" id="twin-oaks">
+  <div class="compact-hero fi">
+    <img src="https://www.ch-floor.com/archive/image/product2/images/layoutlist/UaFloors/aec0c4dc9a3949ed_thumb_600.jpg" alt="Twin Oaks">
+    <div class="compact-hero-content">
+      <div class="brand-tag">Twin Oaks 雙橡園 · 歐洲超耐磨木地板</div>
+      <h2>Heritage · Reserve 系列</h2>
+      <div class="chips">
+        <span class="chip">超耐磨</span><span class="chip">9–12mm</span><span class="chip">歐洲製</span>
+      </div>
+    </div>
+  </div>
+  <div class="brand-brief fi">
+    <p>歐洲 Twin Oaks 雙橡園以「傳承」為品牌核心，Heritage 系列取材歐洲橡木精華，9mm 加厚板材踩踏踏實，從冰川白灰到維京老船深色，每款色號都承載著一段歐洲林地的自然記憶。</p>
+    <div class="brand-specs">
+      <span class="spec">9–12 mm</span>
+      <span class="spec">歐洲橡木</span>
+      <span class="spec">AC4 耐磨</span>
+      <span class="spec">歐洲製</span>
+    </div>
+  </div>
+  <div class="color-section fi">
+    <div class="sec-heading">色系選擇 · 6 種花色</div>
+    <div class="color-grid">
+      <div class="color-card"><div class="color-card-img"><img src="https://www.ch-floor.com/archive/image/product2/images/layoutlist/UaFloors/aec0c4dc9a3949ed_thumb_600.jpg" alt="冰川白灰橡木" loading="lazy"></div><div class="color-name">冰川白灰橡木</div></div>
+      <div class="color-card"><div class="color-card-img"><img src="https://www.ch-floor.com/archive/image/product2/images/layoutlist/UaFloors/5f89cc511ef47ca7_thumb_600.jpg" alt="峽灣石灰橡木" loading="lazy"></div><div class="color-name">峽灣石灰橡木</div></div>
+      <div class="color-card"><div class="color-card-img"><img src="https://www.ch-floor.com/archive/image/product2/images/layoutlist/UaFloors/794b3f07aea1a42b_thumb_600.jpg" alt="極境印象橡木" loading="lazy"></div><div class="color-name">極境印象橡木</div></div>
+      <div class="color-card"><div class="color-card-img"><img src="https://www.ch-floor.com/archive/image/product2/images/layoutlist/UaFloors/0a452c86a5fe0940_thumb_600.jpg" alt="自然原木橡木" loading="lazy"></div><div class="color-name">自然原木橡木</div></div>
+      <div class="color-card"><div class="color-card-img"><img src="https://www.ch-floor.com/archive/image/product2/images/layoutlist/UaFloors/731a871b4ff9551f_thumb_600.jpg" alt="悠然田園橡木" loading="lazy"></div><div class="color-name">悠然田園橡木</div></div>
+      <div class="color-card"><div class="color-card-img"><img src="https://www.ch-floor.com/archive/image/product2/images/layoutlist/UaFloors/e5349ba9a1d88a36_thumb_600.jpg" alt="維京老船橡木" loading="lazy"></div><div class="color-name">維京老船橡木</div></div>
+    </div>
+  </div>
+  <div class="brand-foot fi">
+    <div class="price-block"><h3>Heritage · 9mm</h3><div class="price">NT $3,800 <sub>/ 坪起</sub></div></div>
+    <div class="cta-group"><a href="#contact" class="btn-outline">詢問報價</a><a href="#contact" class="btn-primary" style="background:var(--green)">預約丈量</a></div>
+  </div>
+</section>
+
+<!-- ─── CTA ──────────────────────────────────────────────────────── -->
+<section class="cta-section" id="contact">
+  <p class="eyebrow">South Home · 南島家居</p>
+  <h2>免費到府丈量<br>讓專家幫你選材</h2>
+  <p class="sub">
+    高雄左營・三民・苓雅 三間門市<br>
+    或預約專業顧問到府，現場量尺寸、提供客製報價
+  </p>
+  <div class="cta-btns">
+    <a href="https://line.me/R/ti/p/@974qzwma" class="btn-white">LINE 預約丈量 →</a>
+    <a href="#sanwell" class="btn-outline" style="border-color:rgba(255,255,255,.4);color:white">回頂繼續瀏覽</a>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <span>© 2026 南島家居 South Home｜高雄木地板專家</span>
+  <span>LINE @974qzwma · IG @south_woodenn</span>
+</footer>
+
+<script>
+// ── Fade-in on scroll ───────────────────────────────────────────────
+const io = new IntersectionObserver(
+  entries => entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('vis'); io.unobserve(e.target); }
+  }),
+  { threshold: 0.07 }
+);
+document.querySelectorAll('.fi').forEach(el => io.observe(el));
+
+// ── Active nav highlight ────────────────────────────────────────────
+const navLinks = document.querySelectorAll('.brand-nav a');
+const navIo = new IntersectionObserver(
+  entries => entries.forEach(e => {
+    if (e.isIntersecting) {
+      const id = '#' + e.target.id;
+      navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === id));
+    }
+  }),
+  { threshold: 0.25, rootMargin: '-56px 0px -40% 0px' }
+);
+document.querySelectorAll('.brand-section').forEach(s => navIo.observe(s));
+</script>
+</body>
+</html>
