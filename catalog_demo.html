@@ -33,17 +33,9 @@ body {
   padding: 0 48px; gap: 36px;
 }
 .site-logo {
-  font-family: 'Noto Serif TC', 'Georgia', serif;
-  font-size: 15px; font-weight: 500; letter-spacing: 0.1em;
-  text-decoration: none; color: var(--dark); white-space: nowrap;
-  display: flex; align-items: baseline; gap: 8px;
+  text-decoration: none; display: flex; align-items: center; flex-shrink: 0;
 }
-.site-logo em { color: var(--green); font-style: normal; }
-.site-logo .logo-en {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 13px; font-weight: 300; font-style: italic;
-  letter-spacing: 0.18em; color: var(--gray);
-}
+.site-logo img { height: 28px; width: auto; display: block; }
 .brand-nav {
   flex: 1; display: flex; overflow-x: auto; scrollbar-width: none;
 }
@@ -409,7 +401,7 @@ footer {
 
 <!-- ─── Header ──────────────────────────────────────────────────── -->
 <header class="site-header">
-  <a class="site-logo" href="#"><em>南島</em>家居<span class="logo-en">South Home</span></a>
+  <a class="site-logo" href="#"><img src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/logo_combined.png" alt="南島家居"></a>
   <nav class="brand-nav">
     <a href="#sanwell">山井</a>
     <a href="#sanxia">三夏</a>
