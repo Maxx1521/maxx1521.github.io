@@ -206,7 +206,7 @@ main { padding-top: 56px; }
 }
 .color-card { cursor: pointer; }
 .color-card-img {
-  width: 100%; aspect-ratio: 4/3;
+  width: 100%; aspect-ratio: 1/1;
   overflow: hidden; background: var(--warm); margin-bottom: 10px;
   position: relative;
 }
@@ -377,9 +377,9 @@ footer {
 .features.dark .feature h4 { color: white; }
 .features.dark .feature p { color: rgba(255,255,255,.5); }
 
-/* ── 3-col color grid ────────────────────────────────── */
-.color-grid { grid-template-columns: repeat(3, 1fr); gap: 28px 20px; }
-.color-card-img { aspect-ratio: 3/2; }
+/* ── 4-col square color grid ─────────────────────────── */
+.color-grid { grid-template-columns: repeat(4, 1fr); gap: 20px 16px; }
+.color-card-img { aspect-ratio: 1/1; }
 
 /* ── Responsive ──────────────────────────────────────── */
 @media (max-width: 960px) {
