@@ -404,6 +404,8 @@ footer {
 .color-grid { grid-template-columns: repeat(4, 1fr); gap: 20px 16px; }
 .color-card-img { aspect-ratio: 1/1; }
 
+/* ── SPA initial state ───────────────────────────────── */
+.brand-section, .cta-section, footer { display: none; }
 
 /* ── Hamburger menu ──────────────────────────────────── */
 .menu-btn {
@@ -1039,16 +1041,14 @@ footer {
 </footer>
 
 <script>
-// ── Mobile menu ─────────────────────────────────────────────────────
+// ── Mobile menu ──────────────────────────────────────────────────────
 const menuBtn = document.getElementById('menuBtn');
 const menuOverlay = document.getElementById('menuOverlay');
 const menuClose = document.getElementById('menuClose');
-const menuLinks = menuOverlay.querySelectorAll('a');
 menuBtn.addEventListener('click', () => menuOverlay.classList.add('open'));
 menuClose.addEventListener('click', () => menuOverlay.classList.remove('open'));
-menuLinks.forEach(a => a.addEventListener('click', () => menuOverlay.classList.remove('open')));
 
-// ── Hero slideshow ──────────────────────────────────────────────────
+// ── Hero slideshow ───────────────────────────────────────────────────
 (function(){
   const imgs = document.querySelectorAll('.page-hero img');
   let cur = 0;
@@ -1059,7 +1059,7 @@ menuLinks.forEach(a => a.addEventListener('click', () => menuOverlay.classList.r
   }, 3000);
 })();
 
-// ── Fade-in on scroll ───────────────────────────────────────────────
+// ── Fade-in on scroll ────────────────────────────────────────────────
 const io = new IntersectionObserver(
   entries => entries.forEach(e => {
     if (e.isIntersecting) { e.target.classList.add('vis'); io.unobserve(e.target); }
@@ -1068,18 +1068,84 @@ const io = new IntersectionObserver(
 );
 document.querySelectorAll('.fi').forEach(el => io.observe(el));
 
-// ── Active nav highlight ────────────────────────────────────────────
-const navLinks = document.querySelectorAll('.brand-nav a');
-const navIo = new IntersectionObserver(
-  entries => entries.forEach(e => {
-    if (e.isIntersecting) {
-      const id = '#' + e.target.id;
-      navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === id));
-    }
-  }),
-  { threshold: 0.25, rootMargin: '-56px 0px -40% 0px' }
-);
-document.querySelectorAll('.brand-section').forEach(s => navIo.observe(s));
+// ── Page Router ──────────────────────────────────────────────────────
+const heroEl = document.querySelector('.page-hero');
+const brandSections = document.querySelectorAll('.brand-section');
+const ctaEl = document.querySelector('.cta-section');
+const footerEl = document.querySelector('footer');
+
+function showHero() {
+  heroEl.style.display = 'block';
+  brandSections.forEach(s => s.style.display = 'none');
+  ctaEl.style.display = 'none';
+  footerEl.style.display = 'none';
+  window.scrollTo(0, 0);
+}
+
+function showBrand(id) {
+  heroEl.style.display = 'none';
+  brandSections.forEach(s => { s.style.display = s.id === id ? 'block' : 'none'; });
+  ctaEl.style.display = 'block';
+  footerEl.style.display = 'flex';
+  window.scrollTo(0, 0);
+  requestAnimationFrame(() => {
+    document.querySelectorAll('#' + id + ' .fi, .cta-section .fi, footer .fi').forEach(el => {
+      el.classList.add('vis');
+      io.unobserve(el);
+    });
+  });
+}
+
+function showContact() {
+  heroEl.style.display = 'none';
+  brandSections.forEach(s => s.style.display = 'none');
+  ctaEl.style.display = 'block';
+  footerEl.style.display = 'flex';
+  window.scrollTo(0, 0);
+  requestAnimationFrame(() => {
+    document.querySelectorAll('.cta-section .fi, footer .fi').forEach(el => {
+      el.classList.add('vis');
+      io.unobserve(el);
+    });
+  });
+}
+
+function route(id) {
+  if (!id || id === 'about' || id === 'warranty') {
+    showHero();
+    history.pushState({ page: 'home' }, '', location.pathname);
+  } else if (id === 'contact') {
+    showContact();
+    history.pushState({ page: 'contact' }, '', '#contact');
+  } else {
+    showBrand(id);
+    history.pushState({ page: 'brand', id }, '', '#' + id);
+  }
+}
+
+// intercept all internal hash link clicks
+document.addEventListener('click', e => {
+  const a = e.target.closest('a[href^="#"]');
+  if (!a) return;
+  e.preventDefault();
+  menuOverlay.classList.remove('open');
+  route(a.getAttribute('href').slice(1));
+});
+
+// browser back / forward
+window.addEventListener('popstate', e => {
+  const s = e.state;
+  if (s && s.page === 'brand') showBrand(s.id);
+  else if (s && s.page === 'contact') showContact();
+  else showHero();
+});
+
+// init — handle direct URL with hash (e.g. shared link)
+if (location.hash) {
+  route(location.hash.slice(1));
+} else {
+  showHero();
+}
 </script>
 </body>
 </html>
