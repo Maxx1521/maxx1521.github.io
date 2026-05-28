@@ -37,11 +37,10 @@ body {
 }
 .site-logo img { height: 28px; width: auto; display: block; }
 .brand-nav {
-  flex: 1; display: flex; overflow-x: auto; scrollbar-width: none;
+  flex: 1; display: flex; align-items: center; gap: 0;
 }
-.brand-nav::-webkit-scrollbar { display: none; }
-.brand-nav a {
-  padding: 0 14px; height: 56px;
+.brand-nav > a, .nav-dropdown > a {
+  padding: 0 18px; height: 56px;
   display: flex; align-items: center;
   font-size: 13px; font-weight: 500;
   color: var(--gray); text-decoration: none;
@@ -49,7 +48,29 @@ body {
   white-space: nowrap;
   transition: color .15s, border-color .15s;
 }
-.brand-nav a:hover, .brand-nav a.active { color: var(--dark); border-bottom-color: var(--dark); }
+.brand-nav > a:hover, .nav-dropdown:hover > a { color: var(--dark); border-bottom-color: var(--dark); }
+.nav-dropdown { position: relative; }
+.nav-dropdown-menu {
+  position: absolute; top: 100%; left: 0;
+  background: white; min-width: 130px;
+  box-shadow: 0 6px 24px rgba(0,0,0,.1);
+  border-top: 2px solid var(--dark);
+  opacity: 0; pointer-events: none;
+  transform: translateY(-6px);
+  transition: opacity .18s, transform .18s;
+  z-index: 300;
+}
+.nav-dropdown:hover .nav-dropdown-menu {
+  opacity: 1; pointer-events: all; transform: translateY(0);
+}
+.nav-dropdown-menu a {
+  display: block; padding: 11px 18px;
+  font-size: 13px; color: var(--gray); text-decoration: none;
+  white-space: nowrap; border-bottom: 1px solid var(--border);
+  height: auto; transition: background .12s, color .12s;
+}
+.nav-dropdown-menu a:last-child { border-bottom: none; }
+.nav-dropdown-menu a:hover { color: var(--dark); background: var(--warm); }
 .header-cta {
   background: var(--green); color: white;
   padding: 9px 22px; font-size: 13px; font-weight: 500;
@@ -403,13 +424,21 @@ footer {
 <header class="site-header">
   <a class="site-logo" href="#"><img src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/logo_combined.png" alt="南島家居"></a>
   <nav class="brand-nav">
-    <a href="#sanwell">山井</a>
-    <a href="#sanxia">三夏</a>
-    <a href="#egger">EGGER</a>
-    <a href="#robina">ROBINA</a>
-    <a href="#dongwhal">Dongwhal</a>
-    <a href="#krono">KRONO</a>
-    <a href="#twin-oaks">Twin Oaks</a>
+    <a href="#about">關於我們</a>
+    <div class="nav-dropdown">
+      <a href="#">產品資訊 ▾</a>
+      <div class="nav-dropdown-menu">
+        <a href="#sanwell">山井</a>
+        <a href="#sanxia">三夏</a>
+        <a href="#egger">EGGER</a>
+        <a href="#robina">ROBINA</a>
+        <a href="#dongwhal">Dongwhal</a>
+        <a href="#krono">KRONO</a>
+        <a href="#twin-oaks">Twin Oaks</a>
+      </div>
+    </div>
+    <a href="#warranty">保固範圍</a>
+    <a href="#contact">聯絡我們</a>
   </nav>
   <a class="header-cta" href="#contact">預約丈量</a>
 </header>
