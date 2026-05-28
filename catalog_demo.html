@@ -1234,7 +1234,7 @@ document.addEventListener('click', e => {
 window.addEventListener('popstate', e => {
   const s = e.state;
   if (s && s.page === 'product') showProductPage(s.data);
-  else if (s && s.page === 'brand') showBrand(s.id);
+  else if (s && s.page === 'brand') { showBrand(s.id); window.scrollTo(0, savedScrollY); }
   else if (s && s.page === 'contact') showContact();
   else showHero();
 });
@@ -1268,6 +1268,7 @@ if (location.hash) {
 <script>
 // ── Product detail page ───────────────────────────────────────────
 let lastBrandId = null;
+let savedScrollY = 0;
 
 document.getElementById('ppage-back').addEventListener('click', () => {
   history.back();
@@ -1334,6 +1335,7 @@ function showProductPage(d) {
   dividers.forEach(dv => dv.style.display = 'none');
   ctaEl.style.display = 'none';
   footerEl.style.display = 'none';
+  savedScrollY = window.scrollY;
   document.getElementById('product-page').style.display = 'block';
   window.scrollTo(0, 0);
   history.pushState({ page: 'product', data: Object.fromEntries(Object.entries(d)) }, '', '#product');
