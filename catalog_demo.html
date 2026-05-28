@@ -207,12 +207,12 @@ main { padding-top: 56px; }
   margin-bottom: 28px;
 }
 .color-grid {
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 36px 24px;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px 14px;
 }
 .color-card { cursor: pointer; }
 .color-card-img {
   width: 100%; aspect-ratio: 1/1;
-  overflow: hidden; background: var(--warm); margin-bottom: 14px;
+  overflow: hidden; background: var(--warm); margin-bottom: 0;
   position: relative;
 }
 .color-card-img img {
@@ -226,8 +226,8 @@ main { padding-top: 56px; }
 .color-card:hover .color-card-img .room { opacity: 1; }
 .color-card:hover .color-card-img img:not(.room) { transform: scale(1.04); }
 .color-name {
-  font-size: 13px; letter-spacing: 0.04em; color: var(--dark);
-  text-align: left; margin-bottom: 3px;
+  font-size: 12px; letter-spacing: 0.04em; color: var(--dark);
+  text-align: left; margin-top: 6px; margin-bottom: 2px;
 }
 .color-spec {
   font-size: 11px; letter-spacing: 0.06em; color: var(--gray);
@@ -357,7 +357,7 @@ footer {
 .features.dark .feature p { color: rgba(255,255,255,.5); }
 
 /* ── 4-col square color grid ─────────────────────────── */
-.color-grid { grid-template-columns: repeat(4, 1fr); gap: 20px 16px; }
+.color-grid { grid-template-columns: repeat(4, 1fr); gap: 16px 14px; }
 .color-card-img { aspect-ratio: 1/1; }
 
 /* ── SPA initial state ───────────────────────────────── */
@@ -446,16 +446,18 @@ footer {
       <a href="#">產品資訊 ▾</a>
       <div class="nav-dropdown-menu">
         <div class="nav-dropdown-cat">超耐磨木地板</div>
-        <a href="#sanwell">山井</a>
+        <a href="#sanwell">山井 ヤマイ</a>
         <a href="#egger">EGGER</a>
-        <a href="#robina">ROBINA</a>
-        <a href="#dongwhal">Dongwhal</a>
-        <a href="#krono">KRONO</a>
+        <a href="#robina">羅賓地板</a>
+        <a href="#dongwhal">都華地板</a>
+        <a href="#krono-herringbone">Krono 人字拼系列</a>
+        <a href="#krono-wide">Krono 寬版系列</a>
         <div class="nav-dropdown-cat">海島型木地板</div>
-        <a href="#twin-oaks">Twin Oaks</a>
+        <a href="#twin-oaks">Twin Oaks 雙橡園</a>
         <div class="nav-dropdown-cat">SPC石塑地板</div>
-        <a href="#sanxia">三夏</a>
+        <a href="#sanxia">三夏晶鋼系列</a>
         <div class="nav-dropdown-cat">PVC塑膠地磚</div>
+        <a href="#decoria">DECORIA</a>
       </div>
     </div>
     <a href="#warranty">保固範圍</a>
@@ -474,16 +476,18 @@ footer {
   <a href="#about" class="menu-link">關於我們</a>
   <div class="overlay-sub">產品資訊</div>
   <div class="overlay-cat">超耐磨木地板</div>
-  <a href="#sanwell" class="menu-brand">山井</a>
+  <a href="#sanwell" class="menu-brand">山井 ヤマイ</a>
   <a href="#egger" class="menu-brand">EGGER</a>
-  <a href="#robina" class="menu-brand">ROBINA</a>
-  <a href="#dongwhal" class="menu-brand">Dongwhal</a>
-  <a href="#krono" class="menu-brand">KRONO</a>
+  <a href="#robina" class="menu-brand">羅賓地板</a>
+  <a href="#dongwhal" class="menu-brand">都華地板</a>
+  <a href="#krono-herringbone" class="menu-brand">Krono 人字拼系列</a>
+  <a href="#krono-wide" class="menu-brand">Krono 寬版系列</a>
   <div class="overlay-cat">海島型木地板</div>
-  <a href="#twin-oaks" class="menu-brand">Twin Oaks</a>
+  <a href="#twin-oaks" class="menu-brand">Twin Oaks 雙橡園</a>
   <div class="overlay-cat">SPC石塑地板</div>
-  <a href="#sanxia" class="menu-brand">三夏</a>
+  <a href="#sanxia" class="menu-brand">三夏晶鋼系列</a>
   <div class="overlay-cat">PVC塑膠地磚</div>
+  <a href="#decoria" class="menu-brand">DECORIA</a>
   <a href="#warranty" class="menu-link">保固範圍</a>
   <a href="#contact" class="menu-link">聯絡我們</a>
 </div>
@@ -744,7 +748,7 @@ footer {
 ════════════════════════════════════════════════════════════════ -->
 <section class="brand-section" id="egger">
   <div class="compact-hero fi">
-    <img src="https://www.fumaogroup.com.tw/wp-content/uploads/2025/04/EL2026-Large-D.png" alt="EGGER">
+    <img src="https://tcfl.com.tw/wp-content/uploads/2025/04/NatureSense-Aqua-1-705x302.png" alt="EGGER">
     <div class="compact-hero-content">
       <div class="brand-tag">EGGER 愛格 · 奧地利超耐磨木地板</div>
       <h2>Aqua+ 防潮系列</h2>
@@ -763,16 +767,52 @@ footer {
     </div>
   </div>
   <div class="color-section fi">
-    <div class="sec-heading">色系選擇 · 8 種花色</div>
+    <div class="sec-heading">Aqua+ 色系 · 8 種花色</div>
     <div class="color-grid">
-      <div class="color-card"><div class="color-card-img"><img src="https://www.fumaogroup.com.tw/wp-content/uploads/2025/04/EL2154-CD.png" alt="洛哈奶油橡木" loading="lazy"></div><div class="color-name">洛哈奶油橡木</div></div>
-      <div class="color-card"><div class="color-card-img"><img src="https://www.fumaogroup.com.tw/wp-content/uploads/2025/04/EL2113-CD.png" alt="皮諾沙棕橡木" loading="lazy"></div><div class="color-name">皮諾沙棕橡木</div></div>
-      <div class="color-card"><div class="color-card-img"><img src="https://www.fumaogroup.com.tw/wp-content/uploads/2025/04/EL2525-CD.png" alt="榭菲爾德淺色刺槐" loading="lazy"></div><div class="color-name">榭菲爾德刺槐</div></div>
-      <div class="color-card"><div class="color-card-img"><img src="https://www.fumaogroup.com.tw/wp-content/uploads/2025/04/EL2026-Large-D.png" alt="維多利亞白橡木" loading="lazy"></div><div class="color-name">維多利亞白橡木</div></div>
-      <div class="color-card"><div class="color-card-img"><img src="https://www.fumaogroup.com.tw/wp-content/uploads/2025/04/EL2027-LargeD.png" alt="維多利亞自然橡木" loading="lazy"></div><div class="color-name">維多利亞自然橡木</div></div>
-      <div class="color-card"><div class="color-card-img"><img src="https://www.fumaogroup.com.tw/wp-content/uploads/2025/04/EL2064-CD.png" alt="索里亞原橡" loading="lazy"></div><div class="color-name">索里亞原橡</div></div>
-      <div class="color-card"><div class="color-card-img"><img src="https://www.fumaogroup.com.tw/wp-content/uploads/2025/04/EL2065-CD.png" alt="索里亞灰橡" loading="lazy"></div><div class="color-name">索里亞灰橡</div></div>
-      <div class="color-card"><div class="color-card-img"><img src="https://www.fumaogroup.com.tw/wp-content/uploads/2025/04/EL2070-CD.png" alt="蘭里淺胡桃木" loading="lazy"></div><div class="color-name">蘭里淺胡桃木</div></div>
+      <div class="color-card"><div class="color-card-img"><img src="https://tcfl.com.tw/wp-content/uploads/2025/04/EL2154-2-495x400.png" alt="洛哈奶油橡木" loading="lazy"></div><div class="color-name">洛哈奶油橡木</div></div>
+      <div class="color-card"><div class="color-card-img"><img src="https://tcfl.com.tw/wp-content/uploads/2025/04/EL2113-495x400.png" alt="皮諾沙棕橡木" loading="lazy"></div><div class="color-name">皮諾沙棕橡木</div></div>
+      <div class="color-card"><div class="color-card-img"><img src="https://tcfl.com.tw/wp-content/uploads/2025/04/EL2525-495x400.png" alt="榭菲爾德刺槐" loading="lazy"></div><div class="color-name">榭菲爾德刺槐</div></div>
+      <div class="color-card"><div class="color-card-img"><img src="https://tcfl.com.tw/wp-content/uploads/2025/04/EL2026-495x400.png" alt="維多利亞白橡木" loading="lazy"></div><div class="color-name">維多利亞白橡木</div></div>
+      <div class="color-card"><div class="color-card-img"><img src="https://tcfl.com.tw/wp-content/uploads/2025/04/EL2027-2-495x400.png" alt="維多利亞自然橡木" loading="lazy"></div><div class="color-name">維多利亞自然橡木</div></div>
+      <div class="color-card"><div class="color-card-img"><img src="https://tcfl.com.tw/wp-content/uploads/2025/04/EL2064-495x400.png" alt="索里亞原橡" loading="lazy"></div><div class="color-name">索里亞原橡</div></div>
+      <div class="color-card"><div class="color-card-img"><img src="https://tcfl.com.tw/wp-content/uploads/2025/04/EL2065-495x400.png" alt="索里亞灰橡" loading="lazy"></div><div class="color-name">索里亞灰橡</div></div>
+      <div class="color-card"><div class="color-card-img"><img src="https://tcfl.com.tw/wp-content/uploads/2025/04/EL2070-495x400.png" alt="蘭里淺胡桃木" loading="lazy"></div><div class="color-name">蘭里淺胡桃木</div></div>
+    </div>
+  </div>
+  <div class="color-section fi">
+    <div class="sec-heading">更多色系 · 15 種花色</div>
+    <div class="color-grid">
+      <div class="color-card"><div class="color-card-img"><img src="https://tcfl.com.tw/wp-content/uploads/2025/04/EL2150-495x400.png" alt="北美白橡木" loading="lazy"></div><div class="color-name">北美白橡木</div></div>
+      <div class="color-card"><div class="color-card-img"><img src="https://tcfl.com.tw/wp-content/uploads/2025/04/EL2170-495x400.png" alt="維納斯橡木" loading="lazy"></div><div class="color-name">維納斯橡木</div></div>
+      <div class="color-card"><div class="color-card-img"><img src="https://tcfl.com.tw/wp-content/uploads/2025/04/EL2035-495x400.png" alt="紐伯里淺橡" loading="lazy"></div><div class="color-name">紐伯里淺橡</div></div>
+      <div class="color-card"><div class="color-card-img"><img src="https://tcfl.com.tw/wp-content/uploads/2025/04/EL1037-495x400.png" alt="貝達爾灰橡" loading="lazy"></div><div class="color-name">貝達爾灰橡</div></div>
+      <div class="color-card"><div class="color-card-img"><img src="https://tcfl.com.tw/wp-content/uploads/2025/04/EL1087-495x400.png" alt="巴多利諾灰橡" loading="lazy"></div><div class="color-name">巴多利諾灰橡</div></div>
+      <div class="color-card"><div class="color-card-img"><img src="https://tcfl.com.tw/wp-content/uploads/2025/04/EL1055-495x400.png" alt="巴多利諾原橡" loading="lazy"></div><div class="color-name">巴多利諾原橡 EL1055</div></div>
+      <div class="color-card"><div class="color-card-img"><img src="https://tcfl.com.tw/wp-content/uploads/2025/04/EL1067-495x400.png" alt="白楊木" loading="lazy"></div><div class="color-name">白楊木 EL1067</div></div>
+      <div class="color-card"><div class="color-card-img"><img src="https://tcfl.com.tw/wp-content/uploads/2025/04/EL2733K-495x400.png" alt="漢彌爾頓橡木" loading="lazy"></div><div class="color-name">漢彌爾頓橡木 EL2733</div></div>
+      <div class="color-card"><div class="color-card-img"><img src="https://tcfl.com.tw/wp-content/uploads/2025/04/EL2093K-495x400.png" alt="奧特加橡木" loading="lazy"></div><div class="color-name">奧特加橡木 EL2093</div></div>
+      <div class="color-card"><div class="color-card-img"><img src="https://tcfl.com.tw/wp-content/uploads/2025/04/EL2157V-495x400.png" alt="北方沙棕橡木" loading="lazy"></div><div class="color-name">北方沙棕橡木 EL2157</div></div>
+      <div class="color-card"><div class="color-card-img"><img src="https://tcfl.com.tw/wp-content/uploads/2025/04/EL2091L-495x400.png" alt="康威自然橡木" loading="lazy"></div><div class="color-name">康威自然橡木 EL2091</div></div>
+      <div class="color-card"><div class="color-card-img"><img src="https://tcfl.com.tw/wp-content/uploads/2025/04/EL1307V-495x400.png" alt="沃米亞棕色胡桃木" loading="lazy"></div><div class="color-name">沃米亞棕胡桃 EL1307</div></div>
+      <div class="color-card"><div class="color-card-img"><img src="https://tcfl.com.tw/wp-content/uploads/2025/04/EL203K-495x400.png" alt="瑞靈頓深橡" loading="lazy"></div><div class="color-name">瑞靈頓深橡 EL203</div></div>
+      <div class="color-card"><div class="color-card-img"><img src="https://tcfl.com.tw/wp-content/uploads/2025/04/EL202K-495x400.png" alt="瑞靈頓淺橡" loading="lazy"></div><div class="color-name">瑞靈頓淺橡 EL202</div></div>
+      <div class="color-card"><div class="color-card-img"><img src="https://tcfl.com.tw/wp-content/uploads/2025/04/EL2936L-495x400.png" alt="沃爾瑟姆白橡" loading="lazy"></div><div class="color-name">沃爾瑟姆白橡 EL2936</div></div>
+    </div>
+  </div>
+  <div class="color-section fi">
+    <div class="sec-heading">NatureSense 系列</div>
+    <div class="color-grid">
+      <div class="color-card wide"><div class="color-card-img"><img src="https://tcfl.com.tw/wp-content/uploads/2025/04/NatureSense-705x299.png" alt="NatureSense" loading="lazy" style="object-fit:contain;background:#f5f0eb;"></div><div class="color-name">NatureSense 標準版</div></div>
+      <div class="color-card wide"><div class="color-card-img"><img src="https://tcfl.com.tw/wp-content/uploads/2025/04/NatureSense-Herringbone-705x302.png" alt="NatureSense Herringbone" loading="lazy" style="object-fit:contain;background:#f5f0eb;"></div><div class="color-name">NatureSense 人字拼</div></div>
+      <div class="color-card wide"><div class="color-card-img"><img src="https://tcfl.com.tw/wp-content/uploads/2025/04/NatureSense-Aqua-705x302.png" alt="NatureSense Aqua" loading="lazy" style="object-fit:contain;background:#f5f0eb;"></div><div class="color-name">NatureSense Aqua</div></div>
+      <div class="color-card wide"><div class="color-card-img"><img src="https://tcfl.com.tw/wp-content/uploads/2025/04/NatureSense-Aqua-1-705x302.png" alt="NatureSense Aqua+" loading="lazy" style="object-fit:contain;background:#f5f0eb;"></div><div class="color-name">NatureSense Aqua+</div></div>
+    </div>
+  </div>
+  <div class="color-section fi">
+    <div class="sec-heading">AquaDura 系列</div>
+    <div class="color-grid">
+      <div class="color-card wide"><div class="color-card-img"><img src="https://tcfl.com.tw/wp-content/uploads/2025/04/AquaDura-705x302.png" alt="AquaDura" loading="lazy" style="object-fit:contain;background:#f5f0eb;"></div><div class="color-name">AquaDura 標準版</div></div>
+      <div class="color-card wide"><div class="color-card-img"><img src="https://tcfl.com.tw/wp-content/uploads/2025/04/AquaDura-1-705x300.png" alt="AquaDura+" loading="lazy" style="object-fit:contain;background:#f5f0eb;"></div><div class="color-name">AquaDura+</div></div>
     </div>
   </div>
   <div class="brand-foot fi">
@@ -874,7 +914,7 @@ footer {
 <!-- ═══════════════════════════════════════════════════════════════
      KRONO 畢卡索
 ════════════════════════════════════════════════════════════════ -->
-<section class="brand-section" id="krono">
+<section class="brand-section" id="krono-herringbone">
   <div class="compact-hero fi">
     <img src="https://www.krflooring.com.tw/wp-content/uploads/2025/03/picasso-a.jpg" alt="KRONO">
     <div class="compact-hero-content">
@@ -935,6 +975,26 @@ footer {
 <div class="divider"></div>
 
 <!-- ═══════════════════════════════════════════════════════════════
+     Krono 寬版系列
+════════════════════════════════════════════════════════════════ -->
+<section class="brand-section" id="krono-wide">
+  <div class="compact-hero fi">
+    <img src="https://www.krflooring.com.tw/wp-content/uploads/2025/03/picasso-a.jpg" alt="Krono 寬版系列">
+  </div>
+  <div class="brand-intro fi">
+    <div class="brand-tag">KRONO Original · 超耐磨木地板</div>
+    <h2>Krono 寬版系列</h2>
+    <p class="desc">寬板設計帶來更大氣的空間感，細緻木紋壓紋呈現自然質感，適合現代簡約或北歐風格空間。</p>
+  </div>
+  <div class="brand-foot fi">
+    <div class="price-block"><h3>寬版系列</h3><div class="price">NT $3,100 <sub>/ 坪起</sub></div></div>
+    <div class="cta-group"><a href="#contact" class="btn-outline">詢問報價</a><a href="https://line.me/R/ti/p/@974qzwma" target="_blank" class="btn-primary" style="background:var(--green)">預約丈量</a></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
      Twin Oaks 雙橡園
 ════════════════════════════════════════════════════════════════ -->
 <section class="brand-section" id="twin-oaks">
@@ -973,6 +1033,26 @@ footer {
     <div class="cta-group"><a href="#contact" class="btn-outline">詢問報價</a><a href="https://line.me/R/ti/p/@974qzwma" target="_blank" class="btn-primary" style="background:var(--green)">預約丈量</a></div>
   </div>
 </section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     DECORIA PVC塑膠地磚
+════════════════════════════════════════════════════════════════ -->
+<section class="brand-section" id="decoria">
+  <div class="compact-hero fi">
+    <img src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/logo_combined.png" alt="DECORIA" style="object-fit:contain;background:#f5f0eb;">
+  </div>
+  <div class="brand-intro fi">
+    <div class="brand-tag">DECORIA · PVC塑膠地磚</div>
+    <h2>DECORIA</h2>
+    <p class="desc">專業 PVC 塑膠地磚，耐磨防水，適用於各種商業與住宅空間，施工便利且維護簡單。</p>
+  </div>
+  <div class="brand-foot fi">
+    <div class="price-block"><h3>DECORIA</h3><div class="price">NT $詢價 <sub>/ 坪起</sub></div></div>
+    <div class="cta-group"><a href="#contact" class="btn-outline">詢問報價</a><a href="https://line.me/R/ti/p/@974qzwma" target="_blank" class="btn-primary" style="background:var(--green)">預約丈量</a></div>
+  </div>
+</section>
+
+<div class="divider"></div>
 
 <!-- ─── CTA ──────────────────────────────────────────────────────── -->
 <section class="cta-section" id="contact">
