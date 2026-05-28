@@ -36,7 +36,6 @@ body {
   text-decoration: none; display: flex; align-items: center; flex-shrink: 0;
 }
 .site-logo img { height: 28px; width: auto; display: block; }
-.site-logo .logo-mobile { display: none; }
 .brand-nav {
   flex: 1; display: flex; align-items: center; gap: 0;
   justify-content: flex-end;
@@ -425,8 +424,6 @@ footer {
   .cta-section { padding: 64px 24px; }
   footer { padding: 24px; flex-direction: column; gap: 8px; text-align: center; }
   .site-header { padding: 0 16px; gap: 16px; }
-  .site-logo .logo-desktop { display: none; }
-  .site-logo .logo-mobile { display: block; height: 28px; }
   .brand-brief { padding: 28px 24px 0; flex-direction: column; gap: 16px; }
   .compact-hero { height: 300px; }
   .brand-nav, .header-cta { display: none; }
@@ -442,10 +439,7 @@ footer {
 
 <!-- ─── Header ──────────────────────────────────────────────────── -->
 <header class="site-header">
-  <a class="site-logo" href="#">
-    <img class="logo-desktop" src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/logo_combined.png" alt="南島家居">
-    <img class="logo-mobile" src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/nd_mark_logo.png" alt="南島家居">
-  </a>
+  <a class="site-logo" href="#"><img src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/logo_combined.png" alt="南島家居"></a>
   <nav class="brand-nav">
     <a href="#about">關於我們</a>
     <div class="nav-dropdown">
