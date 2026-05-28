@@ -1106,12 +1106,14 @@ document.querySelectorAll('.fi').forEach(el => io.observe(el));
 // ── Page Router ──────────────────────────────────────────────────────
 const heroEl = document.querySelector('.page-hero');
 const brandSections = document.querySelectorAll('.brand-section');
+const dividers = document.querySelectorAll('.divider');
 const ctaEl = document.querySelector('.cta-section');
 const footerEl = document.querySelector('footer');
 
 function showHero() {
   heroEl.style.display = 'block';
   brandSections.forEach(s => s.style.display = 'none');
+  dividers.forEach(d => d.style.display = 'none');
   ctaEl.style.display = 'none';
   footerEl.style.display = 'none';
   window.scrollTo(0, 0);
@@ -1120,6 +1122,7 @@ function showHero() {
 function showBrand(id) {
   heroEl.style.display = 'none';
   brandSections.forEach(s => { s.style.display = s.id === id ? 'block' : 'none'; });
+  dividers.forEach(d => d.style.display = 'none');
   ctaEl.style.display = 'block';
   footerEl.style.display = 'flex';
   window.scrollTo(0, 0);
