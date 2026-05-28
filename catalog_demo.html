@@ -1164,6 +1164,7 @@ document.querySelectorAll('.fi').forEach(el => io.observe(el));
 
 // ── Page Router ──────────────────────────────────────────────────────
 const heroEl = document.querySelector('.page-hero');
+history.scrollRestoration = 'manual';
 const brandSections = document.querySelectorAll('.brand-section');
 const dividers = document.querySelectorAll('.divider');
 const ctaEl = document.querySelector('.cta-section');
@@ -1178,14 +1179,14 @@ function showHero() {
   window.scrollTo(0, 0);
 }
 
-function showBrand(id) {
+function showBrand(id, scrollY = 0) {
   lastBrandId = id;
   heroEl.style.display = 'none';
   brandSections.forEach(s => { s.style.display = s.id === id ? 'block' : 'none'; });
   dividers.forEach(d => d.style.display = 'none');
   ctaEl.style.display = 'block';
   footerEl.style.display = 'flex';
-  window.scrollTo(0, 0);
+  window.scrollTo(0, scrollY);
   requestAnimationFrame(() => {
     document.querySelectorAll('#' + id + ' .fi, .cta-section .fi, footer .fi').forEach(el => {
       el.classList.add('vis');
@@ -1234,7 +1235,7 @@ document.addEventListener('click', e => {
 window.addEventListener('popstate', e => {
   const s = e.state;
   if (s && s.page === 'product') showProductPage(s.data);
-  else if (s && s.page === 'brand') { showBrand(s.id); window.scrollTo(0, savedScrollY); }
+  else if (s && s.page === 'brand') showBrand(s.id, savedScrollY);
   else if (s && s.page === 'contact') showContact();
   else showHero();
 });
