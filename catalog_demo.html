@@ -1295,13 +1295,16 @@ function showHero() {
 
 function showBrand(id, scrollY = 0) {
   lastBrandId = id;
+  document.getElementById('product-page').style.display = 'none';
   heroEl.style.display = 'none';
   brandSections.forEach(s => { s.style.display = s.id === id ? 'block' : 'none'; });
   dividers.forEach(d => d.style.display = 'none');
   ctaEl.style.display = 'block';
   footerEl.style.display = 'flex';
-  window.scrollTo(0, scrollY);
   requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      window.scrollTo(0, scrollY);
+    });
     document.querySelectorAll('#' + id + ' .fi, .cta-section .fi, footer .fi').forEach(el => {
       el.classList.add('vis');
       io.unobserve(el);
