@@ -321,11 +321,11 @@ footer {
 .bf-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 32px 48px;
+  gap: 40px 48px;
 }
 .bf-item {
   border-top: 1px solid var(--border);
-  padding-top: 16px;
+  padding-top: 22px;
 }
 .bf-item h4 {
   font-size: 13px; font-weight: 700; letter-spacing: 0.06em;
@@ -352,8 +352,10 @@ footer {
 @media (max-width: 960px) {
   .brand-features { grid-template-columns: 1fr; padding: 0 24px 48px; gap: 32px; }
   .bf-photo { display: none; }
-  .bf-grid { gap: 24px 28px; }
-  .brand-intro h2 { text-align: center; }
+  .bf-grid { gap: 28px 28px; }
+  .brand-intro { align-items: center; }
+  .brand-intro h2 { grid-row: 1; text-align: center; }
+  .brand-intro .desc { grid-row: 1; }
 }
 
 /* ── Compact hero height ─────────────────────────────── */
