@@ -1302,13 +1302,11 @@ function showBrand(id, scrollY = 0) {
   ctaEl.style.display = 'block';
   footerEl.style.display = 'flex';
   requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-      window.scrollTo(0, scrollY);
-    });
     document.querySelectorAll('#' + id + ' .fi, .cta-section .fi, footer .fi').forEach(el => {
       el.classList.add('vis');
       io.unobserve(el);
     });
+    if (scrollY > 0) setTimeout(() => window.scrollTo({ top: scrollY, behavior: 'instant' }), 0);
   });
 }
 
@@ -1352,7 +1350,7 @@ document.addEventListener('click', e => {
 window.addEventListener('popstate', e => {
   const s = e.state;
   if (s && s.page === 'product') showProductPage(s.data);
-  else if (s && s.page === 'brand') showBrand(s.id, savedScrollY);
+  else if (s && s.page === 'brand') showBrand(s.id, s.scrollY || 0);
   else if (s && s.page === 'contact') showContact();
   else showHero();
 });
@@ -1453,7 +1451,9 @@ function showProductPage(d) {
   dividers.forEach(dv => dv.style.display = 'none');
   ctaEl.style.display = 'none';
   footerEl.style.display = 'none';
-  savedScrollY = window.scrollY;
+  // 把當前 scrollY 存進 history state，返回時可直接讀取
+  const curState = history.state || {};
+  history.replaceState({ ...curState, scrollY: window.scrollY }, '');
   document.getElementById('product-page').style.display = 'block';
   window.scrollTo(0, 0);
   history.pushState({ page: 'product', data: Object.fromEntries(Object.entries(d)) }, '', '#product');
