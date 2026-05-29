@@ -261,7 +261,7 @@ main { padding-top: 56px; }
 
 /* ── Brand footer (price + CTA) ──────────────────────── */
 .brand-foot {
-  background: white; border-top: 1px solid var(--border);
+  background: #ede9e3; border-top: 1px solid #ddd8d0;
   padding: 48px 80px;
   display: flex; align-items: center; justify-content: space-between;
 }
@@ -305,45 +305,9 @@ footer {
 .fi { opacity: 0; transform: translateY(22px); transition: opacity .65s ease, transform .65s ease; }
 .fi.vis { opacity: 1; transform: none; }
 
-/* ── Dark section theme (EGGER, KRONO) ──────────────── */
-#egger, #krono { background: #141414; }
-#egger .compact-hero,
-#krono .compact-hero { height: 440px; }
-#egger .color-section,
-#krono .color-section {
-  background: #141414; color: white;
-}
-#egger .sec-heading,
-#krono .sec-heading { color: rgba(255,255,255,.35); }
-#egger .sec-heading::after,
-#krono .sec-heading::after { background: #2e2e2e; }
-#egger .color-name,
-#krono .color-name { color: rgba(255,255,255,.72); }
-#egger .color-card-img,
-#krono .color-card-img { background: #1e1e1e; }
-#egger .brand-foot,
-#krono .brand-foot { background: #0e0e0e; border-color: #222; }
-#egger .price-block .price,
-#krono .price-block .price { color: white; }
-#egger .price-block h3,
-#krono .price-block h3 { color: rgba(255,255,255,.38); }
-#egger .btn-outline,
-#krono .btn-outline { color: rgba(255,255,255,.8); border-color: rgba(255,255,255,.3); }
-#egger .btn-outline:hover,
-#krono .btn-outline:hover { background: white; color: #141414; border-color: white; }
-
-/* ── Warm section theme (ROBINA, Twin Oaks) ─────────── */
-#robina .brand-brief   { background: #F4EDE3; }
-#robina .color-section { background: #F4EDE3; }
-#robina .brand-foot    { background: #EAE1D5; border-color: #D9CFC3; }
-#twin-oaks .brand-brief   { background: #EEF0EC; }
-#twin-oaks .color-section { background: #EEF0EC; }
-#twin-oaks .brand-foot    { background: #E3E6E0; border-color: #D3D8CE; }
-
-/* ── Slate section theme (Dongwhal) ──────────────────── */
-#dongwhal .brand-brief   { background: #F0F2F5; }
-#dongwhal .color-section { background: #F0F2F5; }
-#dongwhal .brand-foot    { background: #E6E9EE; border-color: #D5DAE1; }
+/* ── Unified brand section background (light beige) ─── */
+.brand-section { background: #f5f2ee; }
+#egger .compact-hero { height: 440px; }
 
 /* ── Compact hero height ─────────────────────────────── */
 .compact-hero { height: 420px; }
@@ -365,21 +329,6 @@ footer {
   padding: 5px 12px; border: 1px solid var(--border);
   color: var(--dark);
 }
-#egger .brand-specs .spec,
-#krono .brand-specs .spec { border-color: #2e2e2e; color: rgba(255,255,255,.7); }
-#egger .brand-brief p,
-#krono .brand-brief p { color: rgba(255,255,255,.5); }
-#egger .brand-brief,
-#krono .brand-brief { background: #141414; padding-bottom: 0; }
-#robina .brand-specs .spec { border-color: #CEC4B8; }
-#twin-oaks .brand-specs .spec { border-color: #C8CECA; }
-#dongwhal .brand-specs .spec { border-color: #C8CDD4; }
-
-/* ── Dark features row ───────────────────────────────── */
-.features.dark { background: #141414; }
-.features.dark .feature { background: #141414; color: white; }
-.features.dark .feature h4 { color: white; }
-.features.dark .feature p { color: rgba(255,255,255,.5); }
 
 /* ── 4-col square color grid ─────────────────────────── */
 .color-grid { grid-template-columns: repeat(4, 1fr); gap: 16px 14px; }
@@ -681,7 +630,7 @@ footer {
     </div>
   </div>
 
-  <div class="features dark fi">
+  <div class="features fi">
     <div class="feature">
       <div class="ico">💧</div>
       <h4>24H 抗潑水</h4>
