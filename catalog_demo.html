@@ -309,46 +309,38 @@ footer {
 .brand-section { background: #f5f2ee; }
 #egger .compact-hero { height: 440px; }
 
-/* ── Brand feature section ───────────────────────────── */
-.brand-features {
+/* ── Brand showcase (photo + feature circles) ────────── */
+.brand-showcase {
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  gap: 56px;
   padding: 0 80px 64px;
   max-width: 1400px; margin: 0 auto;
+  align-items: center;
 }
-.bf-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px 48px;
+.bs-photo { aspect-ratio: 4/3; overflow: hidden; }
+.bs-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.bs-desc {
+  font-size: 13px; color: var(--gray); line-height: 1.9;
+  margin: 0 0 36px;
 }
-.bf-item {
-  border-top: 1px solid var(--border);
-  padding-top: 22px;
+.bs-feats { display: flex; gap: 28px; }
+.bs-feat { flex: 1; text-align: center; }
+.bs-feat-img {
+  width: 96px; height: 96px; border-radius: 50%;
+  overflow: hidden; margin: 0 auto 12px;
 }
-.bf-item h4 {
-  font-size: 13px; font-weight: 700; letter-spacing: 0.06em;
-  margin: 0 0 6px; color: var(--dark);
+.bs-feat-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.bs-feat-name {
+  font-size: 13px; font-weight: 700; color: var(--dark);
+  letter-spacing: 0.04em; margin-bottom: 6px;
 }
-.bf-item p {
-  font-size: 12px; color: #aaa; line-height: 1.9; margin: 0;
-}
-.bf-photo {
-  position: relative; overflow: hidden;
-  aspect-ratio: 3 / 4;
-}
-.bf-photo img {
-  width: 100%; height: 100%; object-fit: cover; display: block;
-}
-.bf-badge {
-  position: absolute; bottom: 20px; right: 20px;
-  background: rgba(255,255,255,0.88);
-  backdrop-filter: blur(6px);
-  padding: 10px 14px;
-  font-size: 10px; font-weight: 800; letter-spacing: 0.14em;
-  color: var(--dark); text-align: center; line-height: 1.7;
-}
+.bs-feat-desc { font-size: 11px; color: #aaa; line-height: 1.75; }
 @media (max-width: 960px) {
-  .brand-features { grid-template-columns: 1fr; padding: 0 24px 48px; gap: 32px; }
-  .bf-photo { display: none; }
-  .bf-grid { gap: 28px 28px; }
+  .brand-showcase { grid-template-columns: 1fr; padding: 0 24px 48px; gap: 32px; }
+  .bs-photo { aspect-ratio: 16/9; }
+  .bs-feats { gap: 16px; }
+  .bs-feat-img { width: 72px; height: 72px; }
   .brand-intro { align-items: center; }
   .brand-intro h2 { grid-row: 1; text-align: center; }
   .brand-intro .desc { grid-row: 1; }
@@ -662,8 +654,36 @@ footer {
     </p>
   </div>
 
-  <div class="brand-features fi">
-    <img src="https://shengyang1688.com/wp-content/uploads/2025/07/13.5%E4%BB%8B%E7%B4%B9.jpg" alt="富士山系列產品特色" loading="lazy" style="width:100%;display:block;">
+  <div class="brand-showcase fi">
+    <div class="bs-photo">
+      <img src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/fujisan_hero.jpg" alt="富士山系列空間實景" loading="lazy" style="object-position:center bottom;">
+    </div>
+    <div>
+      <p class="bs-desc">採用獨家抗水白基材技術，有效阻絕日常潑水與地面濕氣。精工日系花色設計，讓每一塊地板都如日本風景般細緻雋永，為居家帶來靜謐質感。</p>
+      <div class="bs-feats">
+        <div class="bs-feat">
+          <div class="bs-feat-img">
+            <img src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_miyazaki_room.jpg" alt="24h 抗潑水" loading="lazy">
+          </div>
+          <div class="bs-feat-name">24h 抗潑水</div>
+          <div class="bs-feat-desc">原廠認證抗水，獨家白基材阻絕濕氣，廚房、寵物家庭皆適用</div>
+        </div>
+        <div class="bs-feat">
+          <div class="bs-feat-img">
+            <img src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_chiba.jpg" alt="歐規 AC4 耐磨" loading="lazy">
+          </div>
+          <div class="bs-feat-name">歐規 AC4 耐磨</div>
+          <div class="bs-feat-desc">達歐洲 AC4 耐磨標準，日常踩踏長期維持光澤不褪色</div>
+        </div>
+        <div class="bs-feat">
+          <div class="bs-feat-img">
+            <img src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_kumamoto_room.jpg" alt="歐盟 E1 安全" loading="lazy">
+          </div>
+          <div class="bs-feat-name">歐盟 E1 安全</div>
+          <div class="bs-feat-desc">甲醛含量符合歐盟 E1 等級，室內空氣安全，家人安心無虞</div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="split fi">
