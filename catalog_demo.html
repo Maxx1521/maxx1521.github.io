@@ -445,8 +445,93 @@ footer {
   .ppage-cta { align-self: stretch; text-align: center; }
 }
 
+/* ── Warranty Page ───────────────────────────────────── */
+#warranty-page { background: #f5f2ee; display: none; min-height: 80vh; }
+.wt-header {
+  padding: 72px 80px 56px;
+  max-width: 1100px; margin: 0 auto;
+  border-bottom: 1px solid var(--border);
+}
+.wt-header .eyebrow {
+  font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--gray); margin-bottom: 20px;
+}
+.wt-header h1 {
+  font-family: 'Noto Serif TC', serif;
+  font-size: clamp(28px, 4vw, 52px); font-weight: 300;
+  letter-spacing: 0.08em; margin-bottom: 16px; color: var(--dark);
+}
+.wt-header .sub {
+  font-size: 14px; color: var(--gray); line-height: 1.9; max-width: 560px;
+}
+.wt-cards {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 2px; padding: 48px 80px 80px;
+  max-width: 1100px; margin: 0 auto;
+}
+.wt-card { background: white; padding: 48px 44px; }
+.wt-card-label {
+  font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--gray); margin-bottom: 12px;
+}
+.wt-card-duration {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(36px, 4vw, 56px); font-weight: 300;
+  color: var(--dark); letter-spacing: 0.04em; line-height: 1;
+  margin-bottom: 32px; padding-bottom: 28px;
+  border-bottom: 1px solid var(--border);
+}
+.wt-card-duration span {
+  display: block; font-family: -apple-system, "PingFang TC", sans-serif;
+  font-size: 13px; font-weight: 400; letter-spacing: 0.06em;
+  color: var(--gray); margin-top: 6px;
+}
+.wt-section-title {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--dark);
+  margin: 28px 0 12px;
+}
+.wt-list { list-style: none; padding: 0; margin: 0; }
+.wt-list li {
+  font-size: 13px; color: var(--gray); line-height: 1.85;
+  padding: 5px 0 5px 14px; position: relative;
+  border-bottom: 1px solid #f0ece7;
+}
+.wt-list li::before {
+  content: ''; position: absolute; left: 0; top: 14px;
+  width: 4px; height: 4px; border-radius: 50%; background: #ccc;
+}
+.wt-list.exclude li::before { background: #d9b8a0; }
+.wt-note {
+  padding: 0 80px 72px;
+  max-width: 1100px; margin: 0 auto;
+}
+.wt-note-inner {
+  background: white; padding: 32px 40px;
+  display: flex; align-items: center; gap: 32px;
+  border-top: 2px solid var(--dark);
+}
+.wt-note-txt { flex: 1; }
+.wt-note-txt strong { display: block; font-size: 14px; color: var(--dark); margin-bottom: 6px; }
+.wt-note-txt p { font-size: 13px; color: var(--gray); line-height: 1.8; margin: 0; }
+.wt-note-btn {
+  display: inline-block; padding: 13px 28px;
+  background: var(--dark); color: white;
+  font-size: 12px; font-weight: 600; letter-spacing: 0.12em;
+  text-decoration: none; white-space: nowrap; flex-shrink: 0;
+  transition: opacity .2s;
+}
+.wt-note-btn:hover { opacity: 0.75; }
+@media (max-width: 960px) {
+  .wt-header { padding: 48px 24px 40px; }
+  .wt-cards { grid-template-columns: 1fr; padding: 32px 24px 48px; gap: 16px; }
+  .wt-note { padding: 0 24px 48px; }
+  .wt-note-inner { flex-direction: column; align-items: flex-start; gap: 20px; }
+  .wt-note-btn { align-self: stretch; text-align: center; }
+}
+
 /* ── SPA initial state ───────────────────────────────── */
-.brand-section, .cta-section, footer, #product-page { display: none; }
+.brand-section, .cta-section, footer, #product-page, #warranty-page { display: none; }
 
 /* ── Hamburger menu ──────────────────────────────────── */
 .menu-btn {
@@ -1270,6 +1355,82 @@ footer {
   </div>
 </section>
 
+<!-- ─── Warranty Page ──────────────────────────────────────────────── -->
+<div id="warranty-page">
+
+  <div class="wt-header">
+    <p class="eyebrow">South Home · 南島家居</p>
+    <h1>保固範圍</h1>
+    <p class="sub">南島家居提供完整的產品與施工保固服務，讓您放心交給我們，安心住在美好的空間裡。</p>
+  </div>
+
+  <div class="wt-cards">
+
+    <div class="wt-card">
+      <div class="wt-card-label">Product Warranty</div>
+      <div class="wt-card-duration">
+        依品牌規定
+        <span>各品牌原廠保固，購買時提供保固書</span>
+      </div>
+
+      <div class="wt-section-title">保固範圍</div>
+      <ul class="wt-list">
+        <li>正常使用下之出廠製造瑕疵</li>
+        <li>板材結構性損壞、表面脫層</li>
+        <li>非外力因素導致的地板翹起或變形</li>
+        <li>印刷層異常脫落或褪色（非日照因素）</li>
+      </ul>
+
+      <div class="wt-section-title">不含範圍</div>
+      <ul class="wt-list exclude">
+        <li>潮濕、浸水、漏水導致的受損</li>
+        <li>強力刮傷、撞擊、搬移重物造成損壞</li>
+        <li>陽光長期直射引起的自然氧化變色</li>
+        <li>使用強酸鹼清潔劑或不當打蠟造成損傷</li>
+        <li>天災、地震等不可抗力因素</li>
+        <li>保固不可轉讓，限原始購買者適用</li>
+      </ul>
+    </div>
+
+    <div class="wt-card">
+      <div class="wt-card-label">Installation Warranty</div>
+      <div class="wt-card-duration">
+        1 年
+        <span>自完工驗收日起計算</span>
+      </div>
+
+      <div class="wt-section-title">保固範圍</div>
+      <ul class="wt-list">
+        <li>地板異常隆起（非地面基層問題）</li>
+        <li>卡扣鬆動、接縫異常開裂</li>
+        <li>壓條鬆脫或安裝不確實</li>
+        <li>施工品質缺失造成的異音</li>
+      </ul>
+
+      <div class="wt-section-title">不含範圍</div>
+      <ul class="wt-list exclude">
+        <li>原有地面基層問題（混凝土裂縫、磁磚隆起）</li>
+        <li>入住後搬移家具、重物刮傷地板</li>
+        <li>環境濕度異常或漏水導致的膨脹變形</li>
+        <li>業主自行修繕或請第三方施工後產生的問題</li>
+        <li>天災、地震等不可抗力因素</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="wt-note">
+    <div class="wt-note-inner">
+      <div class="wt-note-txt">
+        <strong>需要申請保固服務？</strong>
+        <p>請透過 LINE 聯繫我們，說明購買日期、品牌及問題描述，我們將安排專人評估並回覆處理方式。</p>
+      </div>
+      <a href="https://line.me/R/ti/p/@974qzwma" target="_blank" class="wt-note-btn">LINE 聯繫我們</a>
+    </div>
+  </div>
+
+</div>
+
 </main>
 
 <footer>
@@ -1322,6 +1483,7 @@ const brandSections = document.querySelectorAll('.brand-section');
 const dividers = document.querySelectorAll('.divider');
 const ctaEl = document.querySelector('.cta-section');
 const footerEl = document.querySelector('footer');
+const warrantyEl = document.getElementById('warranty-page');
 
 function showHero() {
   heroEl.style.display = 'block';
@@ -1329,6 +1491,7 @@ function showHero() {
   dividers.forEach(d => d.style.display = 'none');
   ctaEl.style.display = 'none';
   footerEl.style.display = 'none';
+  warrantyEl.style.display = 'none';
   window.scrollTo(0, 0);
 }
 
@@ -1336,6 +1499,7 @@ function showBrand(id, scrollY = 0) {
   lastBrandId = id;
   document.getElementById('product-page').style.display = 'none';
   heroEl.style.display = 'none';
+  warrantyEl.style.display = 'none';
   brandSections.forEach(s => { s.style.display = s.id === id ? 'block' : 'none'; });
   dividers.forEach(d => d.style.display = 'none');
   ctaEl.style.display = 'block';
@@ -1352,6 +1516,7 @@ function showBrand(id, scrollY = 0) {
 function showContact() {
   heroEl.style.display = 'none';
   brandSections.forEach(s => s.style.display = 'none');
+  warrantyEl.style.display = 'none';
   ctaEl.style.display = 'block';
   footerEl.style.display = 'flex';
   window.scrollTo(0, 0);
@@ -1363,10 +1528,22 @@ function showContact() {
   });
 }
 
+function showWarranty() {
+  heroEl.style.display = 'none';
+  brandSections.forEach(s => s.style.display = 'none');
+  ctaEl.style.display = 'none';
+  footerEl.style.display = 'flex';
+  warrantyEl.style.display = 'block';
+  window.scrollTo(0, 0);
+}
+
 function route(id) {
-  if (!id || id === 'about' || id === 'warranty') {
+  if (!id || id === 'about') {
     showHero();
     history.pushState({ page: 'home' }, '', location.pathname);
+  } else if (id === 'warranty') {
+    showWarranty();
+    history.pushState({ page: 'warranty' }, '', '#warranty');
   } else if (id === 'contact') {
     showContact();
     history.pushState({ page: 'contact' }, '', '#contact');
@@ -1391,15 +1568,19 @@ window.addEventListener('popstate', e => {
   if (s && s.page === 'product') showProductPage(s.data);
   else if (s && s.page === 'brand') showBrand(s.id, s.scrollY || 0);
   else if (s && s.page === 'contact') showContact();
+  else if (s && s.page === 'warranty') showWarranty();
   else showHero();
 });
 
 // init — restore page from URL hash on load/refresh
 (function initRoute() {
   const hash = location.hash.slice(1);
-  if (!hash || hash === 'about' || hash === 'warranty') {
+  if (!hash || hash === 'about') {
     showHero();
     history.replaceState({ page: 'home' }, '', location.pathname);
+  } else if (hash === 'warranty') {
+    showWarranty();
+    history.replaceState({ page: 'warranty' }, '', '#warranty');
   } else if (hash === 'contact') {
     showContact();
     history.replaceState({ page: 'contact' }, '', '#contact');
