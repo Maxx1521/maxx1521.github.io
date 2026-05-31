@@ -451,59 +451,77 @@ footer {
 
 /* ── Product Detail Page ─────────────────────────────── */
 @keyframes ppage-in {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 .pcard { cursor: pointer; }
-#product-page {
-  animation: ppage-in .25s ease;
-  position: fixed; inset: 0; z-index: 500;
-  background: #111;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-}
+#product-page { animation: ppage-in .3s ease; }
 .ppage-back {
-  position: fixed; top: 24px; left: 32px; z-index: 510;
   display: inline-flex; align-items: center; gap: 6px;
-  background: none; border: none; padding: 8px 4px;
+  padding: 120px 80px 20px; background: none; border: none;
   font-size: 11px; font-weight: 600; letter-spacing: 0.15em;
-  text-transform: uppercase; color: rgba(255,255,255,0.55); cursor: pointer;
+  text-transform: uppercase; color: var(--gray); cursor: pointer;
   text-decoration: none; transition: color .15s;
 }
-.ppage-back:hover { color: #fff; }
+.ppage-back:hover { color: var(--dark); }
 .ppage-layout {
-  width: 100%; height: 100%;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  padding: 0;
+  display: grid; grid-template-columns: 1fr 1fr;
+  max-width: 1200px; margin: 0 auto;
+  padding: 0 80px 80px;
 }
-.ppage-gallery {
-  display: flex; flex-direction: column;
-  align-items: center; width: 100%; height: 100%;
-}
+.ppage-gallery { display: flex; flex-direction: column; }
 .ppage-main {
-  flex: 1; width: 100%; overflow: hidden;
+  background: #f0ece6; aspect-ratio: 4/3;
   display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
 }
 .ppage-main img {
-  max-width: 100%; max-height: 100%; width: auto; height: auto;
-  object-fit: contain; display: block;
+  width: 100%; height: 100%; object-fit: cover; display: block;
   transition: opacity .2s ease;
 }
-.ppage-thumbs {
-  display: flex; gap: 6px; padding: 12px 0;
-  justify-content: center;
-}
+.ppage-thumbs { display: flex; gap: 8px; padding: 10px 0; }
 .ppage-thumb {
-  width: 60px; height: 45px; flex-shrink: 0; overflow: hidden;
-  cursor: pointer; opacity: .4; border: 1px solid transparent;
+  width: 72px; height: 54px; flex-shrink: 0; overflow: hidden;
+  cursor: pointer; opacity: .5; border: 2px solid transparent;
   transition: opacity .15s, border-color .15s;
 }
-.ppage-thumb.active { opacity: 1; border-color: rgba(255,255,255,0.6); }
+.ppage-thumb.active { opacity: 1; border-color: #4a4a4a; }
 .ppage-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.ppage-info { display: none; }
+.ppage-info { padding: 0 0 0 56px; display: flex; flex-direction: column; }
+.ppage-tag {
+  font-size: 10px; font-weight: 600; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--gray); margin-bottom: 16px;
+}
+.ppage-name {
+  font-family: 'Noto Serif TC','Georgia',serif;
+  font-size: 32px; font-weight: 300; letter-spacing: 0.06em;
+  line-height: 1.3; color: var(--dark); margin-bottom: 8px;
+}
+.ppage-code {
+  font-size: 12px; color: var(--gray); letter-spacing: 0.1em; margin-bottom: 32px;
+}
+.ppage-specs {
+  display: flex; flex-direction: column; gap: 14px;
+  border-top: 1px solid var(--border); padding-top: 28px; margin-bottom: 36px;
+}
+.ppage-spec-row { font-size: 14px; color: var(--dark); }
+.ppage-spec-row span {
+  display: block; font-size: 10px; font-weight: 600; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--gray); margin-bottom: 3px;
+}
+.ppage-cta {
+  display: inline-block; padding: 15px 32px; background: var(--green);
+  color: #fff; text-decoration: none; font-size: 13px; font-weight: 600;
+  letter-spacing: 0.12em; text-align: center; border-radius: 2px;
+  transition: opacity .2s; align-self: flex-start;
+}
+.ppage-cta:hover { opacity: .85; }
 @media (max-width: 960px) {
-  .ppage-back { top: 16px; left: 16px; }
+  .ppage-back { padding: 110px 24px 16px; }
+  .ppage-layout { grid-template-columns: 1fr; padding: 0 24px 60px; }
+  .ppage-info { padding: 28px 0 0; }
+  .ppage-name { font-size: 26px; }
+  .ppage-cta { align-self: stretch; text-align: center; }
 }
 
 /* ── Warranty Page ───────────────────────────────────── */
@@ -2122,7 +2140,6 @@ function hideAll() {
   warrantyEl.style.display = 'none';
   processEl.style.display = 'none';
   careEl.style.display = 'none';
-  siteHeader.style.display = '';
   document.getElementById('product-page').style.display = 'none';
 }
 
@@ -2274,11 +2291,13 @@ window.addEventListener('popstate', e => {
       <div class="ppage-main"><img id="ppage-main-img" src="" alt=""></div>
       <div class="ppage-thumbs" id="ppage-thumbs"></div>
     </div>
-  </div>
-  <!-- hidden fields kept for JS data reads -->
-  <div style="display:none">
-    <div id="ppage-tag"></div><div id="ppage-name"></div>
-    <div id="ppage-code"></div><div id="ppage-specs"></div>
+    <div class="ppage-info">
+      <div class="ppage-tag" id="ppage-tag"></div>
+      <div class="ppage-name" id="ppage-name"></div>
+      <div class="ppage-code" id="ppage-code"></div>
+      <div class="ppage-specs" id="ppage-specs"></div>
+      <a href="https://line.me/R/ti/p/@974qzwma" target="_blank" class="ppage-cta">預約丈量 · 免費詢問</a>
+    </div>
   </div>
 </section>
 
@@ -2346,16 +2365,15 @@ function showProductPage(d) {
     specsEl.appendChild(row);
   });
 
-  // Show page — hide everything including header
+  // Show page
   heroEl.style.display = 'none';
   brandSections.forEach(s => s.style.display = 'none');
   dividers.forEach(dv => dv.style.display = 'none');
   ctaEl.style.display = 'none';
   footerEl.style.display = 'none';
-  siteHeader.style.display = 'none';
   const curState = history.state || {};
   history.replaceState({ ...curState, scrollY: window.scrollY }, '');
-  document.getElementById('product-page').style.display = 'flex';
+  document.getElementById('product-page').style.display = 'block';
   window.scrollTo(0, 0);
   history.pushState({ page: 'product', data: Object.fromEntries(Object.entries(d)) }, '', '#product');
 }
