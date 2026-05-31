@@ -50,25 +50,19 @@ body.dark-bg .site-header.header-transparent .nav-dropdown:hover > a {
   color: white;
   border-bottom-color: rgba(255,255,255,0.45);
 }
-body.dark-bg .site-header.header-transparent .brand-wordmark { color: white; }
-body.dark-bg .site-header.header-transparent .brand-wordmark-en { color: rgba(255,255,255,0.55); }
 body.dark-bg .site-header.header-transparent .header-cta {
   background: rgba(255,255,255,0.18);
   color: white;
 }
 body.hero-mode .page-hero { height: 100vh; }
 .site-logo {
-  text-decoration: none; display: flex; flex-direction: column;
+  text-decoration: none; display: flex;
   align-items: center; justify-content: center;
-  gap: 3px; padding: 0 28px;
+  padding: 6px 14px;
+  background: var(--warm);
 }
-.brand-wordmark {
-  font-family: 'Noto Serif TC', serif; font-weight: 300;
-  font-size: 30px; letter-spacing: 0.22em; color: var(--dark); line-height: 1;
-}
-.brand-wordmark-en {
-  font-family: 'Cormorant Garamond', serif; font-weight: 300;
-  font-size: 11px; letter-spacing: 0.42em; color: var(--gray); line-height: 1;
+.logo-img {
+  height: 48px; width: auto; display: block;
 }
 .brand-nav {
   display: flex; align-items: center; gap: 0;
@@ -888,7 +882,7 @@ footer {
       </div>
     </div>
   </nav>
-  <a class="site-logo" href="#"><span class="brand-wordmark">南島</span><span class="brand-wordmark-en">Nandao</span></a>
+  <a class="site-logo" href="#"><img class="logo-img" src="assets/nandao_logo.png" alt="NanDao Studio"></a>
   <nav class="brand-nav brand-nav-right">
     <a href="#warranty">保固範圍</a>
     <div class="nav-dropdown">
