@@ -118,7 +118,7 @@ def _fallback_menu(text=""):
 
 
 def _color_selection_message():
-    color_url = os.environ.get("COLOR_SELECTION_URL", "https://notion.so")
+    color_url = os.environ.get("COLOR_SELECTION_URL", "https://maxx1521.github.io")
     bubble = {
         "type": "bubble",
         "hero": {

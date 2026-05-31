@@ -176,11 +176,11 @@ def _product_bubble(p, product_key):
 
 
 NOTION_CATEGORY_URLS = {
-    "超耐磨木地板": "https://www.notion.so/2fd5ab351ee580a4b185c9ceb75d32c2",
-    "石塑地板": "https://www.notion.so/2fd5ab351ee58009a074c0cd6e66f066",
-    "海島型實木地板": "https://www.notion.so/2ff5ab351ee580469d6dcfa074fbfa4c",
-    "塑膠地磚": "https://www.notion.so/2fc5ab351ee5801a8800c8f3c9e4b905",
-    "戶外塑木地板": "https://www.notion.so/2fc5ab351ee5801a8800c8f3c9e4b905",
+    "超耐磨木地板": "https://maxx1521.github.io",
+    "石塑地板": "https://maxx1521.github.io",
+    "海島型實木地板": "https://maxx1521.github.io",
+    "塑膠地磚": "https://maxx1521.github.io",
+    "戶外塑木地板": "https://maxx1521.github.io",
 }
 
 
