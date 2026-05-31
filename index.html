@@ -45,6 +45,9 @@ body.dark-bg .site-header.header-transparent .nav-dropdown > a {
   color: rgba(255,255,255,0.82);
   border-bottom-color: transparent;
 }
+body.dark-bg .site-header.header-transparent .menu-btn span {
+  background: rgba(255,255,255,0.85);
+}
 body.dark-bg .site-header.header-transparent .brand-nav > a:hover,
 body.dark-bg .site-header.header-transparent .nav-dropdown:hover > a {
   color: white;
@@ -778,7 +781,7 @@ footer {
 }
 .menu-btn span {
   display: block; width: 22px; height: 2px; background: var(--dark);
-  transition: transform .3s, opacity .3s;
+  transition: transform .3s, opacity .3s, background .3s;
 }
 .menu-overlay {
   display: none; position: fixed; inset: 0; z-index: 300;
