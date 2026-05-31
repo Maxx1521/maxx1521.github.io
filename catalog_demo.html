@@ -1825,16 +1825,19 @@ function runTypewriter() {
   cursor.className = 'hero-slogan-cursor';
   sloganEl.appendChild(cursor);
   let i = 0;
-  clearInterval(typewriterTimer);
-  typewriterTimer = setInterval(() => {
-    if (i < sloganText.length) {
-      cursor.insertAdjacentText('beforebegin', sloganText[i]);
-      i++;
-    } else {
-      clearInterval(typewriterTimer);
-      setTimeout(() => cursor.remove(), 1800);
+  clearTimeout(typewriterTimer);
+  function typeNext() {
+    if (i >= sloganText.length) {
+      setTimeout(() => cursor.remove(), 2200);
+      return;
     }
-  }, 120);
+    const ch = sloganText[i];
+    cursor.insertAdjacentText('beforebegin', ch);
+    i++;
+    const delay = ch === '，' ? 620 : 185;
+    typewriterTimer = setTimeout(typeNext, delay);
+  }
+  typewriterTimer = setTimeout(typeNext, 0);
 }
 
 // ── Fade-in on scroll ────────────────────────────────────────────────
