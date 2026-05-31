@@ -61,7 +61,7 @@ body.hero-mode .page-hero { height: 100vh; }
 .site-logo {
   text-decoration: none; display: flex; flex-direction: column;
   align-items: center; justify-content: center;
-  gap: 3px; padding: 0 48px;
+  gap: 7px; padding: 0 48px;
 }
 .brand-wordmark {
   font-family: 'Noto Serif TC', 'PMingLiU', '細明體', 'MingLiU', serif; font-weight: 700;
@@ -71,7 +71,10 @@ body.hero-mode .page-hero { height: 100vh; }
 .brand-wordmark-en {
   font-family: 'Cormorant Garamond', serif; font-weight: 300;
   font-style: normal;
-  font-size: 11px; letter-spacing: 0.42em; color: var(--gray); line-height: 1;
+  font-size: 11px; color: var(--gray); line-height: 1;
+  display: block; width: 100%;
+  text-align: justify; text-align-last: justify;
+  letter-spacing: 0;
   transition: color .4s;
 }
 body.dark-bg .site-header.header-transparent .brand-wordmark { color: white; }
