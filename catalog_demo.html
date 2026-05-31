@@ -28,7 +28,7 @@ body {
   background: rgba(255,255,255,0.97);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--border);
-  height: 80px;
+  height: 96px;
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
@@ -41,11 +41,11 @@ body {
 }
 .brand-wordmark {
   font-family: 'Noto Serif TC', serif; font-weight: 300;
-  font-size: 36px; letter-spacing: 0.18em; color: var(--dark); line-height: 1;
+  font-size: 30px; letter-spacing: 0.22em; color: var(--dark); line-height: 1;
 }
 .brand-wordmark-en {
   font-family: 'Cormorant Garamond', serif; font-weight: 300;
-  font-size: 15px; letter-spacing: 0.35em; color: var(--gray); line-height: 1;
+  font-size: 11px; letter-spacing: 0.42em; color: var(--gray); line-height: 1;
 }
 .brand-nav {
   display: flex; align-items: center; gap: 0;
@@ -53,9 +53,9 @@ body {
 .brand-nav-left { justify-content: flex-end; }
 .brand-nav-right { justify-content: flex-start; }
 .brand-nav > a, .nav-dropdown > a {
-  padding: 0 24px; height: 80px;
+  padding: 0 20px; height: 96px;
   display: flex; align-items: center;
-  font-size: 16px; font-weight: 500;
+  font-size: 14px; font-weight: 500;
   color: var(--gray); text-decoration: none;
   border-bottom: 2px solid transparent;
   white-space: nowrap;
@@ -122,7 +122,7 @@ body {
 }
 .btn-outline:hover { background: var(--dark); color: white; border-color: var(--dark); }
 
-main { padding-top: 80px; }
+main { padding-top: 96px; }
 
 /* ── Page Hero ───────────────────────────────────────── */
 .page-hero {
@@ -160,7 +160,7 @@ main { padding-top: 80px; }
 .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
 
 /* ── Brand section wrapper ───────────────────────────── */
-.brand-section { scroll-margin-top: 80px; }
+.brand-section { scroll-margin-top: 96px; }
 
 /* ── Compact brand banner — clean image, no overlay ──── */
 .compact-hero {
@@ -533,9 +533,49 @@ footer {
   transition: opacity .2s;
 }
 .wt-note-btn:hover { opacity: 0.75; }
+.wt-notice {
+  padding: 0 80px 56px;
+  max-width: 1100px; margin: 0 auto;
+}
+.wt-notice-inner {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 0; background: white;
+}
+.wt-notice-group {
+  padding: 40px 44px;
+}
+.wt-notice-group + .wt-notice-group {
+  border-left: 1px solid var(--border);
+}
+.wt-notice-title {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--green);
+  margin-bottom: 20px;
+}
+.wt-notice-list {
+  list-style: none; padding: 0; margin: 0;
+  counter-reset: notice-counter;
+}
+.wt-notice-list li {
+  font-size: 13px; color: var(--gray); line-height: 1.85;
+  padding: 8px 0 8px 28px; position: relative;
+  border-bottom: 1px solid var(--border);
+  counter-increment: notice-counter;
+}
+.wt-notice-list li:last-child { border-bottom: none; }
+.wt-notice-list li::before {
+  content: counter(notice-counter, decimal-leading-zero);
+  position: absolute; left: 0; top: 8px;
+  font-size: 10px; font-weight: 700; color: var(--green);
+  letter-spacing: 0.05em;
+}
 @media (max-width: 960px) {
   .wt-header { padding: 48px 24px 40px; }
   .wt-cards { grid-template-columns: 1fr; padding: 32px 24px 48px; gap: 16px; }
+  .wt-notice { padding: 0 24px 40px; }
+  .wt-notice-inner { grid-template-columns: 1fr; }
+  .wt-notice-group + .wt-notice-group { border-left: none; border-top: 1px solid var(--border); }
+  .wt-notice-group { padding: 32px 24px; }
   .wt-note { padding: 0 24px 48px; }
   .wt-note-inner { flex-direction: column; align-items: flex-start; gap: 20px; }
   .wt-note-btn { align-self: stretch; text-align: center; }
@@ -690,6 +730,7 @@ footer {
   .hero-title-full { display: none; }
   .brand-nav-left, .brand-nav-right, .header-cta { display: none; }
   .menu-btn { display: flex; grid-column: 3; grid-row: 1; justify-self: end; }
+  .site-logo { justify-self: start; padding: 0; }
 }
 @media (max-width: 600px) {
   .other-grid { grid-template-columns: 1fr; }
@@ -714,6 +755,7 @@ footer {
         <a href="#panstone">Panstone 派斯</a>
         <a href="#twin-oaks">Ua Floors</a>
         <a href="#decoria">BLINK 貝力</a>
+        <a href="#woodland">森 WoodLand</a>
       </div>
     </div>
     <div class="nav-dropdown">
@@ -753,6 +795,7 @@ footer {
       <a href="#panstone" class="menu-brand">Panstone 派斯</a>
       <a href="#twin-oaks" class="menu-brand">Ua Floors</a>
       <a href="#decoria" class="menu-brand">BLINK 貝力</a>
+      <a href="#woodland" class="menu-brand">森 WoodLand</a>
     </div>
   </div>
   <div class="acc-group">
@@ -1446,6 +1489,88 @@ footer {
 
 <div class="divider"></div>
 
+<!-- ═══════════════════════════════════════════════════════════════
+     森 WoodLand
+════════════════════════════════════════════════════════════════ -->
+<section class="brand-section" id="woodland">
+  <div class="compact-hero fi">
+    <img src="https://img.meepshop.com/WyjqMMZ3_ttefq4IZdXNel4yPfNXaj9mV3DVeKoi4fs/w:1920/q:80/Z3M6Ly9pbWcubWVlcGNsb3VkLmNvbS9tZWVwc2hvcC9lMTY1NTIyYS1lY2E5LTQ5YzItYjFhYi0yYWFmNmFiZDM1ZTAvZmlsZXMvYjFlNWUyY2ItOWRiNS00N2I1LWFiNjktNDkzNWNmNGNjZmFiLmpwZw" alt="森 WoodLand">
+    <div class="compact-hero-title"><span>森 WoodLand</span></div>
+    <div class="compact-hero-content">
+      <h2>超耐磨木地板</h2>
+      <div class="chips">
+        <span class="chip">12mm 厚度</span><span class="chip">AC5 耐磨</span><span class="chip">EIR 同步壓紋</span>
+      </div>
+    </div>
+  </div>
+  <div class="brand-intro fi">
+    <h2>超耐磨木地板</h2>
+    <p class="desc">森 WoodLand 超耐磨木地板，每片規格 1515×238mm，厚度 12mm，達到 AC5 商業耐磨等級，搭配 EIR 同步壓紋技術，木紋觸感與視覺完整對應。四邊 BEVELED EDGE 倒角封漆，卡扣安裝。通過 FloorScore®、GREENGUARD® 及 EU Ecolabel 三大環保認證，低甲醛、耐刮、防潑水，適合有孩童與毛小孩的家庭。</p>
+  </div>
+
+  <div class="brand-showcase fi">
+    <div class="bs-photo">
+      <img src="https://img.meepshop.com/0mT0dKdccujmfaJlHXbg8xLJYYQlY2T1qSSQ6jxSwhk/w:1920/q:80/Z3M6Ly9pbWcubWVlcGNsb3VkLmNvbS9tZWVwc2hvcC9lMTY1NTIyYS1lY2E5LTQ5YzItYjFhYi0yYWFmNmFiZDM1ZTAvZmlsZXMvNjljNzJkYjktMDA0NS00ZGUzLTg0ZWEtOWIwNzAyYzc4OTg5LmpwZw" alt="森 WoodLand" loading="lazy">
+    </div>
+    <div>
+      <p class="bs-desc">12mm 厚實結構搭配 AC5 耐磨等級，從住宅到輕商業空間皆適用。EIR 同步壓紋讓表面凹凸紋路與木紋視覺完全一致，呈現接近實木的立體觸感。</p>
+      <div class="bs-feats">
+        <div class="bs-feat">
+          <div class="bs-feat-name">12mm 厚度</div>
+          <div class="bs-feat-desc">厚實板材踩踏腳感扎實，卡扣安裝方便快速，穩定耐用</div>
+        </div>
+        <div class="bs-feat">
+          <div class="bs-feat-name">AC5 耐磨等級</div>
+          <div class="bs-feat-desc">商業級耐磨認證，適合高流量住宅與輕商業空間長期使用</div>
+        </div>
+        <div class="bs-feat">
+          <div class="bs-feat-name">EIR 同步壓紋</div>
+          <div class="bs-feat-desc">壓紋凹凸與木紋視覺完全對齊，真實還原木材立體觸感</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="color-section fi">
+    <div class="sec-heading">環保認證</div>
+    <div style="display:flex; gap:32px; flex-wrap:wrap; padding: 0 0 8px;">
+      <div style="flex:1; min-width:180px;">
+        <div style="font-size:13px; font-weight:700; color:var(--dark); margin-bottom:4px;">FloorScore®</div>
+        <div style="font-size:12px; color:#aaa; line-height:1.7;">美國地板空氣品質認證，確保低 VOC 排放，符合 LEED 綠建築標準</div>
+      </div>
+      <div style="flex:1; min-width:180px;">
+        <div style="font-size:13px; font-weight:700; color:var(--dark); margin-bottom:4px;">GREENGUARD®</div>
+        <div style="font-size:12px; color:#aaa; line-height:1.7;">保證低化學排放，適合住宅、學校及醫療機構使用</div>
+      </div>
+      <div style="flex:1; min-width:180px;">
+        <div style="font-size:13px; font-weight:700; color:var(--dark); margin-bottom:4px;">EU Ecolabel</div>
+        <div style="font-size:12px; color:#aaa; line-height:1.7;">符合歐洲嚴格環保標準，對環境友善</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="color-section fi">
+    <div class="sec-heading">色系選擇 · 8 款花色</div>
+    <div class="color-grid">
+      <div class="color-card"><div class="color-card-img"><img src="https://www.gogo-engineering.com/store_image/cokelion/E1752564734386.jpg" alt="WL101 星塵森林" loading="lazy"></div><div class="color-name">WL101 星塵森林</div></div>
+      <div class="color-card"><div class="color-card-img"><img src="https://www.gogo-engineering.com/store_image/cokelion/E1752564723656.jpg" alt="WL102 松林低語" loading="lazy"></div><div class="color-name">WL102 松林低語</div></div>
+      <div class="color-card"><div class="color-card-img"><img src="https://www.gogo-engineering.com/store_image/cokelion/E1752564710496.jpg" alt="WL103 森林秘境" loading="lazy"></div><div class="color-name">WL103 森林秘境</div></div>
+      <div class="color-card"><div class="color-card-img"><img src="https://www.gogo-engineering.com/store_image/cokelion/E1752564699086.jpg" alt="WL104 極光林地" loading="lazy"></div><div class="color-name">WL104 極光林地</div></div>
+      <div class="color-card"><div class="color-card-img"><img src="https://www.gogo-engineering.com/store_image/cokelion/E1752564676676.jpg" alt="WL105 月光森林" loading="lazy"></div><div class="color-name">WL105 月光森林</div></div>
+      <div class="color-card"><div class="color-card-img"><img src="https://www.gogo-engineering.com/store_image/cokelion/E1752564664836.jpg" alt="WL106 柳語林間" loading="lazy"></div><div class="color-name">WL106 柳語林間</div></div>
+      <div class="color-card"><div class="color-card-img"><img src="https://www.gogo-engineering.com/store_image/cokelion/E1752564654466.jpg" alt="WL107 旅人林間" loading="lazy"></div><div class="color-name">WL107 旅人林間</div></div>
+      <div class="color-card"><div class="color-card-img"><img src="https://www.gogo-engineering.com/store_image/cokelion/E1752564641016.jpg" alt="WL108 金色樹冠" loading="lazy"></div><div class="color-name">WL108 金色樹冠</div></div>
+    </div>
+  </div>
+
+  <div class="brand-foot fi">
+    <div class="price-block"><h3>森 WoodLand</h3><div class="price">NT $詢價 <sub>/ 坪起</sub></div></div>
+    <div class="cta-group"><a href="#contact" class="btn-outline">詢問報價</a><a href="https://line.me/R/ti/p/@974qzwma" target="_blank" class="btn-primary" style="background:var(--green)">預約丈量</a></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
 <!-- ─── CTA ──────────────────────────────────────────────────────── -->
 <section class="cta-section" id="contact">
   <p class="eyebrow">南島 Nandao</p>
@@ -1585,6 +1710,31 @@ footer {
 
   </div>
 
+  <div class="wt-notice">
+    <div class="wt-notice-inner">
+      <div class="wt-notice-group">
+        <div class="wt-notice-title">施工前</div>
+        <ol class="wt-notice-list">
+          <li>木地板施工地面必須具有良好水平，要由業務同仁實地丈量確認。</li>
+          <li>木地板施工需裁切，導致粉塵較大，建議施工前先自行將家具、電器、廚具與插座進行保護，避免沾染粉塵。</li>
+          <li>木地板施工前請先清潔地面與清除雜物，並預留給師傅裁切木地板的空間。</li>
+          <li>木地板施工不可與其他工種同時進行。</li>
+          <li>木地板施工順序在油漆與系統櫃之後。</li>
+        </ol>
+      </div>
+      <div class="wt-notice-group">
+        <div class="wt-notice-title">施工後</div>
+        <ol class="wt-notice-list">
+          <li>完工後本公司會負責清運施工垃圾，但不負責細部清潔。</li>
+          <li>完工後空氣中仍會有落塵，建議於完工日隔天再做清潔。</li>
+          <li>漂浮式施工（直鋪）因不打釘，木地板有些微浮動感屬於正常情況。</li>
+          <li>為讓矽利康收邊整齊平順，會在牆上黏貼紙膠帶，撕除紙膠帶可能會造成牆面油漆些微剝落。</li>
+          <li>木地板會冷縮熱漲導致踩踏有些許聲音，但若非單定點踩踏持續有異音，皆屬正常現象。</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
   <div class="wt-note">
     <div class="wt-note-inner">
       <div class="wt-note-txt">
@@ -1670,7 +1820,8 @@ function showHero() {
 
 function showBrand(id, scrollY = 0) {
   lastBrandId = id;
-  document.getElementById('product-page').style.display = 'none';
+  const ppEl = document.getElementById('product-page');
+  if (ppEl) ppEl.style.display = 'none';
   hideAll();
   brandSections.forEach(s => { s.style.display = s.id === id ? 'block' : 'none'; });
   ctaEl.style.display = 'block';
