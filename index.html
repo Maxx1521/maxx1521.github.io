@@ -9,11 +9,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Noto+Serif+TC:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 :root {
-  --green:  #8B6F47;
+  --green:  #848F89;
   --dark:   #2C2420;
   --gray:   #777;
-  --warm:   #F5F0E8;
-  --border: #DDD8D0;
+  --warm:   #F5F2EB;
+  --border: #D5D9D6;
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 body {
@@ -25,7 +25,7 @@ body {
 /* ── Header ──────────────────────────────────────────── */
 .site-header {
   position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-  background: rgba(245,240,232,0.97);
+  background: rgba(245,242,235,0.97);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--border);
   height: 96px;
@@ -72,9 +72,7 @@ body.hero-mode .page-hero { height: 100vh; }
   font-family: 'Cormorant Garamond', serif; font-weight: 300;
   font-style: normal;
   font-size: 11px; color: var(--gray); line-height: 1;
-  display: block; width: 100%;
-  text-align: justify; text-align-last: justify;
-  letter-spacing: 0;
+  letter-spacing: 0.42em;
   transition: color .4s;
 }
 body.dark-bg .site-header.header-transparent .brand-wordmark { color: white; }
@@ -897,7 +895,7 @@ footer {
       </div>
     </div>
   </nav>
-  <a class="site-logo" href="#"><span class="brand-wordmark">南島</span><span class="brand-wordmark-en">NANDAO</span></a>
+  <a class="site-logo" href="#"><span class="brand-wordmark">南島</span><span class="brand-wordmark-en">Nandao</span></a>
   <nav class="brand-nav brand-nav-right">
     <a href="#warranty">保固範圍</a>
     <div class="nav-dropdown">
