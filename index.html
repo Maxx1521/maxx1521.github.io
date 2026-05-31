@@ -19,13 +19,13 @@
 body {
   font-family: -apple-system, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
   color: var(--dark);
-  background: #fff;
+  background: var(--warm);
 }
 
 /* ── Header ──────────────────────────────────────────── */
 .site-header {
   position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-  background: rgba(255,255,255,0.97);
+  background: rgba(245,240,232,0.97);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--border);
   height: 96px;
@@ -76,11 +76,12 @@ body.hero-mode .page-hero { height: 100vh; }
 .brand-nav-left { justify-content: flex-end; }
 .brand-nav-right { justify-content: flex-start; }
 .brand-nav > a, .nav-dropdown > a {
-  padding: 0 28px; height: 96px;
+  padding: 0 22px; height: 96px;
   display: flex; align-items: center;
-  font-size: 15px; font-weight: 500;
+  font-family: 'Cormorant Garamond', serif; font-size: 13px; font-weight: 400;
+  letter-spacing: 0.2em; text-transform: uppercase;
   color: var(--gray); text-decoration: none;
-  border-bottom: 2px solid transparent;
+  border-bottom: 1px solid transparent;
   white-space: nowrap;
   transition: color .15s, border-color .15s;
 }
@@ -88,7 +89,7 @@ body.hero-mode .page-hero { height: 100vh; }
 .nav-dropdown { position: relative; }
 .nav-dropdown-menu {
   position: absolute; top: 100%; left: 0;
-  background: white; min-width: 160px;
+  background: var(--warm); min-width: 160px;
   box-shadow: 0 6px 24px rgba(0,0,0,.1);
   border-top: 2px solid var(--dark);
   opacity: 0; pointer-events: none;
@@ -163,8 +164,8 @@ main { padding-top: 0; }
 .page-hero-content {
   position: absolute; inset: 0;
   display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  color: white; text-align: center; padding: 40px;
+  align-items: flex-start; justify-content: flex-end;
+  color: white; text-align: left; padding: 0 64px 56px;
 }
 .eyebrow {
   font-family: 'Cormorant Garamond', serif;
@@ -181,15 +182,31 @@ main { padding-top: 0; }
   font-size: 15px; opacity: .7; letter-spacing: 0.08em; margin-bottom: 40px;
 }
 .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
+.hero-eyebrow {
+  font-family: 'Cormorant Garamond', serif; font-size: 11px; font-weight: 400;
+  letter-spacing: 0.35em; text-transform: uppercase;
+  color: rgba(255,255,255,0.6); margin-bottom: 10px;
+}
 .hero-slogan {
   font-family: 'Noto Serif TC', serif; font-weight: 300;
-  font-size: clamp(20px, 3vw, 36px); letter-spacing: 0.22em;
-  color: rgba(255,255,255,0.9); line-height: 1.6;
+  font-size: clamp(16px, 2.2vw, 26px); letter-spacing: 0.18em;
+  color: rgba(255,255,255,0.92); line-height: 1.7;
 }
+.hero-view-link {
+  position: absolute; right: 64px; bottom: 56px;
+  font-family: 'Cormorant Garamond', serif; font-size: 12px; font-weight: 400;
+  letter-spacing: 0.25em; text-transform: uppercase;
+  color: rgba(255,255,255,0.75); text-decoration: none;
+  border-bottom: 1px solid rgba(255,255,255,0.35);
+  padding-bottom: 2px;
+  transition: color .15s, border-color .15s;
+}
+.hero-view-link:hover { color: white; border-color: white; }
 .hero-nl { display: none; }
 @media (max-width: 960px) {
   .hero-nl { display: block; }
-  .page-hero-content { align-items: flex-start; text-align: left; padding: 40px 32px; }
+  .page-hero-content { padding: 0 32px 44px; }
+  .hero-view-link { right: 32px; bottom: 44px; }
 }
 .hero-slogan-cursor {
   display: inline-block; width: 1px; height: 1.1em;
@@ -420,9 +437,9 @@ footer {
   color: var(--dark);
 }
 
-/* ── 4-col square color grid ─────────────────────────── */
-.color-grid { grid-template-columns: repeat(4, 1fr); gap: 16px 14px; }
-.color-card-img { aspect-ratio: 1/1; }
+/* ── 3-col color grid (Jour en Design style) ────────── */
+.color-grid { grid-template-columns: repeat(3, 1fr); gap: 24px 20px; }
+.color-card-img { aspect-ratio: 4/3; }
 
 /* ── Product Detail Page ─────────────────────────────── */
 @keyframes ppage-in {
@@ -935,8 +952,10 @@ footer {
   <img src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/hero4.jpg" alt="">
   <img src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/hero5.jpg" alt="">
   <div class="page-hero-content">
+    <p class="hero-eyebrow">南島家居 · Nandao Home</p>
     <p class="hero-slogan">以木與布，重新定義家的溫度</p>
   </div>
+  <a href="#sanwell" class="hero-view-link">View Products</a>
 </section>
 
 
