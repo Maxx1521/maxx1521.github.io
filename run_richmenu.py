@@ -28,7 +28,7 @@ menu = {
         },
         {
             "bounds": {"x": COL * 2, "y": 0, "width": COL + 1, "height": TOP_H},
-            "action": {"type": "postback", "data": "action=catalog", "label": "產品選擇"}
+            "action": {"type": "uri", "uri": "https://maxx1521.github.io"}
         },
     ]
 }
