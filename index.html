@@ -2412,6 +2412,7 @@ function showProductPage(d) {
   });
 
   // Show page
+  heroMode = false; darkBg = false; updateHeader();
   heroEl.style.display = 'none';
   brandSections.forEach(s => s.style.display = 'none');
   dividers.forEach(dv => dv.style.display = 'none');
