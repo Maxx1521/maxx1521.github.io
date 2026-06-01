@@ -2186,7 +2186,7 @@ function hideAll() {
   warrantyEl.style.display = 'none';
   processEl.style.display = 'none';
   careEl.style.display = 'none';
-  document.getElementById('product-page').style.display = 'none';
+  const _pp = document.getElementById('product-page'); if (_pp) _pp.style.display = 'none';
 }
 
 function showHero() {
