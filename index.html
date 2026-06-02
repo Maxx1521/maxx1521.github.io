@@ -865,11 +865,14 @@ footer {
 }
 
 /* ── Homepage Content Sections ──────────────────────── */
+/* ── Home content wrapper: Pergo-style warm cream canvas ── */
+#home-content { background: #F8F6F5; }
+
 .home-about {
-  background: #F0EDE8;
-  padding: 100px 24px;
+  background: white;
+  padding: 120px 24px;
   text-align: center;
-  margin-bottom: 8px;
+  margin-bottom: 80px;
 }
 .home-about-inner { max-width: 660px; margin: 0 auto; }
 .home-about-title {
@@ -902,27 +905,28 @@ footer {
 .home-cat-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  padding: 40px;
-  background: #F0EDE8;
-  margin-bottom: 8px;
+  gap: 24px;
+  padding: 0 40px;
+  background: transparent;
+  margin-bottom: 80px;
 }
 .home-cat-item {
   overflow: hidden;
   text-decoration: none;
   display: block;
+  background: white;
 }
 .home-cat-item img {
   width: 100%;
-  aspect-ratio: 2/3;
+  aspect-ratio: 4/3;
   object-fit: cover;
   display: block;
   transition: transform .55s ease;
 }
 .home-cat-item:hover img { transform: scale(1.04); }
 .home-cat-label {
-  padding: 20px 20px 28px;
-  background: #F0EDE8;
+  padding: 24px 24px 32px;
+  background: transparent;
 }
 .home-cat-label h3 {
   font-family: 'Cormorant Garamond', serif;
@@ -941,8 +945,8 @@ footer {
 .home-split {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  min-height: 500px;
-  margin-bottom: 8px;
+  min-height: 560px;
+  margin-bottom: 80px;
 }
 .home-split-img { overflow: hidden; }
 .home-split-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
@@ -950,22 +954,22 @@ footer {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 64px 60px;
-  background: #F0EDE8;
+  padding: 80px 72px;
+  background: transparent;
 }
 .home-split-txt h2 {
   font-family: 'Noto Serif TC', serif;
-  font-size: clamp(20px, 2.2vw, 30px);
+  font-size: clamp(20px, 2.2vw, 32px);
   font-weight: 700;
   line-height: 1.5;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
   color: var(--dark);
 }
 .home-split-txt p {
   font-size: 14px;
   line-height: 2;
   color: var(--gray);
-  margin-bottom: 32px;
+  margin-bottom: 36px;
 }
 .home-split-btn {
   display: inline-block;
@@ -983,8 +987,8 @@ footer {
 .home-split-btn:hover { background: var(--dark); color: white; }
 
 .home-rooms {
-  background: #F0EDE8;
-  padding: 80px 40px;
+  background: white;
+  padding: 120px 40px;
   text-align: center;
 }
 .home-rooms-title {
@@ -993,12 +997,12 @@ footer {
   font-weight: 400;
   letter-spacing: 0.16em;
   color: var(--dark);
-  margin-bottom: 64px;
+  margin-bottom: 72px;
 }
 .home-rooms-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 48px 0;
+  gap: 56px 0;
   max-width: 860px;
   margin: 0 auto;
 }
@@ -1015,13 +1019,14 @@ footer {
 .home-room-name { font-size: 13px; letter-spacing: 0.08em; color: var(--gray); }
 
 @media (max-width: 960px) {
-  .home-cat-grid { grid-template-columns: 1fr; }
+  .home-cat-grid { grid-template-columns: 1fr; padding: 0 16px; gap: 16px; margin-bottom: 40px; }
   .home-cat-item img { aspect-ratio: 16/9; }
-  .home-split { grid-template-columns: 1fr; }
+  .home-split { grid-template-columns: 1fr; margin-bottom: 40px; }
   .home-split-img { min-height: 280px; }
-  .home-split-txt { padding: 44px 28px; }
+  .home-split-txt { padding: 56px 32px; }
+  .home-rooms { padding: 72px 28px; }
   .home-rooms-grid { grid-template-columns: repeat(2, 1fr); gap: 40px 0; max-width: 420px; }
-  .home-about { padding: 72px 28px; }
+  .home-about { padding: 80px 28px; margin-bottom: 40px; }
 }
 </style>
 </head>
