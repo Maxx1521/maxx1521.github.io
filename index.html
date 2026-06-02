@@ -66,7 +66,7 @@ body.hero-mode .page-hero { height: 100vh; }
 }
 .brand-wordmark {
   font-family: 'Noto Serif TC', 'PMingLiU', '細明體', 'MingLiU', serif; font-weight: 700;
-  font-size: 30px; letter-spacing: 0.22em; color: var(--dark); line-height: 1;
+  font-size: 36px; letter-spacing: 0.22em; color: var(--dark); line-height: 1;
   transition: color .4s;
 }
 .brand-wordmark-en {
@@ -720,7 +720,7 @@ footer {
 }
 
 /* ── SPA initial state ───────────────────────────────── */
-.brand-section, .cta-section, footer, #product-page, #warranty-page, #process-page, #care-page { display: none; }
+.brand-section, .cta-section, footer, #product-page, #warranty-page, #process-page, #care-page, #home-content { display: none; }
 
 /* ── Care Page ───────────────────────────────────────── */
 #care-page { background: var(--warm); min-height: 80vh; }
@@ -863,6 +863,160 @@ footer {
   .other-grid { grid-template-columns: 1fr; }
   .color-grid { grid-template-columns: repeat(2, 1fr); }
 }
+
+/* ── Homepage Content Sections ──────────────────────── */
+.home-about {
+  background: white;
+  padding: 100px 24px;
+  text-align: center;
+}
+.home-about-inner { max-width: 660px; margin: 0 auto; }
+.home-about-title {
+  font-family: 'Noto Serif TC', serif;
+  font-size: clamp(22px, 3vw, 38px);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--dark);
+  margin-bottom: 32px;
+}
+.home-about-desc {
+  font-size: 15px;
+  line-height: 2.2;
+  color: var(--gray);
+  margin-bottom: 44px;
+}
+.home-about-btn {
+  display: inline-block;
+  padding: 14px 44px;
+  border: 1.5px solid var(--dark);
+  color: var(--dark);
+  text-decoration: none;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 14px;
+  letter-spacing: 0.22em;
+  transition: background .25s, color .25s;
+}
+.home-about-btn:hover { background: var(--dark); color: white; }
+
+.home-cat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+.home-cat-item {
+  overflow: hidden;
+  text-decoration: none;
+  display: block;
+}
+.home-cat-item img {
+  width: 100%;
+  aspect-ratio: 2/3;
+  object-fit: cover;
+  display: block;
+  transition: transform .55s ease;
+}
+.home-cat-item:hover img { transform: scale(1.04); }
+.home-cat-label {
+  padding: 20px 20px 28px;
+  background: white;
+}
+.home-cat-label h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  color: var(--dark);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.home-cat-line { width: 32px; height: 2px; }
+.home-cat-line.c1 { background: var(--green); }
+.home-cat-line.c2 { background: #8B9EB0; }
+.home-cat-line.c3 { background: #B09060; }
+
+.home-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 500px;
+}
+.home-split-img { overflow: hidden; }
+.home-split-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.home-split-txt {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 64px 60px;
+  background: var(--warm);
+}
+.home-split-txt h2 {
+  font-family: 'Noto Serif TC', serif;
+  font-size: clamp(20px, 2.2vw, 30px);
+  font-weight: 700;
+  line-height: 1.5;
+  margin-bottom: 20px;
+  color: var(--dark);
+}
+.home-split-txt p {
+  font-size: 14px;
+  line-height: 2;
+  color: var(--gray);
+  margin-bottom: 32px;
+}
+.home-split-btn {
+  display: inline-block;
+  padding: 12px 28px;
+  border: 1.5px solid var(--dark);
+  color: var(--dark);
+  text-decoration: none;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 13px;
+  letter-spacing: 0.2em;
+  width: fit-content;
+  margin-bottom: 10px;
+  transition: background .25s, color .25s;
+}
+.home-split-btn:hover { background: var(--dark); color: white; }
+
+.home-rooms {
+  background: white;
+  padding: 80px 40px;
+  text-align: center;
+}
+.home-rooms-title {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  color: var(--dark);
+  margin-bottom: 64px;
+}
+.home-rooms-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 48px 0;
+  max-width: 860px;
+  margin: 0 auto;
+}
+.home-room-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+  cursor: default;
+}
+.home-room-icon { width: 52px; height: 52px; }
+.home-room-icon svg { width: 100%; height: 100%; stroke: var(--dark); fill: none; stroke-width: 1.3; stroke-linecap: round; stroke-linejoin: round; }
+.home-room-name { font-size: 13px; letter-spacing: 0.08em; color: var(--gray); }
+
+@media (max-width: 960px) {
+  .home-cat-grid { grid-template-columns: 1fr; }
+  .home-cat-item img { aspect-ratio: 16/9; }
+  .home-split { grid-template-columns: 1fr; }
+  .home-split-img { min-height: 280px; }
+  .home-split-txt { padding: 44px 28px; }
+  .home-rooms-grid { grid-template-columns: repeat(2, 1fr); gap: 40px 0; max-width: 420px; }
+  .home-about { padding: 72px 28px; }
+}
 </style>
 </head>
 <body>
@@ -968,6 +1122,112 @@ footer {
   </div>
 </section>
 
+<!-- ─── Homepage Content ────────────────────────────────────────── -->
+<div id="home-content">
+
+  <!-- 1. About -->
+  <section class="home-about fi">
+    <div class="home-about-inner">
+      <h2 class="home-about-title">南島家居・以木為名</h2>
+      <p class="home-about-desc">
+        地板，是一個家最誠實的故事。<br>
+        每天的踩踏、歲月的刻痕，都化為獨一無二的生活印記。<br>
+        我們相信，好的地板不只承載腳步，更承載情感。<br>
+        從選材到施工，南島用心陪伴每一個家的誕生。
+      </p>
+      <a href="#sanwell" class="home-about-btn">探索所有地板系列</a>
+    </div>
+  </section>
+
+  <!-- 2. Category Grid -->
+  <div class="home-cat-grid">
+    <a class="home-cat-item fi" href="#sanwell">
+      <img src="assets/hero2.jpg" alt="超耐磨木地板">
+      <div class="home-cat-label">
+        <h3>超耐磨木地板</h3>
+        <div class="home-cat-line c1"></div>
+      </div>
+    </a>
+    <a class="home-cat-item fi" href="#aquastop">
+      <img src="assets/hero3.jpg" alt="SPC 石塑防水">
+      <div class="home-cat-label">
+        <h3>SPC 石塑防水</h3>
+        <div class="home-cat-line c2"></div>
+      </div>
+    </a>
+    <a class="home-cat-item fi" href="#krono-herringbone">
+      <img src="assets/hero5.jpg" alt="人字拼系列">
+      <div class="home-cat-label">
+        <h3>人字拼系列</h3>
+        <div class="home-cat-line c3"></div>
+      </div>
+    </a>
+  </div>
+
+  <!-- 3. Herringbone Split (text left, img right) -->
+  <div class="home-split">
+    <div class="home-split-txt fi">
+      <h2>人字拼地板——<br>永不過時的設計</h2>
+      <p>人字拼工法融合傳統木工美學，每一塊地板以精確角度交叉鋪設，形成獨特的 V 形紋路，為空間注入歐式典雅與手感溫度。無論客廳、餐廳或臥室，都能成為視覺焦點。</p>
+      <a class="home-split-btn" href="#krono-herringbone">探索人字拼系列</a>
+    </div>
+    <div class="home-split-img fi">
+      <img src="assets/hero4.jpg" alt="人字拼地板">
+    </div>
+  </div>
+
+  <!-- 4. Waterproof Split (img left, text right) -->
+  <div class="home-split">
+    <div class="home-split-img fi">
+      <img src="assets/sw_saga_room.jpg" alt="SPC 防水地板">
+    </div>
+    <div class="home-split-txt fi">
+      <h2>SPC 石塑防水地板</h2>
+      <p>採用石塑複合材料芯層，真正全身防水——即便長期接觸水分，也不膨脹、不變形。不只是表面的抗潑水，而是從內到外的防水保障，廚房、寵物家庭皆適用。</p>
+      <a class="home-split-btn" href="#aquastop">探索 SPC 防水地板</a>
+    </div>
+  </div>
+
+  <!-- 5. Room Guide -->
+  <section class="home-rooms fi">
+    <h2 class="home-rooms-title">適合您空間的地板</h2>
+    <div class="home-rooms-grid">
+      <div class="home-room-item">
+        <div class="home-room-icon"><svg viewBox="0 0 48 48"><rect x="6" y="22" width="36" height="14" rx="2"/><path d="M6 30V36M42 30V36M14 22V18a4 4 0 0 1 4-4h12a4 4 0 0 1 4 4v4"/></svg></div>
+        <span class="home-room-name">客廳</span>
+      </div>
+      <div class="home-room-item">
+        <div class="home-room-icon"><svg viewBox="0 0 48 48"><rect x="6" y="18" width="36" height="20" rx="2"/><path d="M6 24h36M6 38v4M42 38v4M14 18v-4a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v4"/></svg></div>
+        <span class="home-room-name">臥室</span>
+      </div>
+      <div class="home-room-item">
+        <div class="home-room-icon"><svg viewBox="0 0 48 48"><path d="M8 36h32M12 36V16h24v20M20 20h8M18 28a6 6 0 0 1 12 0"/><circle cx="24" cy="12" r="3"/><path d="M24 15v5"/></svg></div>
+        <span class="home-room-name">廚房</span>
+      </div>
+      <div class="home-room-item">
+        <div class="home-room-icon"><svg viewBox="0 0 48 48"><rect x="10" y="16" width="28" height="20" rx="2"/><path d="M10 24h28M18 16v-4M30 16v-4M10 36v4M38 36v4M18 28h2M28 28h2"/></svg></div>
+        <span class="home-room-name">兒童房</span>
+      </div>
+      <div class="home-room-item">
+        <div class="home-room-icon"><svg viewBox="0 0 48 48"><path d="M24 8 C16 14 10 20 10 28a14 14 0 0 0 28 0c0-8-6-14-14-20z"/><path d="M24 24v10M19 29l5-5 5 5"/></svg></div>
+        <span class="home-room-name">衛浴周邊</span>
+      </div>
+      <div class="home-room-item">
+        <div class="home-room-icon"><svg viewBox="0 0 48 48"><rect x="8" y="28" width="32" height="4" rx="1"/><path d="M14 28V18M34 28V18M14 18h20M10 32v6M38 32v6M24 18v-6M20 12h8"/></svg></div>
+        <span class="home-room-name">書房</span>
+      </div>
+      <div class="home-room-item">
+        <div class="home-room-icon"><svg viewBox="0 0 48 48"><path d="M8 36 L24 14 L40 36 Z"/><path d="M18 36v-8h12v8"/><path d="M24 14v-6"/></svg></div>
+        <span class="home-room-name">開放空間</span>
+      </div>
+      <div class="home-room-item">
+        <div class="home-room-icon"><svg viewBox="0 0 48 48"><rect x="10" y="20" width="28" height="22" rx="1"/><path d="M10 20L24 8l14 12M18 42V30h12v12M22 24h4v4h-4z"/></svg></div>
+        <span class="home-room-name">商業空間</span>
+      </div>
+    </div>
+  </section>
+
+</div>
 
 <!-- ═══════════════════════════════════════════════════════════════
      山井 富士山系列
@@ -2198,12 +2458,15 @@ function hideAll() {
   processEl.style.display = 'none';
   careEl.style.display = 'none';
   const _pp = document.getElementById('product-page'); if (_pp) _pp.style.display = 'none';
+  const _hc = document.getElementById('home-content'); if (_hc) _hc.style.display = 'none';
 }
 
 function showHero() {
   heroMode = true; darkBg = true;
   hideAll();
   heroEl.style.display = 'block';
+  const _hc = document.getElementById('home-content'); if (_hc) _hc.style.display = 'block';
+  footerEl.style.display = 'flex';
   window.scrollTo(0, 0);
   updateHeader();
   setTimeout(runTypewriter, 300);
