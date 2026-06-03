@@ -428,6 +428,76 @@ footer {
   .brand-intro .desc { grid-row: 1; }
 }
 
+/* ── Certification row ─────────────────────────────────── */
+.cert-row {
+  display: flex; border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border); background: #fff;
+}
+.cert-item {
+  flex: 1; display: flex; flex-direction: column; align-items: center;
+  gap: 12px; padding: 36px 20px;
+  border-right: 1px solid var(--border);
+}
+.cert-item:last-child { border-right: none; }
+.cert-badge {
+  width: 62px; height: 62px; border: 1.5px solid var(--dark); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 700; letter-spacing: 0.03em;
+  color: var(--dark); line-height: 1.25; text-align: center;
+}
+.cert-label {
+  font-size: 11px; color: var(--gray); letter-spacing: 0.1em;
+  text-align: center; line-height: 1.65;
+}
+
+/* ── Feature cards (3大特點) ──────────────────────────── */
+.feat-cards {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+  padding: 2px 0;
+}
+.feat-card { display: flex; flex-direction: column; }
+.feat-card-img { aspect-ratio: 3/2; overflow: hidden; }
+.feat-card-img img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  transition: transform .45s ease;
+}
+.feat-card:hover .feat-card-img img { transform: scale(1.04); }
+.feat-card-body { padding: 24px 28px 32px; background: #f5f2ee; flex: 1; }
+.feat-card-num {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.3em;
+  color: var(--gray); margin-bottom: 12px;
+}
+.feat-card-title {
+  font-size: 17px; font-weight: 600; color: var(--dark);
+  letter-spacing: 0.06em; margin-bottom: 10px; line-height: 1.4;
+}
+.feat-card-sub {
+  font-size: 10px; font-weight: 600; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--gray); margin-bottom: 10px;
+}
+.feat-card-text { font-size: 12px; color: var(--gray); line-height: 1.95; }
+
+/* ── Section label with lines ─────────────────────────── */
+.sec-label {
+  display: flex; align-items: center; gap: 20px; margin-bottom: 32px;
+}
+.sec-label-line { flex: 1; height: 1px; background: var(--border); }
+.sec-label-main {
+  font-size: 13px; font-weight: 600; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--dark); white-space: nowrap;
+}
+.sec-label-spec {
+  font-size: 11px; letter-spacing: 0.12em; color: var(--gray); margin-left: 8px;
+}
+
+@media (max-width: 960px) {
+  .cert-row { flex-wrap: wrap; }
+  .cert-item { flex: 0 0 50%; border-bottom: 1px solid var(--border); }
+  .cert-item:nth-child(2) { border-right: none; }
+  .cert-item:nth-child(3), .cert-item:nth-child(4) { border-bottom: none; }
+  .feat-cards { grid-template-columns: 1fr; }
+}
+
 /* ── Compact hero height ─────────────────────────────── */
 .compact-hero { height: 420px; }
 
@@ -1297,70 +1367,69 @@ footer {
     </p>
   </div>
 
-  <div class="brand-showcase fi">
-    <div class="bs-photo">
-      <img src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/fujisan_hero.jpg" alt="富士山系列空間實景" loading="lazy" style="object-position:center bottom;">
+  <!-- 認證橫幅 -->
+  <div class="cert-row fi">
+    <div class="cert-item">
+      <div class="cert-badge">AC4</div>
+      <div class="cert-label">歐規耐磨<br>認證等級</div>
     </div>
-    <div>
-      <p class="bs-desc">採用獨家抗水白基材技術，有效阻絕日常潑水與地面濕氣。精工日系花色設計，讓每一塊地板都如日本風景般細緻雋永，為居家帶來靜謐質感。</p>
-      <div class="bs-feats">
-        <div class="bs-feat">
-          <div class="bs-feat-img">
-            <img src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_miyazaki_room.jpg" alt="24h 抗潑水" loading="lazy">
-          </div>
-          <div class="bs-feat-name">24h 抗潑水</div>
-          <div class="bs-feat-desc">原廠認證抗水，獨家白基材阻絕濕氣，廚房、寵物家庭皆適用</div>
-        </div>
-        <div class="bs-feat">
-          <div class="bs-feat-img">
-            <img src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_chiba.jpg" alt="歐規 AC4 耐磨" loading="lazy">
-          </div>
-          <div class="bs-feat-name">歐規 AC4 耐磨</div>
-          <div class="bs-feat-desc">達歐洲 AC4 耐磨標準，日常踩踏長期維持光澤不褪色</div>
-        </div>
-        <div class="bs-feat">
-          <div class="bs-feat-img">
-            <img src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_kumamoto_room.jpg" alt="歐盟 E1 安全" loading="lazy">
-          </div>
-          <div class="bs-feat-name">歐盟 E1 安全</div>
-          <div class="bs-feat-desc">甲醛含量符合歐盟 E1 等級，室內空氣安全，家人安心無虞</div>
-        </div>
+    <div class="cert-item">
+      <div class="cert-badge">E1</div>
+      <div class="cert-label">歐盟甲醛<br>安全標準</div>
+    </div>
+    <div class="cert-item">
+      <div class="cert-badge">24H</div>
+      <div class="cert-label">抗水白基材<br>阻絕濕氣</div>
+    </div>
+    <div class="cert-item">
+      <div class="cert-badge">9.5<br>mm</div>
+      <div class="cert-label">加厚板材<br>踩踏踏實</div>
+    </div>
+  </div>
+
+  <!-- 3大特點大卡片 -->
+  <div class="feat-cards fi">
+    <div class="feat-card">
+      <div class="feat-card-img">
+        <img src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_miyazaki_room.jpg" alt="24H 抗潑水" loading="lazy">
+      </div>
+      <div class="feat-card-body">
+        <div class="feat-card-num">01</div>
+        <div class="feat-card-sub">White Core Technology</div>
+        <div class="feat-card-title">24H 抗潑水</div>
+        <div class="feat-card-text">獨家抗水白基材技術，原廠認證防水效能，有效阻絕日常潑水與地面濕氣。廚房周邊、寵物家庭皆適用，白色基材不易黃變，長期維持如新質感。</div>
+      </div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-card-img">
+        <img src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_chiba_room.jpg" alt="歐規 AC4 耐磨" loading="lazy">
+      </div>
+      <div class="feat-card-body">
+        <div class="feat-card-num">02</div>
+        <div class="feat-card-sub">European Standard AC4</div>
+        <div class="feat-card-title">歐規 AC4 耐磨認證</div>
+        <div class="feat-card-text">通過歐洲 AC4 耐磨等級認證，表面耐磨層抵抗日常走動與家具拖動的刮傷，長期踩踏仍維持光澤，不褪色、不起毛邊。</div>
+      </div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-card-img">
+        <img src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_kumamoto_room.jpg" alt="歐盟 E1 甲醛認證" loading="lazy">
+      </div>
+      <div class="feat-card-body">
+        <div class="feat-card-num">03</div>
+        <div class="feat-card-sub">EU E1 Formaldehyde Standard</div>
+        <div class="feat-card-title">歐盟 E1 安全認證</div>
+        <div class="feat-card-text">甲醛釋放量符合歐盟 E1 最嚴格標準，室內空氣安全無虞。孩童、長輩與寵物同住也能完全放心，讓家真正成為安心的避風港。</div>
       </div>
     </div>
   </div>
 
-  <div class="split fi">
-    <div class="split-img">
-      <img src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/fujisan_hero.jpg" alt="富士山系列" style="object-position: center bottom;">
-    </div>
-    <div class="split-txt">
-      <h3>24 小時抗潑水保護</h3>
-      <p>採用獨家抗水白基材技術，有效阻絕日常潑水、拖地濕氣的侵害。白色基材不易黃變，讓地板長期維持如新質感，適合廚房周邊、寵物家庭等高需求場合。</p>
-      <h3>日系工藝・卡扣安裝</h3>
-      <p>獨特日系花色設計，視覺層次豐富。PerfectFold 卡扣系統施工快速省工，讓美型地板也能輕鬆入住，介面平整不留縫隙。</p>
-    </div>
-  </div>
-
-  <div class="features fi">
-    <div class="feature">
-      <div class="ico">💧</div>
-      <h4>24H 抗潑水</h4>
-      <p>抗水白基材有效阻絕水分，適合廚房、客廳等易潮濕區域</p>
-    </div>
-    <div class="feature">
-      <div class="ico">🛡️</div>
-      <h4>耐刮耐磨表層</h4>
-      <p>表面耐磨層抵抗日常走動磨損，維持光澤持久如新</p>
-    </div>
-    <div class="feature">
-      <div class="ico">⚡</div>
-      <h4>卡扣快速安裝</h4>
-      <p>施工快速省工，平整接縫不留縫隙，DIY 亦可操作</p>
-    </div>
-  </div>
-
   <div class="color-section fi">
-    <div class="sec-heading">典藏款 9.5mm</div>
+    <div class="sec-label">
+      <div class="sec-label-line"></div>
+      <div class="sec-label-main">典藏款<span class="sec-label-spec">· 9.5 mm</span></div>
+      <div class="sec-label-line"></div>
+    </div>
     <div class="color-grid">
       <div class="color-card pcard" data-name="宮崎白梣" data-series="山井 · 富士山系列" data-specs="規格：195 × 1215 × 9.5 mm｜基材：8mm + 1.5mm IXPE｜安裝：卡扣式" data-imgs="assets/sw_miyazaki.jpg|assets/sw_miyazaki_room.jpg"><div class="color-card-img"><img src="assets/sw_miyazaki.jpg" alt="宮崎白梣" loading="lazy"><img class="room" src="assets/sw_miyazaki_room.jpg" alt="" loading="lazy"></div><div class="color-name">宮崎白梣</div></div>
       <div class="color-card pcard" data-name="富山白橡" data-series="山井 · 富士山系列" data-specs="規格：195 × 1215 × 9.5 mm｜基材：8mm + 1.5mm IXPE｜安裝：卡扣式" data-imgs="assets/sw_tomiyama.jpg|assets/sw_tomiyama_room.jpg"><div class="color-card-img"><img src="assets/sw_tomiyama.jpg" alt="富山白橡" loading="lazy"><img class="room" src="assets/sw_tomiyama_room.jpg" alt="" loading="lazy"></div><div class="color-name">富山白橡</div></div>
@@ -1374,7 +1443,11 @@ footer {
   </div>
 
   <div class="color-section fi">
-    <div class="sec-heading">尊爵款 13.5mm</div>
+    <div class="sec-label">
+      <div class="sec-label-line"></div>
+      <div class="sec-label-main">尊爵款<span class="sec-label-spec">· 13.5 mm</span></div>
+      <div class="sec-label-line"></div>
+    </div>
     <div class="color-grid">
       <div class="color-card">
         <div class="color-card-img"><img src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_himeji.jpg" alt="姬路白橡" loading="lazy"></div>
