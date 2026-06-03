@@ -590,6 +590,46 @@ footer {
   transition: opacity .2s; align-self: flex-start;
 }
 .ppage-cta:hover { opacity: .85; }
+
+/* -- Brand Page (bpage) ---------------------------------------- */
+.bpage-hero { position: relative; height: 68vh; min-height: 520px; overflow: hidden; }
+.bpage-hero > img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.bpage-hero-box { position: absolute; bottom: 56px; right: 80px; background: rgba(255,255,255,0.95); padding: 36px 44px; max-width: 360px; }
+.bpage-hero-eyebrow { font-size: 10px; font-weight: 600; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gray); margin-bottom: 12px; }
+.bpage-hero-title { font-family: 'Noto Serif TC','Georgia',serif; font-size: 26px; font-weight: 300; letter-spacing: 0.1em; color: var(--dark); margin: 0 0 10px; line-height: 1.3; }
+.bpage-hero-desc { font-size: 12px; color: var(--gray); letter-spacing: 0.04em; line-height: 1.8; margin: 0; }
+.bpage-intro { display: grid; grid-template-columns: 180px 1fr; gap: 64px; padding: 72px 80px 64px; max-width: 1200px; margin: 0 auto; border-bottom: 1px solid var(--border); }
+.bpage-intro-label { font-size: 10px; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gray); padding-top: 6px; }
+.bpage-intro-title { font-family: 'Noto Serif TC','Georgia',serif; font-size: 20px; font-weight: 300; letter-spacing: 0.08em; color: var(--dark); margin: 0 0 18px; line-height: 1.5; }
+.bpage-intro-text { font-size: 14px; color: var(--gray); line-height: 2.1; margin: 0; }
+.bpage-feats { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--border); }
+.bpage-feat { background: #faf8f5; display: flex; flex-direction: column; }
+.bpage-feat-img { aspect-ratio: 4/3; overflow: hidden; }
+.bpage-feat-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .45s ease; }
+.bpage-feat:hover .bpage-feat-img img { transform: scale(1.04); }
+.bpage-feat-body { padding: 28px 32px 36px; flex: 1; }
+.bpage-feat-num { font-size: 10px; font-weight: 700; letter-spacing: 0.3em; color: var(--gray); margin-bottom: 14px; }
+.bpage-feat-title { font-size: 15px; font-weight: 600; color: var(--dark); letter-spacing: 0.05em; margin-bottom: 12px; }
+.bpage-feat-text { font-size: 13px; color: var(--gray); line-height: 1.95; }
+.bpage-products { padding: 64px 80px 80px; }
+.bpage-products + .bpage-products { padding-top: 0; }
+.bpage-sect-label { font-size: 11px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gray); margin-bottom: 36px; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
+.bpage-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 48px 32px; }
+.bpage-card { cursor: pointer; }
+.bpage-card-img { aspect-ratio: 4/3; overflow: hidden; margin-bottom: 16px; background: #ede9e3; }
+.bpage-card-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s ease; }
+.bpage-card:hover .bpage-card-img img { transform: scale(1.03); }
+.bpage-card-meta { font-size: 11px; color: var(--gray); letter-spacing: 0.06em; margin-bottom: 5px; }
+.bpage-card-name { font-size: 17px; font-weight: 600; color: var(--dark); letter-spacing: 0.03em; }
+@media (max-width: 960px) {
+  .bpage-hero { height: 52vh; min-height: 360px; }
+  .bpage-hero-box { right: 20px; left: 20px; bottom: 20px; max-width: none; }
+  .bpage-intro { grid-template-columns: 1fr; padding: 48px 24px 40px; gap: 20px; }
+  .bpage-feats { grid-template-columns: 1fr; }
+  .bpage-products { padding: 48px 24px 56px; }
+  .bpage-grid { grid-template-columns: repeat(2,1fr); gap: 32px 20px; }
+}
+@media (max-width: 480px) { .bpage-grid { grid-template-columns: 1fr; } }
 .ppage-main { cursor: zoom-in; }
 #lightbox {
   position: fixed; inset: 0; z-index: 9000;
@@ -1344,130 +1384,122 @@ footer {
 ════════════════════════════════════════════════════════════════ -->
 <section class="brand-section" id="sanwell">
 
-  <div class="compact-hero fi">
-    <img src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/fujisan_hero.jpg" alt="富士山系列" style="object-position: center bottom;">
-    <div class="compact-hero-title"><span>山井</span></div>
-    <div class="compact-hero-content">
-      <div class="brand-tag">山井 フローリング · 抗水白基材超耐磨</div>
-      <h2>富士山系列</h2>
-      <div class="chips">
-        <span class="chip">9.5mm</span>
-        <span class="chip">8 種花色</span>
-        <span class="chip">抗水白基材</span>
+  <div class="bpage-hero fi">
+    <img src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/fujisan_hero.jpg" alt="山井富士山系列" style="object-position:center bottom;">
+    <div class="bpage-hero-box">
+      <div class="bpage-hero-eyebrow">山井 フローリング</div>
+      <h2 class="bpage-hero-title">富士山系列</h2>
+      <p class="bpage-hero-desc">日系工藝美學･抗水白基材･9.5 mm 加厚板材</p>
+    </div>
+  </div>
+
+  <div class="bpage-intro fi">
+    <div class="bpage-intro-label">品牌介紹</div>
+    <div>
+      <h3 class="bpage-intro-title">山井地板的品牌力</h3>
+      <p class="bpage-intro-text">來自日本的地板工藝美學，獨特抗水白基材有效阻絕水分滲透，日系獨家花色設計讓每一塊地板都如日本風景般細致雋永。
+9.5 mm 加厚板材踩踏踏實、質感出眾，通過歐規 AC4 耆磨與歐盟 E1 甲醛雙重認證，是兼具日系美學與機能保障的超耆磨地板首選。</p>
+    </div>
+  </div>
+
+  <div class="bpage-feats fi">
+    <div class="bpage-feat">
+      <div class="bpage-feat-img"><img src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_miyazaki_room.jpg" alt="24H 抗潑水" loading="lazy"></div>
+      <div class="bpage-feat-body">
+        <div class="bpage-feat-num">01</div>
+        <div class="bpage-feat-title">24H 抗潑水</div>
+        <div class="bpage-feat-text">獨家抗水白基材技術，原廠認證防水效能，有效阻絕日常潑水與地面濕氣。廩房周邊、寵物家庭皆適用。</div>
+      </div>
+    </div>
+    <div class="bpage-feat">
+      <div class="bpage-feat-img"><img src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_chiba_room.jpg" alt="歐規 AC4 耆磨" loading="lazy"></div>
+      <div class="bpage-feat-body">
+        <div class="bpage-feat-num">02</div>
+        <div class="bpage-feat-title">歐規 AC4 耆磨認證</div>
+        <div class="bpage-feat-text">通過歐洲 AC4 耆磨等級認證，表面耆磨層抗抗日常走動與家具拖動，長期踩踏仍維持光澤不袒色。</div>
+      </div>
+    </div>
+    <div class="bpage-feat">
+      <div class="bpage-feat-img"><img src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_kumamoto_room.jpg" alt="歐盟 E1 安全認證" loading="lazy"></div>
+      <div class="bpage-feat-body">
+        <div class="bpage-feat-num">03</div>
+        <div class="bpage-feat-title">歐盟 E1 安全認證</div>
+        <div class="bpage-feat-text">甲醛釋放量符合歐盟 E1 最嚴格標準，室內空氣安全無虞。孩童、長輩、寵物同住也能完全放心。</div>
       </div>
     </div>
   </div>
 
-  <div class="brand-intro fi">
-    <h2>富士山系列</h2>
-    <p class="desc">
-      來自日本的地板工藝美學，獨特抗水白基材有效阻絕水分滲透，
-      日系獨家花色設計讓每一塊地板都如日本風景般細緻雋永。
-      9.5mm 加厚板材，踩踏踏實、質感出眾。
-    </p>
-  </div>
-
-  <!-- 認證橫幅 -->
-  <div class="cert-row fi">
-    <div class="cert-item">
-      <div class="cert-badge">AC4</div>
-      <div class="cert-label">歐規耐磨<br>認證等級</div>
-    </div>
-    <div class="cert-item">
-      <div class="cert-badge">E1</div>
-      <div class="cert-label">歐盟甲醛<br>安全標準</div>
-    </div>
-    <div class="cert-item">
-      <div class="cert-badge">24H</div>
-      <div class="cert-label">抗水白基材<br>阻絕濕氣</div>
-    </div>
-    <div class="cert-item">
-      <div class="cert-badge">9.5<br>mm</div>
-      <div class="cert-label">加厚板材<br>踩踏踏實</div>
-    </div>
-  </div>
-
-  <!-- 3大特點大卡片 -->
-  <div class="feat-cards fi">
-    <div class="feat-card">
-      <div class="feat-card-img">
-        <img src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_miyazaki_room.jpg" alt="24H 抗潑水" loading="lazy">
+  <div class="bpage-products fi">
+    <div class="bpage-sect-label">典藏款 · 9.5 mm</div>
+    <div class="bpage-grid">
+      <div class="bpage-card pcard" data-name="宮崎白梣" data-series="山井 · 富士山系列" data-specs="規格：195 × 1215 × 9.5 mm｜基材：8mm + 1.5mm IXPE｜安裝：卡扣式" data-imgs="assets/sw_miyazaki.jpg|assets/sw_miyazaki_room.jpg">
+        <div class="bpage-card-img"><img src="assets/sw_miyazaki.jpg" alt="宮崎白梣" loading="lazy"></div>
+        <div class="bpage-card-meta">高密度纖維板 · 典藏款</div>
+        <div class="bpage-card-name">宮崎白梣</div>
       </div>
-      <div class="feat-card-body">
-        <div class="feat-card-num">01</div>
-        <div class="feat-card-sub">White Core Technology</div>
-        <div class="feat-card-title">24H 抗潑水</div>
-        <div class="feat-card-text">獨家抗水白基材技術，原廠認證防水效能，有效阻絕日常潑水與地面濕氣。廚房周邊、寵物家庭皆適用，白色基材不易黃變，長期維持如新質感。</div>
+      <div class="bpage-card pcard" data-name="富山白橡" data-series="山井 · 富士山系列" data-specs="規格：195 × 1215 × 9.5 mm｜基材：8mm + 1.5mm IXPE｜安裝：卡扣式" data-imgs="assets/sw_tomiyama.jpg|assets/sw_tomiyama_room.jpg">
+        <div class="bpage-card-img"><img src="assets/sw_tomiyama.jpg" alt="富山白橡" loading="lazy"></div>
+        <div class="bpage-card-meta">高密度纖維板 · 典藏款</div>
+        <div class="bpage-card-name">富山白橡</div>
       </div>
-    </div>
-    <div class="feat-card">
-      <div class="feat-card-img">
-        <img src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_chiba_room.jpg" alt="歐規 AC4 耐磨" loading="lazy">
+      <div class="bpage-card pcard" data-name="千葉秋香" data-series="山井 · 富士山系列" data-specs="規格：195 × 1215 × 9.5 mm｜基材：8mm + 1.5mm IXPE｜安裝：卡扣式" data-imgs="assets/sw_chiba.jpg|assets/sw_chiba_room.jpg">
+        <div class="bpage-card-img"><img src="assets/sw_chiba.jpg" alt="千葉秋香" loading="lazy"></div>
+        <div class="bpage-card-meta">高密度纖維板 · 典藏款</div>
+        <div class="bpage-card-name">千葉秋香</div>
       </div>
-      <div class="feat-card-body">
-        <div class="feat-card-num">02</div>
-        <div class="feat-card-sub">European Standard AC4</div>
-        <div class="feat-card-title">歐規 AC4 耐磨認證</div>
-        <div class="feat-card-text">通過歐洲 AC4 耐磨等級認證，表面耐磨層抵抗日常走動與家具拖動的刮傷，長期踩踏仍維持光澤，不褪色、不起毛邊。</div>
+      <div class="bpage-card pcard" data-name="佐賀榆木" data-series="山井 · 富士山系列" data-specs="規格：195 × 1215 × 9.5 mm｜基材：8mm + 1.5mm IXPE｜安裝：卡扣式" data-imgs="assets/sw_saga.jpg|assets/sw_saga_room.jpg">
+        <div class="bpage-card-img"><img src="assets/sw_saga.jpg" alt="佐賀榆木" loading="lazy"></div>
+        <div class="bpage-card-meta">高密度纖維板 · 典藏款</div>
+        <div class="bpage-card-name">佐賀榆木</div>
       </div>
-    </div>
-    <div class="feat-card">
-      <div class="feat-card-img">
-        <img src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_kumamoto_room.jpg" alt="歐盟 E1 甲醛認證" loading="lazy">
+      <div class="bpage-card pcard" data-name="京都淺橡" data-series="山井 · 富士山系列" data-specs="規格：195 × 1215 × 9.5 mm｜基材：8mm + 1.5mm IXPE｜安裝：卡扣式" data-imgs="assets/sw_kyoto.jpg|assets/sw_kyoto_room.jpg">
+        <div class="bpage-card-img"><img src="assets/sw_kyoto.jpg" alt="京都淺橡" loading="lazy"></div>
+        <div class="bpage-card-meta">高密度纖維板 · 典藏款</div>
+        <div class="bpage-card-name">京都淺橡</div>
       </div>
-      <div class="feat-card-body">
-        <div class="feat-card-num">03</div>
-        <div class="feat-card-sub">EU E1 Formaldehyde Standard</div>
-        <div class="feat-card-title">歐盟 E1 安全認證</div>
-        <div class="feat-card-text">甲醛釋放量符合歐盟 E1 最嚴格標準，室內空氣安全無虞。孩童、長輩與寵物同住也能完全放心，讓家真正成為安心的避風港。</div>
+      <div class="bpage-card pcard" data-name="奈良灰橡" data-series="山井 · 富士山系列" data-specs="規格：195 × 1215 × 9.5 mm｜基材：8mm + 1.5mm IXPE｜安裝：卡扣式" data-imgs="assets/sw_nara.jpg|assets/sw_nara_room.jpg">
+        <div class="bpage-card-img"><img src="assets/sw_nara.jpg" alt="奈良灰橡" loading="lazy"></div>
+        <div class="bpage-card-meta">高密度纖維板 · 典藏款</div>
+        <div class="bpage-card-name">奈良灰橡</div>
+      </div>
+      <div class="bpage-card pcard" data-name="長野檜木" data-series="山井 · 富士山系列" data-specs="規格：195 × 1215 × 9.5 mm｜基材：8mm + 1.5mm IXPE｜安裝：卡扣式" data-imgs="assets/sw_nagano.jpg|assets/sw_nagano_room.jpg">
+        <div class="bpage-card-img"><img src="assets/sw_nagano.jpg" alt="長野檜木" loading="lazy"></div>
+        <div class="bpage-card-meta">高密度纖維板 · 典藏款</div>
+        <div class="bpage-card-name">長野檜木</div>
+      </div>
+      <div class="bpage-card pcard" data-name="熊本橡木" data-series="山井 · 富士山系列" data-specs="規格：195 × 1215 × 9.5 mm｜基材：8mm + 1.5mm IXPE｜安裝：卡扣式" data-imgs="assets/sw_kumamoto.jpg|assets/sw_kumamoto_room.jpg">
+        <div class="bpage-card-img"><img src="assets/sw_kumamoto.jpg" alt="熊本橡木" loading="lazy"></div>
+        <div class="bpage-card-meta">高密度纖維板 · 典藏款</div>
+        <div class="bpage-card-name">熊本橡木</div>
       </div>
     </div>
   </div>
 
-  <div class="color-section fi">
-    <div class="sec-label">
-      <div class="sec-label-line"></div>
-      <div class="sec-label-main">典藏款<span class="sec-label-spec">· 9.5 mm</span></div>
-      <div class="sec-label-line"></div>
-    </div>
-    <div class="color-grid">
-      <div class="color-card pcard" data-name="宮崎白梣" data-series="山井 · 富士山系列" data-specs="規格：195 × 1215 × 9.5 mm｜基材：8mm + 1.5mm IXPE｜安裝：卡扣式" data-imgs="assets/sw_miyazaki.jpg|assets/sw_miyazaki_room.jpg"><div class="color-card-img"><img src="assets/sw_miyazaki.jpg" alt="宮崎白梣" loading="lazy"><img class="room" src="assets/sw_miyazaki_room.jpg" alt="" loading="lazy"></div><div class="color-name">宮崎白梣</div></div>
-      <div class="color-card pcard" data-name="富山白橡" data-series="山井 · 富士山系列" data-specs="規格：195 × 1215 × 9.5 mm｜基材：8mm + 1.5mm IXPE｜安裝：卡扣式" data-imgs="assets/sw_tomiyama.jpg|assets/sw_tomiyama_room.jpg"><div class="color-card-img"><img src="assets/sw_tomiyama.jpg" alt="富山白橡" loading="lazy"><img class="room" src="assets/sw_tomiyama_room.jpg" alt="" loading="lazy"></div><div class="color-name">富山白橡</div></div>
-      <div class="color-card pcard" data-name="千葉秋香" data-series="山井 · 富士山系列" data-specs="規格：195 × 1215 × 9.5 mm｜基材：8mm + 1.5mm IXPE｜安裝：卡扣式" data-imgs="assets/sw_chiba.jpg|assets/sw_chiba_room.jpg"><div class="color-card-img"><img src="assets/sw_chiba.jpg" alt="千葉秋香" loading="lazy"><img class="room" src="assets/sw_chiba_room.jpg" alt="" loading="lazy"></div><div class="color-name">千葉秋香</div></div>
-      <div class="color-card pcard" data-name="佐賀榆木" data-series="山井 · 富士山系列" data-specs="規格：195 × 1215 × 9.5 mm｜基材：8mm + 1.5mm IXPE｜安裝：卡扣式" data-imgs="assets/sw_saga.jpg|assets/sw_saga_room.jpg"><div class="color-card-img"><img src="assets/sw_saga.jpg" alt="佐賀榆木" loading="lazy"><img class="room" src="assets/sw_saga_room.jpg" alt="" loading="lazy"></div><div class="color-name">佐賀榆木</div></div>
-      <div class="color-card pcard" data-name="京都淺橡" data-series="山井 · 富士山系列" data-specs="規格：195 × 1215 × 9.5 mm｜基材：8mm + 1.5mm IXPE｜安裝：卡扣式" data-imgs="assets/sw_kyoto.jpg|assets/sw_kyoto_room.jpg"><div class="color-card-img"><img src="assets/sw_kyoto.jpg" alt="京都淺橡" loading="lazy"><img class="room" src="assets/sw_kyoto_room.jpg" alt="" loading="lazy"></div><div class="color-name">京都淺橡</div></div>
-      <div class="color-card pcard" data-name="奈良灰橡" data-series="山井 · 富士山系列" data-specs="規格：195 × 1215 × 9.5 mm｜基材：8mm + 1.5mm IXPE｜安裝：卡扣式" data-imgs="assets/sw_nara.jpg|assets/sw_nara_room.jpg"><div class="color-card-img"><img src="assets/sw_nara.jpg" alt="奈良灰橡" loading="lazy"><img class="room" src="assets/sw_nara_room.jpg" alt="" loading="lazy"></div><div class="color-name">奈良灰橡</div></div>
-      <div class="color-card pcard" data-name="長野檜木" data-series="山井 · 富士山系列" data-specs="規格：195 × 1215 × 9.5 mm｜基材：8mm + 1.5mm IXPE｜安裝：卡扣式" data-imgs="assets/sw_nagano.jpg|assets/sw_nagano_room.jpg"><div class="color-card-img"><img src="assets/sw_nagano.jpg" alt="長野檜木" loading="lazy"><img class="room" src="assets/sw_nagano_room.jpg" alt="" loading="lazy"></div><div class="color-name">長野檜木</div></div>
-      <div class="color-card pcard" data-name="熊本橡木" data-series="山井 · 富士山系列" data-specs="規格：195 × 1215 × 9.5 mm｜基材：8mm + 1.5mm IXPE｜安裝：卡扣式" data-imgs="assets/sw_kumamoto.jpg|assets/sw_kumamoto_room.jpg"><div class="color-card-img"><img src="assets/sw_kumamoto.jpg" alt="熊本橡木" loading="lazy"><img class="room" src="assets/sw_kumamoto_room.jpg" alt="" loading="lazy"></div><div class="color-name">熊本橡木</div></div>
-    </div>
-  </div>
-
-  <div class="color-section fi">
-    <div class="sec-label">
-      <div class="sec-label-line"></div>
-      <div class="sec-label-main">尊爵款<span class="sec-label-spec">· 13.5 mm</span></div>
-      <div class="sec-label-line"></div>
-    </div>
-    <div class="color-grid">
-      <div class="color-card">
-        <div class="color-card-img"><img src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_himeji.jpg" alt="姬路白橡" loading="lazy"></div>
-        <div class="color-name">姬路白橡</div>
+  <div class="bpage-products fi">
+    <div class="bpage-sect-label">尊爵款 · 13.5 mm</div>
+    <div class="bpage-grid">
+      <div class="bpage-card pcard" data-name="姬路白橡" data-series="山井 · 富士山系列" data-specs="規格：195 × 1215 × 13.5 mm｜基材：12mm + 1.5mm IXPE｜安裝：卡扣式" data-imgs="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_himeji.jpg">
+        <div class="bpage-card-img"><img src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_himeji.jpg" alt="姬路白橡" loading="lazy"></div>
+        <div class="bpage-card-meta">高密度纖維板 · 尊爵款</div>
+        <div class="bpage-card-name">姬路白橡</div>
       </div>
-      <div class="color-card">
-        <div class="color-card-img"><img src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_kochi.jpg" alt="高知橡木" loading="lazy"><img class="room" src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_kochi_room.jpg" alt="" loading="lazy"></div>
-        <div class="color-name">高知橡木</div>
+      <div class="bpage-card pcard" data-name="高知橡木" data-series="山井 · 富士山系列" data-specs="規格：195 × 1215 × 13.5 mm｜基材：12mm + 1.5mm IXPE｜安裝：卡扣式" data-imgs="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_kochi.jpg|https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_kochi_room.jpg">
+        <div class="bpage-card-img"><img src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_kochi.jpg" alt="高知橡木" loading="lazy"></div>
+        <div class="bpage-card-meta">高密度纖維板 · 尊爵款</div>
+        <div class="bpage-card-name">高知橡木</div>
       </div>
-      <div class="color-card">
-        <div class="color-card-img"><img src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_ginzan.jpg" alt="銀山淺橡" loading="lazy"><img class="room" src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_ginzan_room.jpg" alt="" loading="lazy"></div>
-        <div class="color-name">銀山淺橡</div>
+      <div class="bpage-card pcard" data-name="銀山淺橡" data-series="山井 · 富士山系列" data-specs="規格：195 × 1215 × 13.5 mm｜基材：12mm + 1.5mm IXPE｜安裝：卡扣式" data-imgs="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_ginzan.jpg|https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_ginzan_room.jpg">
+        <div class="bpage-card-img"><img src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_ginzan.jpg" alt="銀山淺橡" loading="lazy"></div>
+        <div class="bpage-card-meta">高密度纖維板 · 尊爵款</div>
+        <div class="bpage-card-name">銀山淺橡</div>
       </div>
-      <div class="color-card">
-        <div class="color-card-img"><img src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_munchen.jpg" alt="慕尼黑" loading="lazy"><img class="room" src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_munchen_room.jpg" alt="" loading="lazy"></div>
-        <div class="color-name">慕尼黑</div>
+      <div class="bpage-card pcard" data-name="慕尼黑" data-series="山井 · 富士山系列" data-specs="規格：195 × 1215 × 13.5 mm｜基材：12mm + 1.5mm IXPE｜安裝：卡扣式" data-imgs="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_munchen.jpg|https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_munchen_room.jpg">
+        <div class="bpage-card-img"><img src="https://raw.githubusercontent.com/Maxx1521/south-home-linebot/master/assets/sw_munchen.jpg" alt="慕尼黑" loading="lazy"></div>
+        <div class="bpage-card-meta">高密度纖維板 · 尊爵款</div>
+        <div class="bpage-card-name">慕尼黑</div>
       </div>
     </div>
   </div>
-
 
 </section>
 
