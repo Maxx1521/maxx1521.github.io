@@ -7,7 +7,10 @@ from dotenv import load_dotenv
 from flask import Flask, abort, request
 from linebot.v3 import WebhookHandler
 from linebot.v3.exceptions import InvalidSignatureError
-from linebot.v3.messaging import ApiClient, Configuration, MessagingApi
+from linebot.v3.messaging import (
+    ApiClient, Configuration, MessagingApi,
+    TextMessage, PushMessageRequest, ReplyMessageRequest,
+)
 from linebot.v3.webhooks import MessageEvent, PostbackEvent, TextMessageContent, FollowEvent
 
 from handlers.booking import (
@@ -74,6 +77,11 @@ scheduler.start()
 atexit.register(lambda: scheduler.shutdown())
 
 
+@app.route("/health", methods=["GET"])
+def health():
+    return "OK"
+
+
 @app.route("/webhook", methods=["POST"])
 def webhook():
     signature = request.headers["X-Line-Signature"]
@@ -85,6 +93,20 @@ def webhook():
     return "OK"
 
 
+def _push_fallback_error(user_id):
+    """主要回覆失敗時（如 reply token 過期），改用 push 補送提示訊息，避免客人完全沒反應。"""
+    try:
+        with ApiClient(configuration) as api_client:
+            MessagingApi(api_client).push_message(
+                PushMessageRequest(
+                    to=user_id,
+                    messages=[TextMessage(text="不好意思，剛才系統忙碌沒能即時回覆，請再按一次按鈕，或輸入「選單」重新開始 🙏")]
+                )
+            )
+    except Exception as e:
+        print(f"[fallback push error] {e}")
+
+
 @handler.add(MessageEvent, message=TextMessageContent)
 def on_message(event):
     try:
@@ -93,6 +115,7 @@ def on_message(event):
             handle_text_message(event, line_bot_api)
     except Exception as e:
         print(f"[on_message error] {e}")
+        _push_fallback_error(event.source.user_id)
 
 
 @handler.add(PostbackEvent)
@@ -103,6 +126,7 @@ def on_postback(event):
             handle_postback(event, line_bot_api)
     except Exception as e:
         print(f"[on_postback error] {e}")
+        _push_fallback_error(event.source.user_id)
 
 
 @handler.add(FollowEvent)
@@ -110,7 +134,6 @@ def on_follow(event):
     try:
         with ApiClient(configuration) as api_client:
             line_bot_api = MessagingApi(api_client)
-            from linebot.v3.messaging import ReplyMessageRequest
             msg = TextMessage(
                 text=(
                     "歡迎來到南島室物所 🏠\n\n"
