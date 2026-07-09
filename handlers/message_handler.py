@@ -7,8 +7,8 @@ from handlers.catalog import get_category_flex
 from handlers.booking import (
     start_booking, get_session, select_time, _parse_date_text, _is_bookable_date,
     handle_name_input, handle_phone_input, handle_address_input,
-    ask_for_date, handle_date_input,
-    WAITING_DATE, WAITING_NAME, WAITING_PHONE, WAITING_ADDRESS, WAITING_CONFIRM
+    ask_for_date, handle_date_input, handle_time_input, _upsert_session,
+    WAITING_DATE, WAITING_TIME, WAITING_NAME, WAITING_PHONE, WAITING_ADDRESS, WAITING_CONFIRM
 )
 from handlers.location import (
     start_location_inquiry, handle_area_input, WAITING_AREA
@@ -46,6 +46,8 @@ def handle_text_message(event, line_bot_api):
             reply = TextMessage(text="請點選「✅ 確認送出」送出預約，或點快捷鍵修改資料。")
         elif state == WAITING_DATE:
             reply = handle_date_input(user_id, text, session)
+        elif state == WAITING_TIME:
+            reply = handle_time_input(user_id, text, session)
         elif state == WAITING_AREA:
             reply = handle_area_input(user_id, text)
         else:
@@ -62,6 +64,7 @@ def handle_text_message(event, line_bot_api):
             reply = TextMessage(text="⚠️ 無法預約該日期，請選擇明天以後的時段。")
         else:
             reply = select_time(date_str)
+            _upsert_session({"user_id": user_id, "state": WAITING_TIME, "appt_type": "丈量預約", "date": date_str})
         line_bot_api.reply_message(
             ReplyMessageRequest(reply_token=event.reply_token, messages=[reply])
         )
@@ -112,7 +115,6 @@ def _fallback_menu(text=""):
             QuickReplyItem(action=PostbackAction(label="📅 丈量預約", data="action=booking&appt_type=丈量預約", display_text="📅 丈量預約")),
             QuickReplyItem(action=PostbackAction(label="🏠 門市參觀", data="action=store_visit", display_text="🏠 門市參觀")),
             QuickReplyItem(action=PostbackAction(label="🏠 門市地址", data="action=location_inquiry", display_text="🏠 門市地址")),
-            QuickReplyItem(action=PostbackAction(label="🪵 產品目錄", data="action=catalog", display_text="🪵 產品目錄")),
         ])
     )
 
@@ -151,7 +153,6 @@ def _main_menu():
             QuickReplyItem(action=PostbackAction(label="📅 丈量預約", data="action=booking&appt_type=丈量預約", display_text="📅 丈量預約")),
             QuickReplyItem(action=PostbackAction(label="🏠 門市參觀", data="action=store_visit", display_text="🏠 門市參觀")),
             QuickReplyItem(action=PostbackAction(label="🎨 線上選色", data="action=color_selection", display_text="🎨 線上選色")),
-            QuickReplyItem(action=PostbackAction(label="🪵 產品目錄", data="action=catalog", display_text="🪵 產品目錄")),
         ])
     )
 

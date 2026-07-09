@@ -5,8 +5,9 @@ from linebot.v3.messaging import (
 from handlers.catalog import get_category_flex, get_products_flex, get_brand_products_flex, get_product_colors
 from handlers.booking import (
     start_booking, select_time, ask_for_name,
-    handle_confirm, handle_edit_field, get_session, _delete_session,
-    push_appointment_confirmation, _review_card, _upsert_session
+    handle_confirm, handle_edit_field, get_session,
+    push_appointment_confirmation, _review_card, _upsert_session,
+    WAITING_TIME
 )
 from handlers.location import start_location_inquiry
 
@@ -59,7 +60,13 @@ def handle_postback(event, line_bot_api):
     elif action == "select_date":
         date = data.get("date", [""])[0]
         product = data.get("product", [None])[0]
-        _delete_session(user_id)
+        _upsert_session({
+            "user_id": user_id,
+            "state": WAITING_TIME,
+            "appt_type": appt_type,
+            "date": date,
+            "product": product if product else store,
+        })
         reply = select_time(date, product, appt_type, store)
 
     elif action == "select_time":

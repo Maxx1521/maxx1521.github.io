@@ -15,6 +15,7 @@ from google.oauth2 import service_account
 _supabase = None
 
 WAITING_DATE    = "waiting_date"
+WAITING_TIME    = "waiting_time"
 WAITING_NAME    = "waiting_name"
 WAITING_PHONE   = "waiting_phone"
 WAITING_ADDRESS = "waiting_address"
@@ -75,7 +76,7 @@ def handle_date_input(user_id, text, session):
     appt_type = session.get("appt_type", "丈量預約")
     product   = session.get("product")
     store     = product if appt_type == "門市參觀" else None
-    _delete_session(user_id)
+    _upsert_session({**session, "state": WAITING_TIME, "date": date_str})
     return select_time(date_str, None if store else product, appt_type, store)
 
 
@@ -166,14 +167,15 @@ def start_booking(product=None, appt_type="丈量預約", store=None, user_id=No
     return TextMessage(text=text, quick_reply=QuickReply(items=quick_items))
 
 
-def select_time(date, product=None, appt_type="丈量預約", store=None):
+def _times_for_appt(appt_type, store=None):
     if appt_type == "門市參觀":
         if store and "苓雅" in store:
-            times = ["12:00", "14:00", "16:00", "18:00"]
-        else:
-            times = ["09:00", "11:00", "13:00", "15:00", "17:00"]
-    else:
-        times = ["10:00", "14:00", "16:00"]
+            return ["12:00", "14:00", "16:00", "18:00"]
+        return ["09:00", "11:00", "13:00", "15:00", "17:00"]
+    return ["10:00", "14:00", "16:00"]
+
+
+def _time_quick_reply(date, product, appt_type, store, times):
     quick_items = []
     for t in times:
         data = f"action=select_time&date={date}&time={t}&appt_type={appt_type}"
@@ -184,9 +186,35 @@ def select_time(date, product=None, appt_type="丈量預約", store=None):
         quick_items.append(
             QuickReplyItem(action=PostbackAction(label=t, data=data, display_text=t))
         )
+    return QuickReply(items=quick_items)
+
+
+def select_time(date, product=None, appt_type="丈量預約", store=None):
+    times = _times_for_appt(appt_type, store)
     return TextMessage(
         text=f"📅 已選擇 {date}\n\n請選擇希望的時段：",
-        quick_reply=QuickReply(items=quick_items)
+        quick_reply=_time_quick_reply(date, product, appt_type, store, times)
+    )
+
+
+def handle_time_input(user_id, text, session):
+    """客戶用打字輸入時段（而非點選快捷鍵）時的處理"""
+    date      = session.get("date")
+    appt_type = session.get("appt_type", "丈量預約")
+    product   = session.get("product")
+    store     = product if appt_type == "門市參觀" else None
+    times     = _times_for_appt(appt_type, store)
+
+    m = re.search(r'(\d{1,2})[:：](\d{2})', text)
+    time_str = f"{int(m.group(1)):02d}:{m.group(2)}" if m else None
+
+    if time_str and time_str in times:
+        return ask_for_name(user_id, appt_type, date, time_str, product)
+
+    times_display = "、".join(times)
+    return TextMessage(
+        text=f"⚠️ 此時段無法預約\n\n目前開放時段：{times_display}\n請點選下方時段",
+        quick_reply=_time_quick_reply(date, product, appt_type, store, times)
     )
 
 

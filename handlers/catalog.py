@@ -27,6 +27,8 @@ CATEGORY_META = {
 
 CATEGORY_ORDER = ["海島型實木地板", "超耐磨木地板", "石塑地板", "塑膠地磚", "戶外塑木地板"]
 
+CATALOG_ENABLED = False  # 2026-07-09：業主要求先撤下產品目錄，改回 True 即可恢復
+
 # 超耐磨木地板：品牌 → 款式
 LAMINATE_BRANDS = {
     "山井富士山": {
@@ -185,6 +187,8 @@ NOTION_CATEGORY_URLS = {
 
 
 def get_category_flex():
+    if not CATALOG_ENABLED:
+        return TextMessage(text="產品型錄整理中，如需了解商品歡迎直接留言詢問，我們會盡快回覆您 🙏")
     bubbles = []
     for category in CATEGORY_ORDER:
         meta = CATEGORY_META[category]
@@ -239,6 +243,8 @@ def get_category_flex():
 
 
 def get_products_flex(category):
+    if not CATALOG_ENABLED:
+        return TextMessage(text="產品型錄整理中，如需了解商品歡迎直接留言詢問，我們會盡快回覆您 🙏")
     if category == "超耐磨木地板":
         return _laminate_brands_flex()
 
@@ -298,6 +304,8 @@ def _laminate_brands_flex():
 
 
 def get_brand_products_flex(brand):
+    if not CATALOG_ENABLED:
+        return TextMessage(text="產品型錄整理中，如需了解商品歡迎直接留言詢問，我們會盡快回覆您 🙏")
     info = LAMINATE_BRANDS.get(brand)
     if not info:
         return TextMessage(text="找不到此品牌，請重新選擇。")
@@ -362,6 +370,8 @@ def get_brand_products_flex(brand):
 
 
 def get_product_colors(brand, product_name):
+    if not CATALOG_ENABLED:
+        return TextMessage(text="產品型錄整理中，如需了解商品歡迎直接留言詢問，我們會盡快回覆您 🙏")
     info = LAMINATE_BRANDS.get(brand)
     if not info:
         return TextMessage(text="找不到此品牌。")
