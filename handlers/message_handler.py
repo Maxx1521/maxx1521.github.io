@@ -146,7 +146,7 @@ def _color_selection_message():
 
 def _main_menu():
     return TextMessage(
-        text="歡迎來到南島家居 South Home 🌿\n\n請選擇服務：",
+        text="歡迎來到南島室物所 🌿\n\n請選擇服務：",
         quick_reply=QuickReply(items=[
             QuickReplyItem(action=PostbackAction(label="📅 丈量預約", data="action=booking&appt_type=丈量預約", display_text="📅 丈量預約")),
             QuickReplyItem(action=PostbackAction(label="🏠 門市參觀", data="action=store_visit", display_text="🏠 門市參觀")),
@@ -160,7 +160,7 @@ def _quote_message():
     return TextMessage(
         text=(
             "感謝您的詢問！📐\n\n"
-            "南島家居提供【免費到府丈量 + 快速報價】服務。\n\n"
+            "南島室物所提供【免費到府丈量 + 快速報價】服務。\n\n"
             "請提供以下資訊，我們將盡快回覆：\n\n"
             "1️⃣ 施工地點（縣市區域）\n"
             "2️⃣ 空間坪數（大約幾坪）\n"

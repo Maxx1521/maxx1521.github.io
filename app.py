@@ -113,7 +113,7 @@ def on_follow(event):
             from linebot.v3.messaging import ReplyMessageRequest
             msg = TextMessage(
                 text=(
-                    "歡迎來到南島家居 🏠\n\n"
+                    "歡迎來到南島室物所 🏠\n\n"
                     "我們專注木地板與建材，\n"
                     "提供選材建議、免費丈量、快速報價服務。\n\n"
                     "你可以直接輸入以下關鍵字快速查詢：\n\n"
