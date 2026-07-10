@@ -14,7 +14,7 @@ from linebot.v3.messaging import (
 from linebot.v3.webhooks import MessageEvent, PostbackEvent, TextMessageContent, FollowEvent
 
 from handlers.booking import (
-    WAITING_CONFIRM, _delete_session, get_supabase,
+    WAITING_CONFIRM, _delete_session, get_supabase, _with_retry,
     push_owner_notification, push_success_to_customer, create_calendar_event,
 )
 from handlers.message_handler import handle_text_message
@@ -33,16 +33,14 @@ AUTO_CONFIRM_SECONDS = 10
 def auto_confirm_pending():
     cutoff = (datetime.now(timezone.utc) - timedelta(seconds=AUTO_CONFIRM_SECONDS)).isoformat()
     try:
-        result = (
+        result = _with_retry(lambda: (
             get_supabase()
             .table("user_sessions")
             .select("*")
             .eq("state", WAITING_CONFIRM)
             .lt("updated_at", cutoff)
             .execute()
-        )
-        if result.data:
-            print(f"[DEBUG auto_confirm] picked up {[s['user_id'] for s in result.data]}")
+        ))
         for session in result.data:
             user_id = session["user_id"]
             try:
@@ -81,9 +79,6 @@ atexit.register(lambda: scheduler.shutdown())
 
 @app.route("/health", methods=["GET"])
 def health():
-    print("[DEBUG] /health hit - stdout print test", flush=True)
-    import sys
-    print("[DEBUG] /health hit - stderr print test", file=sys.stderr, flush=True)
     return "OK"
 
 

@@ -2,6 +2,7 @@ import os
 import re
 import json
 import base64
+import time
 from datetime import datetime, timedelta, timezone, date as date_type
 from linebot.v3.messaging import (
     FlexMessage, FlexContainer, TextMessage,
@@ -34,10 +35,22 @@ def get_supabase():
 
 # ── 對話狀態管理 ────────────────────────────────
 
+def _with_retry(fn, attempts=3, base_delay=0.4):
+    """重試 Supabase 呼叫，容忍偶發的 DNS/網路瞬斷（尤其伺服器剛醒來那幾秒）。"""
+    last_exc = None
+    for i in range(attempts):
+        try:
+            return fn()
+        except Exception as e:
+            last_exc = e
+            if i < attempts - 1:
+                time.sleep(base_delay * (i + 1))
+    raise last_exc
+
+
 def get_session(user_id):
     try:
-        r = get_supabase().table("user_sessions").select("*").eq("user_id", user_id).maybe_single().execute()
-        print(f"[DEBUG get_session] user={user_id} -> {r.data}")
+        r = _with_retry(lambda: get_supabase().table("user_sessions").select("*").eq("user_id", user_id).maybe_single().execute())
         return r.data
     except Exception as e:
         print(f"[session get error] user={user_id} {e}")
@@ -47,16 +60,14 @@ def get_session(user_id):
 def _upsert_session(data):
     try:
         payload = {**data, "updated_at": datetime.now(timezone.utc).isoformat()}
-        print(f"[DEBUG upsert_session] payload={payload}")
-        get_supabase().table("user_sessions").upsert(payload).execute()
+        _with_retry(lambda: get_supabase().table("user_sessions").upsert(payload).execute())
     except Exception as e:
         print(f"[session upsert error] payload={data} {e}")
 
 
 def _delete_session(user_id):
-    print(f"[DEBUG delete_session] user={user_id}")
     try:
-        get_supabase().table("user_sessions").delete().eq("user_id", user_id).execute()
+        _with_retry(lambda: get_supabase().table("user_sessions").delete().eq("user_id", user_id).execute())
     except Exception as e:
         print(f"[session delete error] user={user_id} {e}")
 
