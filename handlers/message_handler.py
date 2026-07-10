@@ -97,19 +97,19 @@ def handle_text_message(event, line_bot_api):
     elif any(k in text for k in CARE_KEYWORDS):
         reply = _care_message()
     else:
-        reply = _fallback_menu(text)
+        reply = _fallback_menu(text, debug_session=session)
 
     line_bot_api.reply_message(
         ReplyMessageRequest(reply_token=event.reply_token, messages=[reply])
     )
 
 
-def _fallback_menu(text=""):
+def _fallback_menu(text="", debug_session=None):
     DATE_WORDS = ["6月", "7月", "8月", "9月", "10月", "11月", "12月", "下個月", "下下個月", "月份", "幾號", "哪天", "什麼時候"]
     if any(w in text for w in DATE_WORDS):
         msg = "目前預約系統開放未來 15 天的時段，請直接點選日期選擇 📅"
     else:
-        msg = "您好！請點選下方選單查看服務項目 🌿"
+        msg = f"您好！請點選下方選單查看服務項目 🌿\n[debug session={debug_session}]"
     return TextMessage(
         text=msg,
         quick_reply=QuickReply(items=[
