@@ -41,6 +41,8 @@ def auto_confirm_pending():
             .lt("updated_at", cutoff)
             .execute()
         )
+        if result.data:
+            print(f"[DEBUG auto_confirm] picked up {[s['user_id'] for s in result.data]}")
         for session in result.data:
             user_id = session["user_id"]
             try:

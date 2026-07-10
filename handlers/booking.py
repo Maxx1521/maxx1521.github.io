@@ -37,25 +37,28 @@ def get_supabase():
 def get_session(user_id):
     try:
         r = get_supabase().table("user_sessions").select("*").eq("user_id", user_id).maybe_single().execute()
+        print(f"[DEBUG get_session] user={user_id} -> {r.data}")
         return r.data
     except Exception as e:
-        print(f"[session get error] {e}")
+        print(f"[session get error] user={user_id} {e}")
         return None
 
 
 def _upsert_session(data):
     try:
         payload = {**data, "updated_at": datetime.now(timezone.utc).isoformat()}
+        print(f"[DEBUG upsert_session] payload={payload}")
         get_supabase().table("user_sessions").upsert(payload).execute()
     except Exception as e:
-        print(f"[session upsert error] {e}")
+        print(f"[session upsert error] payload={data} {e}")
 
 
 def _delete_session(user_id):
+    print(f"[DEBUG delete_session] user={user_id}")
     try:
         get_supabase().table("user_sessions").delete().eq("user_id", user_id).execute()
     except Exception as e:
-        print(f"[session delete error] {e}")
+        print(f"[session delete error] user={user_id} {e}")
 
 
 # ── 預約流程 ─────────────────────────────────────
