@@ -27,6 +27,10 @@ app = Flask(__name__)
 configuration = Configuration(access_token=os.environ["LINE_CHANNEL_ACCESS_TOKEN"])
 handler = WebhookHandler(os.environ["LINE_CHANNEL_SECRET"])
 
+# 暫時關閉自動回覆，客人傳訊息時由業主本人在 LINE 上手動回覆。
+# 要恢復自動回覆時把這個改回 True 即可（圖文選單、預約資料、程式碼都沒有被刪除）。
+BOT_ENABLED = False
+
 AUTO_CONFIRM_SECONDS = 10
 
 
@@ -109,6 +113,8 @@ def _push_fallback_error(user_id):
 
 @handler.add(MessageEvent, message=TextMessageContent)
 def on_message(event):
+    if not BOT_ENABLED:
+        return
     try:
         with ApiClient(configuration) as api_client:
             line_bot_api = MessagingApi(api_client)
@@ -120,6 +126,8 @@ def on_message(event):
 
 @handler.add(PostbackEvent)
 def on_postback(event):
+    if not BOT_ENABLED:
+        return
     try:
         with ApiClient(configuration) as api_client:
             line_bot_api = MessagingApi(api_client)
