@@ -34,6 +34,7 @@ def handle_text_message(event, line_bot_api):
 
     # 優先檢查對話狀態（正在填寫資料中）
     session = get_session(user_id)
+    print(f"[TRACE] text={text!r} user={user_id} session={session}")
     if session:
         state = session.get("state")
         if state == WAITING_NAME:

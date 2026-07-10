@@ -60,7 +60,8 @@ def get_session(user_id):
 def _upsert_session(data):
     try:
         payload = {**data, "updated_at": datetime.now(timezone.utc).isoformat()}
-        _with_retry(lambda: get_supabase().table("user_sessions").upsert(payload).execute())
+        result = _with_retry(lambda: get_supabase().table("user_sessions").upsert(payload).execute())
+        print(f"[TRACE] upsert ok payload={payload} result={result.data}")
     except Exception as e:
         print(f"[session upsert error] payload={data} {e}")
 
