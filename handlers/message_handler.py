@@ -4,6 +4,7 @@ from linebot.v3.messaging import (
     QuickReply, QuickReplyItem, MessageAction, PostbackAction, URIAction
 )
 from handlers.catalog import get_category_flex
+from handlers import booking as booking_mod
 from handlers.booking import (
     start_booking, get_session, select_time, _parse_date_text, _is_bookable_date,
     handle_name_input, handle_phone_input, handle_address_input,
@@ -109,7 +110,11 @@ def _fallback_menu(text="", debug_session=None):
     if any(w in text for w in DATE_WORDS):
         msg = "目前預約系統開放未來 15 天的時段，請直接點選日期選擇 📅"
     else:
-        msg = f"您好！請點選下方選單查看服務項目 🌿\n[debug session={debug_session}]"
+        msg = (
+            f"您好！請點選下方選單查看服務項目 🌿\n"
+            f"[debug session={debug_session} get_err={booking_mod.last_session_error} "
+            f"upsert_err={booking_mod.last_upsert_error} upsert_result={booking_mod.last_upsert_result}]"
+        )
     return TextMessage(
         text=msg,
         quick_reply=QuickReply(items=[

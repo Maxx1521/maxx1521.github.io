@@ -48,21 +48,34 @@ def _with_retry(fn, attempts=3, base_delay=0.4):
     raise last_exc
 
 
+last_session_error = None
+
+
 def get_session(user_id):
+    global last_session_error
     try:
         r = _with_retry(lambda: get_supabase().table("user_sessions").select("*").eq("user_id", user_id).maybe_single().execute())
+        last_session_error = None
         return r.data
     except Exception as e:
+        last_session_error = f"{type(e).__name__}: {e}"
         print(f"[session get error] user={user_id} {e}")
         return None
 
 
+last_upsert_error = None
+last_upsert_result = None
+
+
 def _upsert_session(data):
+    global last_upsert_error, last_upsert_result
     try:
         payload = {**data, "updated_at": datetime.now(timezone.utc).isoformat()}
         result = _with_retry(lambda: get_supabase().table("user_sessions").upsert(payload).execute())
-        print(f"[TRACE] upsert ok payload={payload} result={result.data}")
+        last_upsert_error = None
+        last_upsert_result = result.data
     except Exception as e:
+        last_upsert_error = f"{type(e).__name__}: {e}"
         print(f"[session upsert error] payload={data} {e}")
 
 
