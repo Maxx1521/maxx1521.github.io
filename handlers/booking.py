@@ -35,8 +35,8 @@ def get_supabase():
 
 # ── 對話狀態管理 ────────────────────────────────
 
-def _with_retry(fn, attempts=3, base_delay=0.4):
-    """重試 Supabase 呼叫，容忍偶發的 DNS/網路瞬斷（尤其伺服器剛醒來那幾秒）。"""
+def _with_retry(fn, attempts=6, base_delay=0.5):
+    """重試 Supabase 呼叫，容忍 Render 偶發的 DNS 中斷（觀察過持續好幾秒的情況）。"""
     last_exc = None
     for i in range(attempts):
         try:

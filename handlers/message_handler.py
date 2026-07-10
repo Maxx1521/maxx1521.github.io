@@ -35,7 +35,6 @@ def handle_text_message(event, line_bot_api):
 
     # 優先檢查對話狀態（正在填寫資料中）
     session = get_session(user_id)
-    print(f"[TRACE] text={text!r} user={user_id} session={session}")
     if session:
         state = session.get("state")
         if state == WAITING_NAME:
@@ -97,24 +96,24 @@ def handle_text_message(event, line_bot_api):
         reply = _material_message()
     elif any(k in text for k in CARE_KEYWORDS):
         reply = _care_message()
+    elif booking_mod.last_session_error:
+        # 剛才查詢對話狀態時連線失敗（例如 Render 對 Supabase 的 DNS 短暫中斷），
+        # 這種情況不能直接當成「沒有進行中的預約」丟回主選單，那樣客人會覺得資料憑空消失。
+        reply = TextMessage(text="不好意思，系統剛才有點忙碌，請稍等幾秒後再打一次剛剛的內容 🙏")
     else:
-        reply = _fallback_menu(text, debug_session=session)
+        reply = _fallback_menu(text)
 
     line_bot_api.reply_message(
         ReplyMessageRequest(reply_token=event.reply_token, messages=[reply])
     )
 
 
-def _fallback_menu(text="", debug_session=None):
+def _fallback_menu(text=""):
     DATE_WORDS = ["6月", "7月", "8月", "9月", "10月", "11月", "12月", "下個月", "下下個月", "月份", "幾號", "哪天", "什麼時候"]
     if any(w in text for w in DATE_WORDS):
         msg = "目前預約系統開放未來 15 天的時段，請直接點選日期選擇 📅"
     else:
-        msg = (
-            f"您好！請點選下方選單查看服務項目 🌿\n"
-            f"[debug session={debug_session} get_err={booking_mod.last_session_error} "
-            f"upsert_err={booking_mod.last_upsert_error} upsert_result={booking_mod.last_upsert_result}]"
-        )
+        msg = "您好！請點選下方選單查看服務項目 🌿"
     return TextMessage(
         text=msg,
         quick_reply=QuickReply(items=[
