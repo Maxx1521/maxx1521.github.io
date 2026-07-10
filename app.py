@@ -81,6 +81,9 @@ atexit.register(lambda: scheduler.shutdown())
 
 @app.route("/health", methods=["GET"])
 def health():
+    print("[DEBUG] /health hit - stdout print test", flush=True)
+    import sys
+    print("[DEBUG] /health hit - stderr print test", file=sys.stderr, flush=True)
     return "OK"
 
 
