@@ -213,7 +213,7 @@ def handle_time_input(user_id, text, session):
 
     times_display = "、".join(times)
     return TextMessage(
-        text=f"⚠️ 此時段無法預約\n\n目前開放時段：{times_display}\n請點選下方時段",
+        text=f"⚠️ 此時段無法預約，請選擇以下時段：\n{times_display}",
         quick_reply=_time_quick_reply(date, product, appt_type, store, times)
     )
 
