@@ -139,6 +139,8 @@ def on_postback(event):
 
 @handler.add(FollowEvent)
 def on_follow(event):
+    if not BOT_ENABLED:
+        return
     try:
         with ApiClient(configuration) as api_client:
             line_bot_api = MessagingApi(api_client)
