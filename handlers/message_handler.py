@@ -125,7 +125,7 @@ def _fallback_menu(text=""):
 
 
 def _color_selection_message():
-    color_url = os.environ.get("COLOR_SELECTION_URL", "https://maxx1521.github.io")
+    color_url = os.environ.get("COLOR_SELECTION_URL", "https://nandaostudio.github.io")
     bubble = {
         "type": "bubble",
         "hero": {
